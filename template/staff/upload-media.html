@@ -1,0 +1,45 @@
+{% extends 'staff/base.html' %}
+
+{% block title %}
+
+{% endblock title %}
+
+
+{% block main %}
+<div class="container m-5" style="background-color: #fff;background-color: #fff;
+    padding: 24px 60px;">
+    <h5>Media : / {{UserIn.first_name}} {{UserIn.last_name}}</h5>
+
+</div>
+
+<div class="container m-5" style="background-color: #fff;background-color: #fff;
+    padding: 24px 60px;">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <img class="img-thumbnail rounded-circle" src="{{UserIn.media.dp.url}}"
+                    style="height: 100px; width: 100px;">
+            </div>
+            <div class="col-md-8">
+                <form action="/staff/upload_media/{{UserIn.username}}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <div class="mb-3 sm">
+                    <label for="formFile" class="form-label">Update Profile Picture</label>
+                    <input required name="dp" class="form-control" type="file" id="formFile">
+
+                </div>
+
+            </div>
+            <div class="col-md-2 ">
+                <br>
+                <button type="submit" class="btn btn-primary my-2">Save</button>
+            </div>
+            </form>
+            </div>
+        </div>
+       
+    </div>
+
+</div>
+{% endblock main %}

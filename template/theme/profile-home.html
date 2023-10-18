@@ -1,0 +1,127 @@
+{% extends 'theme/base.html' %}
+{% load static %}
+
+{% block title %}
+
+{% endblock title %}
+
+
+{% block main %}
+
+<div class="container px-0 mancon">
+    <h3 class="head1 my-5">My Shadi <span class="smallu">Find-Interact-love</span></h3>
+    <div class="row">
+        <div class="col-md-8 my-4">
+            <div class="cardarea ">
+                <div class="row">
+                    <div class="col-md-4 ">
+                        <div class="card rounded-0 p-0 m-0 my-2">
+                            <img src="{% static 'assets/images/match.png' %}" class="img-thumbnail">
+                            <div class="foooter">
+                                Find Your Match
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card rounded-0 p-0 m-0 my-2">
+                            <img src="{% static 'assets/images/request.png' %}" class="img-thumbnail">
+                            <div class="foooter">
+                                Request & Interest
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card rounded-0 p-0 m-0 my-2">
+                            <img src="{% static 'assets/images/interact.png' %}" class="img-thumbnail">
+                            <div class="foooter">
+                                Interact Call & Message
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card rounded-0 p-0 m-0 my-2">
+                            <img src="{% static 'assets/images/expert.png' %}" class="img-thumbnail">
+                            <div class="foooter">
+                                Expert Verification
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card rounded-0 p-0 m-0 my-2">
+                            <img src="{% static 'assets/images/partner.png' %}" class="img-thumbnail">
+                            <div class="foooter">
+                                My Life Partner
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card rounded-0 p-0 m-0 my-2">
+                            <img src="{% static 'assets/images/shop.png' %}" class="img-thumbnail">
+                            <div class="foooter">
+                                Shadi Shopping
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 profile-wid">
+            <div class="progress" style="height: 20px;">
+                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+              </div>
+
+         
+            <div class="container my-2">
+               
+                <hr class="hr">
+                <h5>Personal Details  &nbsp;<span class="fa fa-lg fa-caret-down" type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#pdet"
+                    aria-expanded="false"
+                    aria-controls="pdet" > </span>
+                    <button class="btn btn-primary " style="
+                    float: right;
+                    margin-top: -5px;">
+                <span class="fa fa-edit"> </span>
+                Edit
+            </button>
+                </h5>
+                <hr class="hr">
+                <div class="pdet" id="pdet">
+                <p><b>Name: </b> {{request.user.first_name}} {{request.user.last_name}}</p>
+                <p><b>Registered For: </b> {{request.user.profile.registerfor}} </p>
+                <p><b>User Name: </b> {{request.user.profile.user}} </p>
+                <p><b>Gender: </b> {{request.user.profile.gender}} </p>
+                <p><b>You Looking For: </b> {{request.user.profile.lookingfor}} </p>
+                <p><b>Age: </b> {{request.user.profile.age}} </p>
+                <p><b>Contact: </b> {{request.user.profile.mobile}} </p>
+                <p><b>Marrital Status: </b> {{request.user.profile.marrital_status}} </p>
+                <p><b>Date Of Birth: </b> {{request.user.profile.dob}} </p>
+                <p><b>Height: </b> {{request.user.profile.height}} </p>
+                <p><b>Color: </b> {{request.user.profile.color}} </p>
+                <p><b>Qualification: </b> {{request.user.profile.Qualification}} </p>
+                <p><b>Work: </b> {{request.user.profile.work}} </p>
+                <p><b>Experience: </b> {{request.user.profile.experience}} </p>
+                <p><b>Hobbies: </b> {{request.user.profile.hobbies}} </p>
+                <p><b>Income: </b> {{request.user.profile.income}} </p>
+                <p><b>Medical Condition: </b> {{request.user.profile.medical_condition}} </p>
+                <p><b>City: </b> {{request.user.profile.city}} </p>
+                <p ><b>about_me: </b><br><br> <span style="font-size: 14px;">{{request.user.profile.about_me}}</span> </p>
+
+                </div>
+
+
+            </div>
+        </div>
+        
+    </div>
+    <br>
+</div>
+
+
+{% endblock main %}

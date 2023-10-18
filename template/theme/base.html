@@ -1,0 +1,466 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}{% endblock title %}</title>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/main.css' %}" />
+  <!-- MDB -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+  
+ 
+  <!-- header -->
+  <div class="top-head">
+
+
+  </div>
+  <header>
+    <!-- Image and text -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top ">
+      <div class="container-fluid ">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="#">
+          <img src="{% static 'assets/images/logo.png' %}" class="me-2" height="20" alt="MDB Logo" loading="lazy" />
+          <small>Nameofwebsite</small>
+        </a>
+
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+
+          <!-- Left links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">All Profiles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Search</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link " href="#">Plans</a>
+            </li>
+
+
+          </ul>
+          <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+        {% if user.is_authenticated %}
+        <div class="d-flex align-items-center ele-right">
+          <!-- Icon -->
+          <a class="text-reset me-3" href="#">
+            <i class="fas fa-message fa-lg"></i>
+          </a>
+
+          <!-- Notifications -->
+          <div class="dropdown">
+            <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button"
+              data-mdb-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-bell fa-lg"></i>
+              <span class="badge rounded-pill badge-notification bg-danger">1</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="#">Some news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Another news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Avatar -->
+          <div class="dropdown">
+            <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
+              role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+              <img src="{{request.user.media.dp.url}}" class="rounded-circle" height="38" width="38"
+                alt="dp_{{request.user}}" loading="lazy" />
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+              <li>
+                <a class="dropdown-item" href="/profile_home">My profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Settings</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </li>
+
+            </ul>
+
+          </div>
+
+        </div>
+        {% else %}
+
+        <span class="auth-btn">
+          <a class="nav-link btn btn-login" href="#" data-mdb-toggle="modal" data-mdb-target="#loginModal">Login</a>
+        </span>
+        <span class="auth-btn ">
+          <a class="nav-link btn btn-join" href="#" data-mdb-toggle="modal" data-mdb-target="#joinModal">Join Now</a>
+        </span>
+
+        <div class="dropdown profmob">
+        <span class="fa fa-user dropdown"   type="button"
+        id="dropdownMenuButton"
+        data-mdb-toggle="dropdown"
+        aria-expanded="false"></span>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuButton">
+          
+          {% if user.is_authenticated %}
+         
+          {% else %}  
+          <li><a class="dropdown-item" href="#">logIn</a></li>
+          <li><a class="dropdown-item" href="#">JoinNow</a></li>
+          {% endif %}
+            
+          
+        </ul>
+      </div>
+        {% endif %}
+
+
+        <!-- Right elements -->
+      </div>
+      <!-- Container wrapper -->
+
+      </div>
+
+    </nav>
+  </header>
+  <!-- /header -->
+  {% block main %}
+
+  {% endblock main %}
+  <!-- Footer -->
+  <footer class="bg-dark text-center text-white">
+    <!-- Grid container -->
+    <div class=" container p-4">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+
+      <!-- Twitter -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+
+      <!-- Google -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-google"></i></a>
+
+      <!-- Instagram -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+
+      <!-- Linkedin -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+
+      <!-- Github -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
+    </section>
+    <!-- Section: Social media -->
+
+
+    <!-- Section: Text -->
+    <section class="mb-4">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
+        repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
+        eum harum corrupti dicta, aliquam sequi voluptate quas.
+      </p>
+    </section>
+    <!-- Section: Text -->
+
+    <!-- Section: Links -->
+    <section class="">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Links</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="#!" class="text-white">Link 1</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 2</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 3</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 4</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Links</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="#!" class="text-white">Link 1</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 2</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 3</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 4</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Links</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="#!" class="text-white">Link 1</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 2</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 3</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 4</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Links</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="#!" class="text-white">Link 1</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 2</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 3</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 4</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </section>
+    <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">coresistance.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+  <!-- footer -->
+
+
+
+
+
+  <!-- Modal  -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title " id="exampleModalLabel">Login To Continue</h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form action="/login" method="post">
+            {% csrf_token %}
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text" id="addon-wrapping"><span class="fa fa-user"></span></span>
+              <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                aria-describedby="addon-wrapping" name="uname" required>
+            </div>
+
+            <div class="input-group flex-nowrap my-4">
+              <span class="input-group-text" id="addon-wrapping"><span class="fa fa-key"></span></span>
+              <input type="password" class="form-control" placeholder="Password" aria-label="Username"
+                aria-describedby="addon-wrapping" name="pwd" required>
+            </div>
+
+            <div class="input-group flex-nowrap my-4 ">
+              <button class="btn btn-success"> LogIn</button>
+              <button class="btn btn mx-2"> <span class="fa fa-google"></span> with Google</button>
+
+            </div>
+            <hr class="hr">
+            <small>Don't have account <a href="# ">Register Now</a></small>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+      document.querySelectorAll('.form-outline').forEach((formOutline) => {
+        new mdb.Input(formOutline).init();
+      });
+    </script>
+  </div>
+
+    <!-- Modal join-->
+    <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title " id="exampleModalLabel">JoinNow </h5>
+              <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3 regi-form" action="/register" method="post">
+                    {% csrf_token %}
+                    <div class="col-md-12">
+                        <label for="inputState" class="form-label"></label>
+                        <select name="for" id="inputState" class="form-select" required>
+                          <option selected>Register For</option>
+                          <option>Own</option>
+                          <option>Brother</option>
+                          <option>Sister</option>
+                          <option>Friend</option>
+                          <option>Other</option>
+        
+        
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                     
+                      <input placeholder="First Name" type="text" name="fname" required class="form-control" id="inputEmail4">
+                    </div>
+                    <div class="col-md-6">
+                      <input placeholder="Last Name" type="text" name="lname" required class="form-control" id="inputPassword4">
+                    </div>
+                    <div class="col-12">
+                     
+                        <input placeholder="Email" type="email" name="email" required class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                      </div>
+        
+                    <div class="col-12">
+                        <label for="gender" class="form-label">Gender</label><br>
+                        
+                        <div class="btn-group">
+                            <input type="radio" class="btn-check" required name="gender" id="f" autocomplete="off" value="Female" checked />
+                            <label class="btn btn-secondary" for="f">Female</label>
+                      
+                            <input type="radio" class="btn-check" required name="gender" id="m" value="Male" autocomplete="off" />
+                            <label class="btn btn-secondary" for="m">Male</label>
+                          </div>
+                      
+                    </div>
+
+                    <div class="col-12">
+                        <label for="lfor" class="form-label">Looking For</label><br>
+                        
+                        <div class="btn-group">
+                            <input type="radio" class="btn-check" required name="lfor" id="lf" autocomplete="off" value="Female" checked />
+                            <label class="btn btn-secondary" for="lf">Female</label>
+                      
+                            <input type="radio" class="btn-check" required name="lfor" id="lm" autocomplete="off" value="Male"/>
+                            <label class="btn btn-secondary" for="lm">Male</label>
+                          </div>
+                      
+                    </div>
+        
+                
+        
+                    <div class="col-12">
+                      <label for="" class="form-label">Date Of Birth</label>
+                      <input type="date" name="dob" required class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    </div>
+                    <div class="col-12">
+                     
+                      <input placeholder="Contact Number" name="contact" required type="number" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                    </div>
+        
+                    <div class="col-12">
+                     
+                        <input placeholder="User Name" name="uname" required type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                      </div>
+                      <div class="col-12">
+                     
+                        <input placeholder="Password" type="password" name="pwd" required class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                      </div>
+        
+                      <div class="col-12">
+                        <button type="submit" class="btn btn-primary w-100">Register</button>
+                      </div>
+        
+                      <div class="col-12 text-center my-2">
+                       <span>Or</span>
+                      </div>
+        
+                      <div class="col-12 my-0 py-0">
+                     <button class="btn btn-google w-100"> <span class="fa fa-google "></span> Sign In With Google</button>
+                      </div>
+                    
+                    
+                  </form>
+             
+            </div>
+    
+          </div>
+        </div>
+    
+        <script>
+          document.querySelectorAll('.form-outline').forEach((formOutline) => {
+            new mdb.Input(formOutline).init();
+          });
+        </script>
+      </div>
+
+      
+
+</body>
+
+</html>

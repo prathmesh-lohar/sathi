@@ -1,0 +1,251 @@
+{% extends 'staff/base.html' %}
+
+{% block main %}
+
+<div class="container" style="padding: 24px 35px;
+background: #fff;">
+<div class="alert alert-dark" role="alert">
+    {{user.first_name}} {{user.last_name}}
+  </div>
+    <div class="row my-4">
+        <form action="/staff/save_details" method="post">
+            {% csrf_token %}
+        <div class="col-md-12">
+            <h3>Personal Details</h3>
+
+            <div class="row my-2">
+                <div class="col ">
+                    <label for="gender">Gender</label>
+                    <select id="gender" class="form-control" name="gender" >
+                        <option selected>{{details.gender}}</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        
+
+                    </select>
+                </div>
+
+                <div class="col ">
+                    <label for="regfor">Resister For</label>
+                    <select id="regfor" class="form-control" name="regofor" >
+                        <option selected>{{details.registerfor}}</option>
+                        <option>Own</option>
+                        <option>Brother</option>
+                        <option>Sister</option>
+                        <option>Friend</option>
+                        <option>Other</option>
+
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col ">
+                    <label for="exampleInputEmail1">Mobile:</label>
+                    <input value="{{details.mobile}}" type="number" name="mobile" class=" form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" >
+                </div>
+
+                <div class="col ">
+                    <label for="exampleInputEmail1">Marrital Status:</label>
+                    <select id="inputState" class="form-control" name="mstatus">
+                        <option selected>{{details.marrital_status}}</option>
+                        <option>Single</option>
+                        <option>In Process</option>
+                        <option>On Hold</option>
+                        <option>Married</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col ">
+                    <label for="exampleInputEmail1">Date Of Birth:  &nbsp; &nbsp; Existing: {{details.dob}}</label>
+                    <input value="{{details.dob}}" required type="date" name="dob" class=" form-control"  id="exampleInputEmail1"
+                        aria-describedby="emailHelp">
+                </div>
+
+                <div class="col ">
+                    <label for="exampleInputEmail1">Income:
+                        :</label>
+                    <input value="{{details.income}}" type="text" name="Income" class=" form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" >
+                </div>
+            </div>
+
+            <div class="row">
+               
+                <div class="col">
+                    <label for="exampleInputEmail1">Height:</label>
+                    <input value="{{details.height}}" type="text" name="height" class=" form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" >
+                </div>
+                <div class="col ">
+                    <label for="exampleInputEmail1">Color:</label>
+                    <input value="{{details.color}}" type="text" name="color" class=" form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" >
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col ">
+                    <label for="exampleInputEmail1">Qualification:</label>
+                    <input value="{{details.Qualification}}" type="work" name="qualification" class=" form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" >
+                </div>
+
+                <div class="col ">
+                    <label for="exampleInputEmail1">Work:</label>
+                    <input value="{{details.work}}" type="work" name="work" class=" form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" >
+                </div>
+
+                <div class="col">
+                    <label for="exampleInputEmail1">Experience:
+                        :</label>
+                    <input value="{{details.experience}}" type="text" name="experience" class=" form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" >
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col ">
+                    <label for="exampleInputEmail1">Hobbies:
+                        :</label>
+                    <input value="{{details.hobbies}}" type="text" name="Hobbies" class=" form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" >
+                </div>
+
+
+
+                <div class="col ">
+                    <label for="exampleInputEmail1">Medical condition:
+                        :</label>
+                    <input value="{{details.medical_condition}}" type="text" name="medical_condition" class=" form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" >
+                </div>
+
+
+                <div class="col">
+                    <label for="exampleInputEmail1">City
+                        :</label>
+                    <input  value="{{details.city}}" type="text" name="city"  class=" form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">About Me</label>
+                <textarea class="form-control"  name="about" id="exampleFormControlTextarea1"
+                    rows="3">{{details.about_me}}</textarea>
+            </div>
+
+
+
+            <!-- <input type="hidden" name="userid" value="{{User}}"> -->
+
+
+
+
+        </div>
+
+        <h3 class="my-2">Family Details</h3>
+        <div class="row my-2">
+            <div class="col ">
+                <label for="exampleInputEmail1">Father_Name:</label>
+                <input value="{{fdetails.father_name}}" type="text" name="father_name" class=" form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" >
+            </div>
+
+            <div class="col ">
+                <label for="exampleInputEmail1"> Father_Education:</label>
+                <input value="{{fdetails.father_education}}"  type="text" name="father_education" class=" form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" >
+            </div>
+
+
+            <div class="col ">
+                <label for="exampleInputEmail1">Father_Occupation:</label>
+                <input value="{{fdetails.father_occupation}}"  type="text" name="father_occupation" class=" form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" >
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="exampleInputEmail1">Mother_Name:</label>
+                <input value="{{fdetails.mother_name}}"  type="work" name="mother_name" class=" form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" >
+            </div>
+
+            <div class="col ">
+                <label for="exampleInputEmail1">Mother_Education:</label>
+                <input value="{{fdetails.mother_education}}"  type="work" name="mother_education" class=" form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" >
+            </div>
+
+            <div class="col ">
+                <label for="exampleInputEmail1">Mother_Occupation:
+                    :</label>
+                <input value="{{fdetails.mother_occupation}}"  type="text" name="mother_occupation" class=" form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" >
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <label for="exampleFormControlTextarea1"> sister (if no type No):</label>
+                <textarea class="form-control"  name="sister" id="exampleFormControlTextarea1"
+                    rows="3">{{fdetails.sister}}</textarea>
+            </div>
+
+            <div class="col">
+                <label for="exampleFormControlTextarea1"> Brother (if no type No):</label>
+                <textarea class="form-control"  name="brother" id="exampleFormControlTextarea1"
+                    rows="3">{{fdetails.brother}}</textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="exampleFormControlTextarea1"> Native_Place</label>
+                <textarea class="form-control"  name="native_place" id="exampleFormControlTextarea1"
+                    rows="3">{{fdetails.native_place}}</textarea>
+            </div>
+
+            <div class="col">
+                <label for="exampleFormControlTextarea1"> Relatives</label>
+                <textarea class="form-control"  name="relatives" id="exampleFormControlTextarea1"
+                    rows="3">{{fdetails.relatives}}</textarea>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col my-5">
+            <button type="submit" class="btn btn-primary " >Save All</button>
+            <button onclick="window.location.href='/staff';" type="button" class="btn btn-danger " >Cancel</button>
+
+        </div>
+        </div>
+
+        <input type="hidden" name="uid" value="{{uid}}">
+        <input type="hidden" name="username" value="{{user.username}}">
+        <input type="hidden" name="id" value="{{user.id}}">
+        
+        <input type="hidden" name="offcer" value="request.user">
+
+    </form>
+    </div>
+</div>
+
+</div>
+
+
+
+{% endblock main %}

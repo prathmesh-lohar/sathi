@@ -1,0 +1,1094 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Playfair+Display&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Montserrat:wght@300&family=Playfair+Display&family=Poppins&display=swap');
+
+body {
+    background-color: #fdfbf6;
+}
+
+.filter {
+    display: block;
+    /* width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #ebddaa;
+    padding: 30px 25px;
+    margin: 60px 0px 70px; */
+
+    background: rgb(255 255 255);
+    border-radius: 10px;
+    padding: 30px 25px;
+    margin: 60px 0px 70px;
+    border: 1px solid #ebddaa;
+}
+
+@media screen and (max-width: 767px) {
+    .filter {
+        display: none;
+    }
+}
+
+.profileare .fa-bars {
+    background-color: rgb(196, 157, 60);
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+.hr {
+    --mdb-divider-bg: #ebddaa;
+}
+
+.profileare {
+
+    padding-right: 20px;
+    padding-left: 30px;
+}
+
+.profileare .h5 {
+    font-weight: 500;
+    font-family: 'Playfair Display', serif;
+}
+
+.cardarea {
+    margin-top: -50px;
+}
+
+.cardarea .card-title {
+    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+
+}
+
+.card {
+    padding: 8px;
+    /* margin: 10px 0px 10px 15px; */
+}
+
+.card .fa {
+    color: #601e4f;
+}
+
+.card-body .card-title:hover {
+    color: #601e4f;
+}
+
+.card-body {
+    padding-top: 7px;
+}
+
+@media screen and (max-width: 767px) {
+    .card-body {
+        padding-top: 10px;
+    }
+}
+
+.card img {
+    /* position: relative;
+  text-align: center; */
+    width: 100%;
+    float: left;
+    object-fit: cover;
+    height: 100%;
+    transition: all 0.5s ease 0s;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.card .tags {
+    /* border-radius: 25px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    padding: 8px;
+    font-size: small; */
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(225, 231, 236);
+    color: rgb(51, 51, 51);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 30px;
+    float: left;
+    margin: 0 8px 8px 0;
+    cursor: pointer;
+    transition: all 0.4s ease 0s;
+}
+
+.card .tags:hover {
+    background-color: green;
+    color: white;
+}
+
+.card-body span {
+    font-weight: 500
+}
+
+.profile-img {
+    -webkit-transition: 0.4s ease;
+    transition: 0.4s ease;
+}
+
+.profile-img:hover {
+    -webkit-transform: scale(1.08);
+    transform: scale(1.08);
+}
+
+.filter .fa {
+    border-radius: 11px;
+    border-style: solid;
+    padding: 5px;
+    border-color: #ebddaa;
+}
+
+.filter .form-label {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    color: rgb(96, 30, 79);
+
+}
+
+.filter select {
+
+    /* border-style: solid; */
+    padding: 12px;
+    /* border-color: rgb(96, 30, 79); */
+    color: rgb(96, 30, 79);
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid rgb(96, 30, 79);
+
+}
+
+.filter option {
+
+    font-size: 14px;
+    color: rgb(96, 30, 79);
+    background-color: rgba(255, 71, 209, 0.106);
+
+}
+
+
+
+.modal-body .fa {
+    border-radius: 11px;
+    border-style: solid;
+    padding: 5px;
+    border-color: #ebddaa;
+}
+
+.modal-body .form-label {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    color: rgb(96, 30, 79);
+
+}
+
+.modal-body select {
+
+    border-style: solid;
+    padding: 12px;
+    border-color: rgb(96, 30, 79);
+    color: rgb(96, 30, 79);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.modal-body option {
+
+    font-size: 14px;
+    color: rgb(96, 30, 79);
+    background-color: rgba(255, 71, 209, 0.106);
+
+}
+
+.filter-mob {
+    display: none;
+    background-color: rgba(255, 192, 203, 0.685);
+    padding: 5px;
+    color: blueviolet;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+@media screen and (max-width: 767px) {
+    .filter-mob {
+        display: block;
+    }
+}
+
+.upper ul {
+    float: right;
+    list-style: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+}
+
+.col-md-8 .card-title {
+    color: rgb(33, 37, 41);
+    font-weight: 600;
+
+    font-size: 26px;
+}
+
+.like .fa {
+    float: right;
+    color: blue;
+}
+
+.profileare select {
+    border: 1px solid rgb(96, 30, 79);
+    height: 45px;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+.upper .fa-th {
+    border: 1px solid #601e4f;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.upper .float-end {
+
+    margin-top: -37px;
+
+}
+
+.end {
+    display: block;
+}
+
+@media screen and (max-width: 767px) {
+    .end {
+
+        display: none;
+
+    }
+}
+
+.navbar .nav-item .btn {
+    border-radius: 12px;
+    margin-left: 5px;
+    font-weight: 200;
+    padding: 8px 25px;
+}
+
+.navbar .nav-item .btn:hover {
+    color: #5d0874;
+}
+
+.navbar .auth-btn .btn-login {
+    background-color: #607d8b;
+    color: #fff;
+    padding: 8px;
+    font-weight: 300;
+    border-radius: 5px;
+}
+
+.navbar .auth-btn .btn-join {
+    background-color: #0b6a87;
+    margin-left: 5px;
+    color: #fff;
+    padding: 8px;
+    font-weight: 300;
+    border-radius: 5px;
+
+}
+
+@media screen and (max-width: 990px) {
+    .navbar .auth-btn .btn-join {
+        display: none;
+    }
+
+    .navbar .auth-btn .btn-login {
+        display: none;
+    }
+}
+
+.navbar .nav-link {
+    font-family: 'Poppins', sans-serif;
+    color: #66451c;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.navbar .nav-link:hover {
+    color: rgb(108, 88, 224);
+}
+
+.navbar .navbar-brand {
+    font-family: 'Poppins', sans-serif;
+
+    cursor: pointer;
+    font-weight: 700;
+    margin-left: -8px;
+
+}
+
+.navbar-collapse {
+    margin-left: 85px;
+}
+
+@media screen and (max-width: 767px) {
+    .navbar-collapse {
+        margin-left: 9px;
+    }
+
+    .navbar-collapse {
+        margin-left: -25px;
+    }
+}
+
+#loginModal form {
+    padding: 25px;
+}
+
+#loginModal input {
+    font-size: 15px;
+    font-family: ;
+}
+
+/*  */
+.top-head {
+    /* background: linear-gradient(to right, rgb(96, 8, 118), rgba(17, 6, 64, 0.979)); */
+    background: linear-gradient(to right, rgb(118, 69, 8), rgb(64, 52, 6));
+    width: 100%;
+    height: 30px;
+}
+
+footer {
+    background: linear-gradient(to right, rgb(96, 8, 118), rgba(17, 6, 64, 0.979));
+
+}
+
+@media screen and (max-width: 767px) {
+    .top-head {
+        display: none;
+    }
+}
+
+.navbar {
+    padding: 20px;
+}
+
+.navbar .container-fluid {
+    margin: 0px 48px 0px 39px;
+}
+
+@media screen and (max-width: 767px) {
+    .navbar {
+        padding: 10px;
+    }
+
+    .navbar .container-fluid {
+        margin: 0px 0px 0px 0px;
+    }
+}
+
+.navbar-brand {
+    margin-right: 0px;
+
+}
+
+@media screen and (max-width: 380px) {
+    .navbar .fa-message {
+        display: none;
+    }
+
+    .navbar .fa-bell {
+        display: none;
+    }
+
+    .navbar .badge-notification {
+        display: none;
+    }
+}
+
+.navbar ul {
+    margin-left: 38px;
+}
+
+/* .navbar .rounded-circle {
+    height: 38px;
+} */
+.navbar .profmob {
+    border: 1px solid #66451c;
+    color: #66451c;
+    padding: 5px 10px;
+    border-radius: 50%;
+    display: none;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 990px) {
+    .navbar .profmob {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 764px) {
+    .navbar .rounded-circle {
+        height: 30px;
+    }
+}
+
+@media screen and (max-width: 393px) {
+    .navbar .fa fa-bell {
+        display: none;
+    }
+
+    .navbar ul {
+        margin-left: 0px;
+    }
+}
+
+.head1mob {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .head1mob {
+        display: block;
+    }
+
+}
+
+/* .ele-right{
+    margin: auto;
+} */
+
+.carousel-item {
+    cursor: -webkit-zoom-in;
+}
+
+.bio h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #5d0874;
+
+}
+
+.bio span {
+    font-size: 13px;
+    font-weight: 400;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.imenu {
+    width: 100%;
+
+}
+
+
+
+/* slider css */
+
+.scrol_tab {
+    font-family: "Roboto", sans-serif;
+    background-color: rgba(255, 255, 255, 0.486);
+    /* background-color: #00000012; */
+    width: 100%;
+    margin: 0px auto;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    cursor: pointer;
+}
+
+.fafa {
+    color: white;
+    display: block;
+}
+
+.scrol_tab ul {
+    display: flex;
+    gap: 16px;
+    padding: 12px 24px;
+    margin: 0;
+    list-style-type: none;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    margin-left: -15px;
+}
+
+.scrol_tab a.activetab {
+    color: white;
+    background-color: #000000ab;
+}
+
+.scrol_tab ul::-webkit-scrollbar {
+    display: none;
+}
+
+.scrol_tab a {
+    color: black;
+    text-decoration: none;
+    background-color: #fff;
+    padding: 4px 24px;
+    display: inline-block;
+    border-radius: 4px;
+    user-select: none;
+    white-space: nowrap;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.scrol_tab .right-arrow,
+.scrol_tab .left-arrow {
+
+    top: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.scrol_tab .right-arrow {
+    right: 0;
+    background: linear-gradient(to left, #cacacaad 60%, transparent);
+
+    justify-content: flex-end;
+    color: black;
+
+}
+
+.scrol_tab .left-arrow {
+    right: 0;
+    background: linear-gradient(to right, #cacacaad 60%, transparent);
+    justify-content: flex-end;
+    color: black;
+}
+
+.fafa: hover {
+    background-color: #333;
+}
+
+
+
+
+
+/* slider css */
+
+.mainx {
+    margin-left: 34px;
+
+}
+
+@media screen and (max-width: 990px) {
+    .mainx {
+        margin-left: 0px;
+
+    }
+
+
+}
+
+.bigbtns {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.bigbtns .btn {
+    width: 49%;
+
+    border-radius: 0px;
+}
+
+.bigbtns .btn-danger {
+    float: right;
+}
+
+.infohead {
+    width: 100%;
+    background-color: #5d0874;
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.infohead .fa-chevron-down {
+    padding: 8px;
+    cursor: pointer;
+
+}
+
+.infodata .points {
+    margin-left: 8px;
+}
+
+.infodata .points span {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.infodata p {
+    text-align: justify;
+}
+
+.infodata b {
+    font-weight: bolder;
+    font-size: 22px;
+}
+
+.bio {
+    margin-left: 22px;
+    padding-right: 68px;
+}
+
+.mianbox {
+    /* background-image:  */
+    background-image: linear-gradient(to bottom, rgba(117, 19, 93, 0.589), rgb(0, 0, 0)), url("/static/assets/images/couple.jpg");
+    width: 100%;
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+/* homepage */
+.inner {
+    text-align: center;
+    padding: 40px;
+}
+
+.inner .hashtag {
+    font-size: 30px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    line-height: 60px;
+
+}
+
+.inner .sec {
+    font-size: 56px;
+    color: #a5e6fa;
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 60px;
+
+}
+
+.inner .red {
+    font-size: 60px;
+    font-weight: bolder;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    line-height: 60px;
+
+
+}
+
+.inner .white {
+    font-size: 40px;
+    font-weight: 600;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    margin-left: 8px;
+    color: #fff;
+    line-height: 60px;
+
+
+}
+
+.inner small {
+    font-size: 22px;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    font-weight: 400;
+    line-height: 60px;
+
+}
+
+.inner .search-form {
+    margin-top: 20px;
+    background-color: rgba(0, 0, 0, 0.654);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+
+}
+
+.inner .search-form select {
+    border: 1px solid rgb(96, 30, 79);
+    height: 45px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 5px;
+    font-family: Poppins, sans-serif;
+    color: #66451c;
+    width: 100%;
+}
+
+.inner .search-form .btn {
+
+    height: 45px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 5px;
+    font-family: Poppins, sans-serif;
+    color: #fff;
+    width: 100%;
+    background-color: #607d8b;
+}
+
+.headiing {
+    text-align: center;
+
+}
+
+.headiing .subbrand {
+    font-size: 30px;
+    font-weight: 700;
+
+    color: rgb(196, 140, 70);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-family: 'Cinzel Decorative', cursive;
+}
+
+.headiing h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #66451c;
+    font-size: 50px;
+}
+
+.headiing .num {
+    font-size: 70px;
+
+}
+
+
+/* homepage login modal*/
+
+#loginModal .modal-body .fa {
+    border-radius: 0px;
+    border-style: none;
+    /* padding: 5px; */
+    border-color: ;
+}
+
+#loginModal .modal-body form input {
+    border: 1px solid rgb(96, 30, 79);
+    color: rgb(96, 30, 79);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px;
+}
+
+#loginModal .modal-body #addon-wrapping {
+    border: 1px solid rgb(96, 30, 79);
+    color: rgb(96, 30, 79);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px;
+}
+
+#loginModal .modal-body form input::placeholder {
+
+    color: rgb(96, 30, 79);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#loginModal .modal-title {
+    margin: 0 25px;
+    color: rgb(96, 30, 79);
+
+}
+
+
+
+/* featured homepage */
+.profile .card {
+    display: block;
+    position: relative;
+
+
+    transition: all .4s cubic-bezier(0.4, 0.0, 0.2, 1);
+    ;
+    /* border: 1px solid #333; */
+
+    color: white;
+    width: 100%;
+    height: 300px;
+
+
+}
+
+.profile .card::after {
+    content: "";
+
+    opacity: 1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    width: auto;
+    height: 100%;
+
+}
+
+.profile .card-title {
+    font-family: 'Work Sans';
+    padding: 0 16px;
+    font-weight: 400;
+}
+
+
+.profile .card-block {
+    text-align: center;
+    padding: 16px;
+    margin-top: 25%;
+}
+
+.profile .card-bg {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    transition: .4s ease;
+    border-radius: 10px;
+
+}
+
+.profile .card-text {
+    font-size: .87em;
+    font-family: 'Lato';
+    font-weight: 300;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #F95959;
+}
+
+.profile .card:hover {
+    box-shadow: 0 28px 40px -12px rgba(0, 0, 0, 0.24);
+    transform: scale(1.05);
+}
+
+.profile .card:hover .card-bg {
+    opacity: .8;
+    border: 1px solid #333;
+
+
+}
+
+.profile .card:hover ::after {
+    opacity: 0;
+
+}
+
+/*  */
+
+
+.lefter {
+    border: 1px solid #ebddaa;
+    border-radius: 10px;
+}
+.mancon .profile-wid{
+    border: 1px solid #ebddaa;
+    padding: 25px;
+    margin-top: -19px;
+    line-height: 11px;
+}
+.mancon {
+    margin-left: 62px;
+}
+
+.mancon .head1 {
+    color: #5d0874;
+}
+
+.mancon .head1 .smallu {
+    font-size: 18px;
+    color: #1f91b3;
+}
+
+.mancon .cardarea .card {
+    border: 3px solid;
+
+
+}
+
+.mancon .cardarea .foooter {
+    background-color: #5d0874;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
+.mancon .cardarea .card img {
+    width: 100%;
+    max-height: 100%;
+    border-radius: 0px;
+}
+
+/*  */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Montserrat:wght@300&family=Playfair+Display&family=Poppins&display=swap');
+
+
+.about img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.about .body h2 {
+    font-size: 60px;
+    font-family: 'Cinzel Decorative', cursive;
+    color: #66451c;
+
+}
+
+.about .body h3 {
+    font-size: 45px;
+    font-family: 'Cinzel Decorative', cursive;
+    color: #e5026b;
+
+}
+
+.about .body p {
+
+    font-family: Poppins, sans-serif;
+    color: #66451c;
+    font-size: 18px;
+    text-align: justify;
+
+
+}
+
+.about .body .ico {
+    list-style: none;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: justify;
+}
+
+.about .body .ico .fa {
+    background: black;
+    padding: 15px;
+    color: #fff;
+    border-radius: 30%;
+}
+
+/* reg form */
+
+
+#joinModal .modal{
+    display: block !important; /* I added this to see the modal, you don't need this */
+}
+
+/* Important part */
+#joinModal .modal-dialog{
+    overflow-y: initial !important
+}
+#joinModal .modal-body{
+    height: 80vh;
+    overflow-y: auto;
+}
+
+
+
+
+#joinModal .modal-body{
+    padding: 0px 50px;
+}
+#joinModal .modal-title{
+    margin: 0 40px;
+    color: rgb(96, 30, 79);
+}
+#joinModal .modal-body .form-label {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: rgb(96, 30, 79);
+}
+
+.regi-form input {
+    border: 1px solid rgb(96, 30, 79);
+    color: rgb(96, 30, 79);
+    font-size: 14px;
+    font-weight: 500;
+    
+}
+
+.regi-form .form-check-input {
+    padding: 0px;
+}
+
+.regi-form select {
+    border: 1px solid rgb(96, 30, 79);
+    color: rgb(96, 30, 79);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px;
+
+}
+
+.regi-form label {
+
+    color: rgb(96, 30, 79);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.regi-form .btn-own {
+    border: 1px solid rgb(96, 30, 79);
+    color: rgb(96, 30, 79);
+    /* font-size: 14px; */
+    font-weight: 500;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background-color: #fff;
+    
+
+
+}
+
+.regi-form input::placeholder {
+
+    color: rgb(96, 30, 79);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.regi-form .btn-google {
+    color: rgb(96, 30, 79);
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid rgb(11, 135, 237);
+
+    margin-bottom: 28px;
+}
+
+.regi-form  .fa {
+  border: none;
+  padding: 0px;
+}
+
+.regi-form .btn-primary {
+
+    font-size: 14px;
+    font-weight: 500;
+    
+}
+
+/* reg form */

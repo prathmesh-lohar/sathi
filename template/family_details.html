@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}
+family detail new profile
+{% endblock title %}
+
+
+{% block main %}
+
+
+<div class="container" style="
+    padding: 40px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Family Details</h3>
+                <br>
+
+        
+                                <div class="container ">
+                                    <form method="POST" action="/family_details">
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Father_Name:</label>
+                                            <input type="text" name="father_name" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1"> Father_Education:</label>
+                                            <input type="text" name="father_education" class=" form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+                                      
+                                      
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Father_Occupation:</label>
+                                            <input type="text" name="father_occupation" class=" form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Mother_Name:</label>
+                                            <input type="work" name="mother_name" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Mother_Education:</label>
+                                            <input type="work" name="mother_education" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Mother_Occupation:
+                                                :</label>
+                                            <input type="text" name="mother_occupation" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+
+                                       
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1"> sister (if no type No):</label>
+                                            <textarea class="form-control" required name="sister" id="exampleFormControlTextarea1"
+                                                rows="3"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1"> Brother (if no type No):</label>
+                                            <textarea class="form-control" required name="brother" id="exampleFormControlTextarea1"
+                                                rows="3"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1"> Native_Place</label>
+                                            <textarea class="form-control" required name="native_place" id="exampleFormControlTextarea1"
+                                                rows="3"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1"> Relatives</label>
+                                            <textarea class="form-control" required name="relatives" id="exampleFormControlTextarea1"
+                                                rows="3"></textarea>
+                                        </div>
+
+
+
+                                        <!-- <input type="hidden" name="userid" value="{{User}}"> -->
+
+                                        {% csrf_token %}
+
+                                        <button type="submit" class="btn btn-success"
+                                            style="width: 20%; height: 40px;">Save</button>
+                                    </form>
+                                </div>
+
+                                <style>
+                                    form {
+
+                                        max-width: 90%;
+                                        border-radius: 0px;
+
+                                    }
+                                </style>
+
+                            </div>
+                      </div>
+                      </div>
+                      </div>
+
+
+{% endblock main %}

@@ -1,0 +1,393 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{% endblock title %}
+
+{% block main %}
+
+<style>
+	body{
+		background-color: #dddddd;
+	}
+</style>
+
+<!-- inner banner -->
+<div class="w3layouts-inner-banner">
+	<div class="container">
+		<div class="logo">
+			<h1><a class="cd-logo link link--takiri" href="/">Match <span><i class="fa fa-heart"
+							aria-hidden="true"></i>Made in heaven.</span></a></h1>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<!-- //inner banner -->
+
+
+
+<div class="container-fluid" style="margin-top: 25px;	">
+
+
+	<h3 align='center'>Total Matrimonial Profiles list</h3>
+	<div class="container" style="">
+		<div class="row">
+			<div class="col-md-10">
+
+
+<div class="container-fluid" style="margin-top: 25px; max-width: 95%;">
+	<ul id="myTabs" class="nav nav-pills nav-justified" role="tablist" data-tabs="tabs">
+		<li class="active"><a href="#all" data-toggle="tab">All</a></li>
+		<li><a href="#male" data-toggle="tab">Male</a></li>
+		<li><a href="#female" data-toggle="tab">Female</a></li>
+	</ul>
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane fade in active " id="all">
+			
+{% load static %}
+
+<grid style="margin-top: 5px;">
+	
+	{% for i in all_profiles  %}
+		
+	
+		
+	<div class="col">
+		<div class="maindiv">
+			<section class="idsection">
+				<p style="    line-height: 3.2em; margin-left: 3px;" class="id-text">PROFILE ID : {{i.user.id}}</p>
+
+			</section>
+			
+			<div class="wrap">
+			<section class="dpsection">
+				<img class="dpimg" src="{{i.user.media.dp.url}}">
+				
+			</section>
+			<section class="texes">
+				<p style="font-size: 12px;" class="textname"><strong>Name:</strong>  {{i.user.first_name}} {{i.user.last_name}} </p>
+				<p style="font-size: 12px;" class="textname"><strong>Age/Height:</strong>  {{i.age}}/{{i.height}} </p>
+				<p style="font-size: 12px;" class="textname"><strong>Qualification:</strong>  {{i.Qualification}} </p>
+				<p style="font-size: 12px;" class="textname"><strong>Work:</strong>  {{i.work}} </p>
+				<a href="/show_profile/{{i.user.id}}"><button class="btnconnect"> View Profile</button></a>
+				
+			</section>
+		</div>
+
+		<section class="abt">
+			<p class="abtp" style="font-size: 12px; font-family: inherit;">{{i.about_me}}</p>
+		</section>
+		</div>
+	</div>
+
+	{% endfor %}
+</grid>
+
+<style>
+	grid{
+		display: grid;
+		grid-template-columns: auto auto;
+		-ms-grid-column-span: 2;
+		grid-row-gap: 10px;
+	}
+	@media (max-width: 1200px){
+		grid{
+		grid-template-columns: auto ;
+
+		}
+	}
+</style>
+
+
+
+			
+		</div>
+		<div role="tabpanel" class="tab-pane fade" id="male">
+			<grid style="margin-top: 5px;">
+	
+				{% for i in male_profiles  %}
+					
+				
+					
+				<div class="col">
+					<div class="maindiv">
+						<section class="idsection">
+							<p style="    line-height: 3.2em; margin-left: 3px;" class="id-text">PROFILE ID : {{i.user.id}}</p>
+			
+						</section>
+						
+						<div class="wrap">
+						<section class="dpsection">
+							<img class="dpimg" src="{{i.user.media.dp.url}}">
+							
+						</section>
+						<section class="texes">
+							<p style="font-size: 12px;" class="textname"><strong>Name:</strong>  {{i.user.first_name}} {{i.user.last_name}} </p>
+							<p style="font-size: 12px;" class="textname"><strong>Age/Height:</strong>  {{i.age}}/{{i.height}} </p>
+							<p style="font-size: 12px;" class="textname"><strong>Qualification:</strong>  {{i.Qualification}} </p>
+							<p style="font-size: 12px;" class="textname"><strong>Work:</strong>  {{i.work}} </p>
+							<a href="/show_profile/{{i.user.id}}"><button class="btnconnect"> View Profile</button></a>
+							
+						</section>
+					</div>
+			
+					<section class="abt">
+						<p class="abtp" style="font-size: 12px; font-family: inherit;">{{i.about_me}}</p>
+					</section>
+					</div>
+				</div>
+			
+				{% endfor %}
+			</grid>
+			
+			<style>
+				grid{
+					display: grid;
+					grid-template-columns: auto auto;
+					-ms-grid-column-span: 2;
+					grid-row-gap: 10px;
+				}
+				@media (max-width: 1200px){
+					grid{
+					grid-template-columns: auto ;
+			
+					}
+				}
+			</style>
+			
+			
+		</div>
+		<div role="tabpanel" class="tab-pane fade" id="female">
+			<grid style="margin-top: 5px;">
+	
+				{% for i in female_profiles  %}
+					
+				
+					
+				<div class="col">
+					<div class="maindiv">
+						<section class="idsection">
+							<p style="    line-height: 3.2em; margin-left: 3px;" class="id-text">PROFILE ID : {{i.user.id}}</p>
+			
+						</section>
+						
+						<div class="wrap">
+						<section class="dpsection">
+							<img class="dpimg" src="{{i.user.media.dp.url}}">
+							
+						</section>
+						<section class="texes">
+							<p style="font-size: 12px;" class="textname"><strong>Name:</strong>  {{i.user.first_name}} {{i.user.last_name}} </p>
+							<p style="font-size: 12px;" class="textname"><strong>Age/Height:</strong>  {{i.age}}/{{i.height}} </p>
+							<p style="font-size: 12px;" class="textname"><strong>Qualification:</strong>  {{i.Qualification}} </p>
+							<p style="font-size: 12px;" class="textname"><strong>Work:</strong>  {{i.work}} </p>
+							<a href="/show_profile/{{i.user.id}}"><button class="btnconnect"> View Profile</button></a>
+							
+						</section>
+					</div>
+			
+					<section class="abt">
+						<p class="abtp" style="font-size: 12px; font-family: inherit;">{{i.about_me}}</p>
+					</section>
+					</div>
+				</div>
+			
+				{% endfor %}
+			</grid>
+			
+			<style>
+				grid{
+					display: grid;
+					grid-template-columns: auto auto;
+					-ms-grid-column-span: 2;
+					grid-row-gap: 10px;
+				}
+				@media (max-width: 1200px){
+					grid{
+					grid-template-columns: auto ;
+			
+					}
+				}
+			</style>
+			
+			
+
+		</div>
+	</div>
+</div>
+			</div>
+			<div class="col-md-2 filter">
+				<h4 >Filter By</h4>
+				<div class="gridf">
+					<button class="btn btn-success" style="border-radius: 0px;">filter1</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter2</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter3</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter4</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter5</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter6</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter7</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter8</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter9</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter10</button>
+					
+				</div>
+
+				<h4 style="margin-top: 30px;">Sort By By</h4>
+				<div class="gridf">
+					<button class="btn btn-success" style="border-radius: 0px;">filter1</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter2</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter3</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter4</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter5</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter6</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter7</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter8</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter9</button>
+					<button class="btn btn-success" style="border-radius: 0px;">filter10</button>
+					
+				</div>
+
+
+				<style>
+					.gridf{
+						display: grid;
+						grid-template-columns: auto auto;
+						margin-top: 10px;
+						grid-column-gap:5px;
+						grid-row-gap:5px;
+					}
+					.filter{
+						margin-top: 35px;
+					}
+				</style>
+				
+			</div>
+		</div>
+	</div>
+
+
+
+</div>
+
+<style>
+	.nav-pills > li > a {
+    border-radius: 0px;
+
+}
+.maindiv{
+width: 390px;
+height: 300px;
+background: #fff;
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.idsection{
+	width: 390px;
+	height: 43px;
+	background-color: red;
+}
+.id-text{
+	color: #FFF;
+font-family: inherit;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+text-transform: uppercase;
+}
+.dpimg{
+width: 161px;
+height: 196px;
+background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+
+}
+.textname{
+	color: #000;
+text-align: justify;
+font-family: inherit;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+text-transform: capitalize;
+}
+.wrap{
+	display: flex;
+}
+.texes{
+	margin: 27px;
+	align-content: center;
+    /* display: grid;
+	row-gap: 1px; */
+}
+.btnconnect{
+width: 161px;
+height: 35px;
+border: 1px solid #000;
+background: #FFF;
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+color: #000;
+
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+text-transform: capitalize;
+
+
+}
+.abtp{
+	width: 350px;
+height: 50px;
+color: #000;
+text-align: justify;
+font-family: inherit;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+text-transform: capitalize;
+align-content: center;
+    display: grid;
+	margin: 5px;
+}
+
+@media (max-width: 1200px){
+	.maindiv{
+width: 100%;
+height: auto;
+/* margin-left: -30px; */
+
+}
+.idsection{
+	width: 100%;
+	height: auto;
+	background-color: red;
+}
+.abtp{
+	width: 95%;
+	height: auto;
+	font-size: 6px;
+}
+.texes{
+	margin: 10px;
+	align-content: center;
+    /* display: grid;
+	row-gap: 1px; */
+	font-size: 10px;
+}
+.dpimg{
+	width: 100%;
+	max-height: 150px;
+}
+}
+</style>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock main %}

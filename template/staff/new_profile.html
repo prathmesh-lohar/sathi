@@ -1,0 +1,53 @@
+{% extends 'staff/base.html' %}
+
+{% block title %}
+    
+{% endblock title %}
+
+
+{% block main %}
+    <div class="container m-5" style="background-color: #fff;background-color: #fff;
+    padding: 24px 60px;">
+    <h3>Create New User For Profile</h3>
+        <form class="my-3" action="/staff/add_user" method="POST">
+            {% csrf_token %}
+            <div class="form-group ">
+                <label for="fname">First Name</label>
+                <input name="fname" type="text" class="form-control" id="fname" aria-describedby="emailHelp" placeholder="Enter First Name">
+               
+              </div>
+              <div class="form-group ">
+                <label for="lname">Last Name</label>
+                <input name = "lname" type="text" class="form-control" id="lname" aria-describedby="emailHelp" placeholder="Enter last Name">
+               
+              </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+             
+            </div>
+
+            <div class="form-group">
+                <label for="uname">Username</label>
+                <input name="username" type="text" class="form-control" id="uname" aria-describedby="emailHelp" placeholder="Create Username">
+               
+              </div>
+            <div class="form-group">
+              <label for="pwd">Password</label>
+              <input name="password" type="password" class="form-control" id="pwd" placeholder="Create Password">
+            </div>
+            
+          <input type="hidden" value="{{request.user.username}}" name="rofficer">
+          
+
+            <button type="submit" class="btn btn-primary my-2">Create</button>
+        </form>
+
+            <!-- <input type="hidden" name="userid" value="{{User}}"> -->
+
+           
+        
+    </div>
+{% endblock main %}
+    
+    

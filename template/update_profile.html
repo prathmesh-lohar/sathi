@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% block title %}
+new profile
+{% endblock title %}
+
+
+{% block main %}
+
+
+<div class="container" style="
+    padding: 40px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Profile</h3>
+
+                <div class="tabbable-panel " style="
+                margin-top: 12px;">
+                    <div class="tabbable-line">
+                        <ul class="nav nav-tabs ">
+                            <li class="active">
+                                <a href="#tab_default_1" data-toggle="tab">
+                                    Personal Details </a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_2" data-toggle="tab">
+                                    Family Details </a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_3" data-toggle="tab">
+                                    Media </a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_4" data-toggle="tab">
+                                    Documents </a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_5" data-toggle="tab">
+                                    T&C </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_default_1">
+                                <p>
+
+
+                                <div class="container">
+                                    <form method="POST" action="/save_personal_detail">
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Mobile:</label>
+                                            <input type="number" name="mobile" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Marrital Status:</label>
+                                            <input type="text" name="mstatus" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Date Of Birth:</label>
+                                            <input type="date" name="dob" class=" form-control" id="exampleInputEmail1"
+                                                aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Height:</label>
+                                            <input type="number" name="height" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Color:</label>
+                                            <input type="text" name="color" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Qualification:</label>
+                                            <input type="work" name="qualification" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Work:</label>
+                                            <input type="work" name="work" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Experience:
+                                                :</label>
+                                            <input type="text" name="experience" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Hobbies:
+                                                :</label>
+                                            <input type="text" name="Hobbies" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Income:
+                                                :</label>
+                                            <input type="text" name="Income" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Medical condition:
+                                                :</label>
+                                            <input type="text" name="medical_condition" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        </div>
+
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">City
+                                                :</label>
+                                            <input type="text" name="city" class=" form-control" id="exampleInputEmail1"
+                                                aria-describedby="emailHelp">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">About Me</label>
+                                            <textarea class="form-control" name="about" id="exampleFormControlTextarea1"
+                                                rows="3"></textarea>
+                                        </div>
+
+
+
+                                        <!-- <input type="hidden" name="userid" value="{{User}}"> -->
+
+                                        {% csrf_token %}
+
+                                        <button type="submit" class="btn btn-success"
+                                            style="width: 20%; height: 40px;">Save</button>
+                                    </form>
+                                </div>
+
+                                <style>
+                                    form {
+
+                                        max-width: 90%;
+                                        border-radius: 0px;
+
+                                    }
+                                </style>
+
+                            </div>
+                            <div class="tab-pane" id="tab_default_2">
+                                <p>
+                                    Tab 2.
+                                </p>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                </p>
+
+                            </div>
+                            <div class="tab-pane" id="tab_default_3">
+                                <p>
+                                    Tab 3.
+                                </p>
+                                <p>
+                                    Consectetur deleniti quisquam natus eius commodi.
+                                </p>
+
+                            </div>
+                            <div class="tab-pane" id="tab_default_4">
+                                <p>
+                                    Tab 4.
+                                </p>
+                                <p>
+                                    Consectetur deleniti quisquam natus eius commodi.
+                                </p>
+
+                            </div>
+                            <div class="tab-pane" id="tab_default_5">
+                                <p>
+                                    Tab 5.
+                                </p>
+                                <p>
+                                    Consectetur deleniti quisquam natus eius commodi.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock main %}
