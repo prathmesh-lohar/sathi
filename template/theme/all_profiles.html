@@ -1,0 +1,283 @@
+{% extends 'theme/base.html' %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% load static %}
+{% block main %}
+<script src="{% static 'assets/js/cal.js' %}"></script>
+
+<div class="filter-mob text-center" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><span>Profile Fileter
+        <span class="fa fa-filter"></span></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+
+            <div class="filter my-5 mx-0">
+
+                <form>
+                    <label class="form-label"><span class="fa fa-search"></span> I'm looking for</label>
+                    <select class="form-select my-2" aria-label="Default select example">
+                        <option selected>I'm looking for</option>
+                        <option value="1">Men</option>
+                        <option value="2">Women</option>
+
+                    </select>
+                    <label class="form-label"><span class="fa  fa-clock-o"></span> Age</label>
+                    <select class="form-select my-2" aria-label="Default select example">
+                        <option selected>Select Age</option>
+                        <option value="1">22-30</option>
+                        <option value="1">30-35</option>
+                        <option value="1">35-40</option>
+                        <option value="1">40-50</option>
+
+
+
+                    </select><label class="form-label"><span class="fa fa-bell-o"></span> Select Religion</label>
+                    <select class="form-select my-2" aria-label="Default select example">
+                        <option selected>Religion</option>
+                        <option value="1">Any</option>
+
+                    </select>
+                    <label class="form-label"><span class="fa fa-globe"></span> Location</label>
+                    <select class="form-select my-2" aria-label="Default select example">
+                        <option selected>Pune</option>
+                        <option value="1">nanded</option>
+                        <option value="2">beed</option>
+                        <option value="2">parali</option>
+                        <option value="2">nagpur..</option>
+                    </select>
+                </form>
+
+            </div>
+        </div>
+        <div class="col-md-9 profileare">
+            <div class="upper py-5">
+                <div class="end">
+                    <div class="d-inline head1 h5">Showing <span
+                            style="font-weight: bold; font-family: roboto;">32</span>
+                        Profiles</div>
+                </div>
+                <div class=" head1mob text-center h5">Showing <span
+                        style="font-weight: bold; font-family: roboto;">32</span>
+                    Profiles</div>
+
+                <div class="end">
+                    <div class="d-inline h5 float-end">
+                        <div class="d-inline h5">short by :</div>
+                        <select>
+                            <option>Most Relative</option>
+                        </select>
+
+                        <span class="fa fa-th "></span>
+                        <pan class="fa fa-bars "></pan>
+                    </div>
+                </div>
+                <hr class="hr my-4" />
+            </div>
+
+            <div class="cardarea">
+
+                {% for m in all_profiles %}
+                <div class="card mb-3">
+                    <div class=" row g-0">
+                        <div class="col-md-4">
+                            <img src="
+                                
+                                {% if m.user.media.dp.url %}
+                                {{m.user.media.dp.url}}
+                                {% else %}
+                                https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg
+                                {% endif %}
+                                    
+                                " alt="dp-{{m.user.first_name}}" class="img-fluid rounded-start profile-img" />
+
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+
+                                <div class="like">
+                                    <span class="fa fa-thumbs-o-up"></span>
+
+                                </div>
+                                <h5 class="card-title">{{m.user.first_name}} {{m.user.last_name}}</h5>
+                                <p class="card-text">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <span class="fa fa-graduation-cap"></span><span> {{m.Qualification}}</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="fa fa-briefcase "></span><span> {{m.work}}</span><br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <span class="fa fa-calendar"></span><span> Male,
+                                            {% if m.age %}
+                                            {{m.age}} Years
+                                            {% else %}
+                                            ---
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+
+                                        <span class="fa fa-long-arrow-up "></span><span> {{m.height}}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <span class="fa fa-ring"></span><span> {{m.marrital_status}}</span>
+
+                                    </div>
+                                    <div class="col-4">
+                                        
+                                        <script>
+                                            var work = "{{m.work}}";
+                                            var Qualification = "{{m.Qualification}}";
+                                            var color = "{{m.color}}";
+                                            var marrital_status ="{{m.marrital_status}}";
+                                            var height = "{{m.height}}";
+                                            
+                                            var experience = "{{m.experience}}";
+                                            var hobbies = "{{m.hobbies}}";
+                                            var city = "{{m.city}}";
+                                            var medical_condition = "{{m.medical_condition}}";
+                                            var income = "{{m.income}}";
+
+                                            var max = 100;
+
+                                            var score = 0;
+
+                                            if(work=="{{request.user.profile.work}}")
+                                            {
+                                                score = score+10;
+                                            }
+                                            if(Qualification=="{{request.user.profile.Qualification}}")
+                                            {
+                                                score = score+10;
+                                            }if(color=="{{request.user.profile.color}}")
+                                            {
+                                                score = score+10;
+                                            }if(marrital_status=="{{request.user.profile.marrital_status}}")
+                                            {
+                                                score = score+10;
+                                            }if(experience=="{{request.user.profile.experience}}")
+                                            {
+                                                score = score+10;
+                                            }
+                                            if(hobbies=="{{request.user.profile.hobbies}}")
+                                            {
+                                                score = score+10;
+                                            }if(city=="{{request.user.profile.city}}")
+                                            {
+                                                score = score+10;
+                                            }
+                                            if(medical_condition=="{{request.user.profile.medical_condition}}")
+                                            {
+                                                score = score+10;
+                                            }if(income=="{{request.user.profile.income}}")
+                                            {
+                                                score = score+10;
+                                            }
+                                            if(height=="{{request.user.profile.height}}")
+                                            {
+                                                score = score+10;
+                                            }
+
+                                            var per = (score/max) * 100;
+
+                                            console.log(per)
+                                        </script>
+        
+                                        <span class="fa fa-filter "></span><span> Matching <p id="val" onload="cal({{m.id}})"></p> %  <span id="mid">{{m.id}}</span> </span><br>
+                                        
+                                       
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-4">
+
+                                        <span class="fa fa-location-arrow"> </span><span> {{m.city}}</span>
+                                    </div>
+                                </div>
+
+                                </p>
+                                <hr class="hr" />
+                                <p class="card-text">
+                                    <span class="tags">chat now</span>
+                                    <span class="tags">watsapp</span>
+                                    <span class="tags">send Interest</span>
+                                    <span class="tags">more..</span>
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Profile Filer</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <label class="form-label"><span class="fa fa-search"></span> I'm looking for</label>
+                    <select class="form-select my-2" aria-label="Default select example">
+                        <option selected>I'm looking for</option>
+                        <option value="1">Men</option>
+                        <option value="2">Women</option>
+
+                    </select>
+                    <label class="form-label"><span class="fa  fa-clock-o"></span> Age</label>
+                    <select class="form-select my-2" aria-label="Default select example">
+                        <option selected>Select Age</option>
+                        <option value="1">22-30</option>
+                        <option value="1">30-35</option>
+                        <option value="1">35-40</option>
+                        <option value="1">40-50</option>
+
+
+
+                    </select><label class="form-label"><span class="fa fa-bell-o"></span> Select Religion</label>
+                    <select class="form-select my-2" aria-label="Default select example">
+                        <option selected>Religion</option>
+                        <option value="1">Any</option>
+
+                    </select>
+                    <label class="form-label"><span class="fa fa-globe"></span> Location</label>
+                    <select class="form-select my-2" aria-label="Default select example">
+                        <option selected>Pune</option>
+                        <option value="1">nanded</option>
+                        <option value="2">beed</option>
+                        <option value="2">parali</option>
+                        <option value="2">nagpur..</option>
+                    </select>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}

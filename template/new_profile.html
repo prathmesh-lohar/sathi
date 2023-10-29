@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block title %}
+new profile
+{% endblock title %}
+
+
+{% block main %}
+
+
+<div class="container" style="
+    padding: 40px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Personal Details</h3>
+                <br>
+
+        
+                                <div class="container ">
+                                    <form method="POST" action="/save_personal_detail">
+                                        <div class="form-group ">
+                                            <label for="inputState">Gender</label>
+                                            <select id="inputState" class="form-control" name="gender" required>
+                                              <option selected>Choose...</option>
+                                              <option>Male</option>
+                                              <option>Female</option>
+                                            </select>
+                                          </div>
+
+                                          <div class="form-group ">
+                                            <label for="exampleInputEmail1">Age:</label>
+                                            <input type="number" name="age" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Mobile:</label>
+                                            <input type="number" name="mobile" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Marrital Status:</label>
+                                            <input type="text" name="mstatus" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Date Of Birth:</label>
+                                            <input type="date" name="dob" class=" form-control" required id="exampleInputEmail1"
+                                                aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Height:</label>
+                                            <input type="text" name="height" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Color:</label>
+                                            <input type="text" name="color" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Qualification:</label>
+                                            <input type="work" name="qualification" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Work:</label>
+                                            <input type="work" name="work" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Experience:
+                                                :</label>
+                                            <input type="text" name="experience" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Hobbies:
+                                                :</label>
+                                            <input type="text" name="Hobbies" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Income:
+                                                :</label>
+                                            <input type="text" name="Income" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">Medical condition:
+                                                :</label>
+                                            <input type="text" name="medical_condition" class=" form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        </div>
+
+
+                                        <div class="form-group ">
+                                            <label for="exampleInputEmail1">City
+                                                :</label>
+                                            <input type="text" name="city" required class=" form-control" id="exampleInputEmail1"
+                                                aria-describedby="emailHelp">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">About Me</label>
+                                            <textarea class="form-control" required name="about" id="exampleFormControlTextarea1"
+                                                rows="3"></textarea>
+                                        </div>
+
+
+
+                                        <!-- <input type="hidden" name="userid" value="{{User}}"> -->
+
+                                        {% csrf_token %}
+
+                                        <button type="submit" class="btn btn-success"
+                                            style="width: 20%; height: 40px;">Save</button>
+                                    </form>
+                                </div>
+
+                                <style>
+                                    form {
+
+                                        max-width: 90%;
+                                        border-radius: 0px;
+
+                                    }
+                                </style>
+
+                            </div>
+                      </div>
+                      </div>
+                      </div>
+
+
+{% endblock main %}

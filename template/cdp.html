@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    create profile picture
+{% endblock title %}
+
+
+
+{% block main %}
+<center>
+<div class="container">
+    <br>
+    <h3>Upload Profile Picture<h3>
+        <form action="/cdp" method="POST"  enctype="multipart/form-data">
+    <label class="picture" for="picture__input" tabIndex="0">
+        <span class="picture__image"></span>
+      </label>
+      {% csrf_token %}
+      <input type="file" name="picture__input" id="picture__input">
+      <button type="submit" class="btn-success">Save</button>
+    </form>
+<br>
+</div>
+</center>
+
+
+
+<style>
+    #picture__input {
+  display: none;
+}
+
+.picture {
+  width: 400px;
+  aspect-ratio: 16/9;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #020202;
+  border: 2px dashed currentcolor;
+  cursor: pointer;
+  font-family: sans-serif;
+  transition: color 300ms ease-in-out, background 300ms ease-in-out;
+  outline: none;
+  overflow: hidden;
+}
+
+.picture:hover {
+  color: #040404;
+  background: #ccc;
+}
+
+.picture:active {
+  border-color: turquoise;
+  color: turquoise;
+  background: #eee;
+}
+
+.picture:focus {
+  color: #000000;
+  background: #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.picture__img {
+  max-width: 100%;
+}
+
+</style>
+
+
+<script>
+    const inputFile = document.querySelector("#picture__input");
+const pictureImage = document.querySelector(".picture__image");
+const pictureImageTxt = "Choose an image";
+pictureImage.innerHTML = pictureImageTxt;
+
+inputFile.addEventListener("change", function (e) {
+  const inputTarget = e.target;
+  const file = inputTarget.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.addEventListener("load", function (e) {
+      const readerTarget = e.target;
+
+      const img = document.createElement("img");
+      img.src = readerTarget.result;
+      img.classList.add("picture__img");
+
+      pictureImage.innerHTML = "";
+      pictureImage.appendChild(img);
+    });
+
+    reader.readAsDataURL(file);
+  } else {
+    pictureImage.innerHTML = pictureImageTxt;
+  }
+});
+
+</script>
+{% endblock main %}
+    
+    

@@ -1,0 +1,201 @@
+{% extends 'theme/base.html' %}
+{% load static %}
+{% block title %}Home|{% endblock title %}
+
+{% block main %}
+<div class="container-fluid m-0 p-0 mianbox">
+  <div class="container inner">
+    <span class="hashtag ">#1MATRIMONY</span><br>
+    <span class="sec">Find your</span><br>
+    <span class="red">Right Match</span><span class="white">here</span><br>
+    <small class="p ">Most trusted Matrimony Brand in the World.</small>
+
+    <div class="container search-form">
+
+      <div class="row g-3">
+        <div class="col-sm">
+          <div class="form-outline">
+            <select>
+              <option>I am looking for</option>
+              <option>Male</option>
+              <option>Feale</option>
+
+            </select>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="form-outline">
+            <select>
+              <option>Age</option>
+              <option>22-25</option>
+              <option>25-30</option>
+              <option>30-30</option>
+
+
+            </select>
+          </div>
+        </div>
+
+
+        <div class="col-sm">
+          <div class="form-outline">
+            <select>
+              <option>Religion</option>
+
+              <option>....</option>
+
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="form-outline">
+            <select>
+              <option>Location</option>
+              <option>pune</option>
+              <option>latur</option>
+              <option>parali</option>
+              <option>....</option>
+
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="form-outline">
+            <button class="btn btn-black">Search</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<div class="container-fluid m-0 p-0">
+  <div class="headiing my-5">
+    <span class="subbrand">TRUSTED BRAND</span>
+    <h1>Trust by <span class="num">1500+ </span>Couples</h1>
+  </div>
+</div>
+
+<div class="cpl">
+  <link rel="stylesheet" href="{% static 'assets/css/slider.css' %}">
+
+  <div class="slider" id="slider">
+    <div class="slide" id="slide">
+
+      <img class="item" src="{% static 'assets/images/couple1.jpg' %}">
+      <img class="item" src="{% static 'assets/images/couple2.jpg' %}">
+      <img class="item" src="{% static 'assets/images/couple3.jpg' %}">
+      <img class="item" src="{% static 'assets/images/couple4.jpg' %}">
+      <img class="item" src="{% static 'assets/images/couple5.jpg' %}">
+      <img class="item" src="{% static 'assets/images/couple1.jpg' %}">
+      <img class="item" src="{% static 'assets/images/couple2.jpg' %}">
+      <img class="item" src="{% static 'assets/images/couple3.jpg' %}">
+      <img class="item" src="{% static 'assets/images/couple4.jpg' %}">
+      <img class="item" src="{% static 'assets/images/couple5.jpg' %}">
+
+    </div>
+    <button class="ctrl-btn pro-prev">Prev</button>
+    <button class="ctrl-btn pro-next">Next</button>
+    
+  </div>
+  
+</div>
+
+
+<script src="{% static 'assets/js/slider.js' %}"></script>
+
+<div class="container-fluid m-0 p-0">
+  <div class="headiing my-5">
+    <span class="subbrand">Featured Profiles</span>
+    <!-- <h1>Vrified by more than <span class="num">10 </span>Agents</h1> -->
+  </div>
+</div>
+
+<div class="profile">
+
+  <div class="container ">
+    <div class="row">
+
+      
+      {% for f in featured1 %}
+
+       <div class="col-md-3 my-1">
+        <div class="card m-0 p-0">
+
+          <img src="{{f.user.media.dp.url}}" class="card-img" alt="{{f.user.first_name}}" />
+
+          <div class="card-bg">
+            <div class="card-block">
+
+              <h3 class="card-title">{{f.user.first_name}}<br> {{f.user.last_name}}</h3>
+              <p class="card-text">{{f.Qualification}}</p>
+              
+
+            </div>
+          </div>
+        </div>
+      </div>  
+
+      {% endfor %}
+        
+    </div>
+  </div>
+</div>
+
+
+<div class="container my-5">
+  <div class="about ">
+    <div class="row">
+      <div class="col-md-5 my-5">
+        <img src="{% static 'assets/images/about.jpg' %}" class="" alt="">
+
+      </div>
+      <div class="col-md-7 my-5">
+        <div class="body">
+          <h2 class="my-4 mx-5"> Welcome to</h2>
+          <h3 class="mx-5">Wedding Matrimony</h3>
+          <p class="mx-5 my-4">Lorem lipsume siteamet Lorem lipsume siteametLorem lipsume siteamet
+            Lorem lipsume siteamet
+            Lorem lipsume siteamet
+            Lorem lipsume siteametLorem lipsume siteametLorem lipsume siteametLorem lipsume siteamet
+            Lorem lipsume siteamet
+            Lorem lipsume siteamet Lorem lipsume siteametLorem lipsume siteamet
+            Lorem lipsume siteamet
+            Lorem lipsume siteamet
+            Lorem lipsume siteametLorem lipsume siteametLorem lipsume siteametLorem lipsume siteamet
+            Lorem lipsume siteametLorem lipsume siteamet Lorem lipsume siteametLorem lipsume siteamet
+            Lorem lipsume siteamet
+            Lorem lipsume siteamet
+            Lorem lipsume siteametLorem lipsume siteametLorem lipsume siteametLorem lipsume siteamet
+            Lorem lipsume siteamet
+          </p>
+          <hr class="hr px-5 mx-5">
+
+          <div class="ico">
+            <div class="container mx-5">
+              <div class="row">
+                <div class="col">
+                  <span class="fa fa-phone"></span><span class="num"> +91 0000 000000
+                </div>
+                <div class="col">
+                  <span class="fa fa-envelope"></span><span class="num"> abc@mail.com
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock main %}

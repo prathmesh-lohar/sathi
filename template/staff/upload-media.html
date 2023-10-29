@@ -1,0 +1,90 @@
+{% extends 'staff/base.html' %}
+
+{% block title %}
+
+{% endblock title %}
+
+
+{% block main %}
+<div class="container m-5" style="background-color: #fff;background-color: #fff;
+    padding: 24px 60px;">
+    <h5>Media : / {{UserIn.first_name}} {{UserIn.last_name}}</h5>
+
+</div>
+
+<div class="container m-5" style="background-color: #fff;background-color: #fff;
+    padding: 24px 60px;">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <img class="img-thumbnail rounded-circle" src="{{UserIn.media.dp.url}}"
+                    style="height: 100px; width: 100px;">
+            </div>
+            <div class="col-md-8">
+                <form action="/staff/upload_media/{{UserIn.username}}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3 sm">
+                        <label for="formFile" class="form-label">Update Profile Picture</label>
+                        <input required name="dp" class="form-control" type="file" id="formFile">
+
+                    </div>
+
+            </div>
+            <div class="col-md-2 ">
+                <br>
+                <button type="submit" class="btn btn-primary my-2">Save</button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="top text-center my-3">
+        <h1 class="">Gallery</h1>
+        <button class=" my-5 mx-auto btn-sm btn btn-primary" data-toggle="collapse" href="#collapseExample"
+            role="button" aria-expanded="false" aria-controls="collapseExample">Add New Image</button>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <div class="container">
+                    <form action="/staff/save_gallery/{{UserIn.username}}" method="post" enctype="multipart/form-data">
+                    <label for="formFile" class="form-label">Upload an Image</label>
+                        {% csrf_token %}
+                    <center><input style="width: 50%;" required name="img" class="form-control sm" type="file"
+                            id="formFile">
+
+                    </center><button type="submit" class="btn btn-success btn-sm my-2">Upload</button>
+                </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            
+            {% for g in gallery %}
+                
+            
+                
+            <div class="col-md-3">
+                <div class="card my-2">
+                    <img src="{{g.img.url}}" class="card-img-top " alt="...">
+                    <div class="card-footer">
+                        <a href="/staff/delete_gallery/{{g.id}}">
+                        <button style="width: 100%;" class="btn btn-sm rounded-0 btn-danger"><span
+                                class="bi bi-trash"></span></button>
+                            </a>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock main %}
