@@ -1,0 +1,101 @@
+{% extends 'staff/base.html' %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block main %}
+
+{% if messages %}
+
+{% for message in messages %}
+
+<div id="message" style="margin: 12px 24px 0px;" class="alert alert-{{message.tags}} d-flex align-items-center"
+    role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+        <use xlink:href="#exclamation-triangle-fill" />
+    </svg>
+    <div>
+        {{message}}
+    </div>
+
+</div>
+
+
+{% endfor %}
+
+{% endif %}
+
+
+<div class="container">
+    <p>
+        <button class="btn btn-primary my-5 btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample">
+            <span class="bi bi-plus"> </span>
+            Upload New
+            Document
+        </button>
+    </p>
+
+</div>
+<div class="conatainer">
+    <div class="collapse" id="collapseExample">
+        <div class="container" class="collapse" id="collapseExample">
+            <div class="card card-body">
+
+                <div class="form">
+                    <div class="row">
+
+                        <form action="/staff/upload_documents/{{username}}" method="post" enctype="multipart/form-data">
+                            <div class="mb-md-3">
+                                <label for="formFile" class="form-label">Name Of Document</label>
+                                <input required name="name" class="form-control" type="text" id="formFile">
+                                {% csrf_token %}
+                            </div>
+
+                            <div class="mb-md-3">
+                                <label for="formFile" class="form-label">Upload Document File</label>
+                                <input required name="file" class="form-control" type="file" id="formFile">
+
+                            </div>
+
+                            <div class="mb-3 form-check mx-1">
+                                <input required type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">This Document Verified By Me</label>
+                            </div>
+                            <div class="mb-3 my-2">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="dic-main" style="background-color: #ffff; border-radius: 10px; padding-bottom: 10px; margin: 10px;">
+
+<div class="container my-5">
+    <h1>documents</h1>
+</div>
+
+<div class="container">
+    <ul class="list-group list-group-flush">
+        
+        {% for i in alldocs %}
+        <a target="_blank" href="{{i.file.url}}">
+        <li class="list-group-item">{{i.name}}</li>
+    </a>
+
+        {% endfor %}
+            
+       
+      </ul>
+</div>
+</div>
+
+
+{% endblock main %}

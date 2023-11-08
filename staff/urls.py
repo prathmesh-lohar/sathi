@@ -17,6 +17,7 @@ urlpatterns = [
     
     path("upload_details/<str:username>", views.upload_details , name="upload_details"),
     path("upload_media/<str:username>", views.upload_media , name="upload_media"),
+    path("upload_documents/<str:username>", views.upload_documents , name="upload_documents"),
 
     path("save_details", views.save_details , name="save_details"),
     path("save_gallery/<str:username>", views.save_gallery , name="save_gallery"),

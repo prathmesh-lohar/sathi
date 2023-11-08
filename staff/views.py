@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from app1.models import profile,family_details,media
 from django.contrib.auth.hashers import make_password
+from extra.models import *
 
 # Create your views here.
 
@@ -68,11 +69,35 @@ def upload_details(request,username):
         details  = profile.objects.filter(username=username).first()
         fdetails  = family_details.objects.filter(username=username).first()
         user = User.objects.filter(username=username).first()
+        
+        
+        # from extra
+        incomelist = income.objects.all()
+        heightlist = height.objects.all()
+        colorlist = color.objects.all()
+        colorlist = color.objects.all()
+
+        Qualificationlist= Qualification.objects.all()
+        worklist= work.objects.all()
+        experiencelist = experience.objects.all()
+        hobbieslist = hobbies.objects.all()
+        
+        
+        
         data = {
             'details':details,
             'fdetails':fdetails,
             'user':user,
-            'uid':username
+            'uid':username,
+            
+            'incomelist':incomelist,
+            'heightlist':heightlist,
+            'colorlist':colorlist,
+            'Qualificationlist':Qualificationlist,
+            'worklist':worklist,
+            'experiencelist':experiencelist,
+            'hobbieslist':hobbieslist,
+            
         }
 
         return render(request, "staff/upload_details.html",data)
@@ -200,6 +225,37 @@ def upload_media(request,username):
     else:
         return HttpResponse("you are not staff user")
 
+
+@login_required(login_url='/staff/login')
+def upload_documents(request,username):
+    if request.user.is_staff:
+        username=username
+        u=User.objects.filter(username=username).first()
+        
+        uid=u.id
+        
+        from app1.models import document
+        alldocs = document.objects.filter(user_id=uid)
+        
+        if request.user.is_staff:
+        
+            if request.method == "POST":
+                file = request.FILES['file']
+                name = request.POST.get('name')
+                
+                from app1.models import document
+                g = document(user_id=uid,file=file,name=name)
+                g.save()
+                messages.success(request, "document uploaded successfully")
+                
+                
+                return redirect(request.META.get('HTTP_REFERER'))  
+
+        return render(request, "staff/upload_documents.html",{"username":username,"alldocs":alldocs})
+    else:
+        return HttpResponse("you are not staff user")
+
+
 @login_required(login_url='/staff/login')
 def save_details(request):
     if request.user.is_staff:
@@ -209,7 +265,7 @@ def save_details(request):
             dob = request.POST.get('dob')
             height = request.POST.get('height')
             color = request.POST.get('color')
-            qualification = request.POST.get('qualification')
+            qualification = request.POST.get('tags')
             work = request.POST.get('work')
             experience = request.POST.get('experience')
             Hobbies = request.POST.get('Hobbies')
@@ -247,12 +303,16 @@ def save_details(request):
             if profile.objects.filter(username=username).exists():
                 obj=profile.objects.filter(username=uid).update(user=id,mobile=mobile,marrital_status=mstatus,dob=dob,height=height,color=color,Qualification=qualification,work=work,experience=experience,hobbies=Hobbies,income=Income,medical_condition=medical_condition,city=city,about_me=about,gender=gender,registerfor=regofor,is_approved=vstatus)
                 obj2=family_details.objects.filter(username=uid).update(user=id,father_name=father_name,father_education=father_education,father_occupation=father_occupation,mother_name=mother_name,mother_education=mother_education,mother_occupation=mother_occupation,brother=brother,sister=sister,relatives=relatives,native_place=native_place)
+                messages.success(request, "details uploaded successfully")
+                
             
             else:
                 # user = User.objects.filter(id=uid).first()
                 obj=profile(username=uid,mobile=mobile,marrital_status=mstatus,dob=dob,height=height,color=color,Qualification=qualification,work=work,experience=experience,hobbies=Hobbies,income=Income,medical_condition=medical_condition,city=city,about_me=about,gender=gender,registerfor=regofor,is_approved=vstatus)
                 obj2=family_details(username=uid,user=id,father_name=father_name,father_education=father_education,father_occupation=father_occupation,mother_name=mother_name,mother_education=mother_education,mother_occupation=mother_occupation,brother=brother,sister=sister,relatives=relatives,native_place=native_place)
                 obj.save()
+                messages.success(request, "details uploaded successfully")
+                
                 # obj2.save()
         return redirect('/staff')
     

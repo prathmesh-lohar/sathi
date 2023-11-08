@@ -6,7 +6,14 @@
 
 
 {% block main %}
+    
+<script>
+var activeImage = document.querySelector("#carouselExampleInterval .carousel-inner .carousel-item.active img");
+var src = activeImage.getAttribute("src");
 
+console.log(src); // This will log the src of the active image to the console
+
+</script>
 
 
 <div class="container p-0 ">
@@ -17,14 +24,17 @@
                     <div class="carousel-inner">
                         <div class="carousel-item active" data-mdb-interval="10000">
                             <img src="{{profile.user.media.dp.url}}" data-mdb-toggle="modal" data-mdb-target="#imgzoom"
-                                class="d-block w-100" alt="Wild Landscape" />
+                                class="d-block w-100" alt="" />
                         </div>
+                        
+                        {% for gallery in gallery  %}
                         <div class="carousel-item" data-mdb-interval="2000">
-                            <img src="images/profile2.jpg" class="d-block w-100" alt="Camera" />
+                            <img src="{{gallery.img.url}}" class="d-block w-100" alt="{{media.user}}" data-mdb-toggle="modal" data-mdb-target="#imgzoom-{{ forloop.counter }}"/>
                         </div>
-                        <div class="carousel-item">
-                            <img src="images/profile3.jpg" class="d-block w-100" alt="Exotic Fruits" />
-                        </div>
+                        {% endfor %}
+                            
+                      
+                       
                     </div>
                     <button class="carousel-control-prev" data-mdb-target="#carouselExampleInterval" type="button"
                         data-mdb-slide="prev">
@@ -46,27 +56,19 @@
                         <!-- <li>
                             <a href="/blog" {% if request.get_full_path == '/blog' %} class="activetab"  {% endif %}>All</a>       
                         </li> -->
+
                         <li>
                             <div class="col" data-mdb-target="#carouselExampleInterval" data-mdb-slide-to="0"><img
-                                    src="{{profile.user.media.dp.url}}" style="width: 100px;" /></div>
+                                    src="{{profile.user.media.dp.url}}" style=" max-height: 100px;" /></div>
                         </li>
-                        <li>
-                            <div class="col" data-mdb-target="#carouselExampleInterval" data-mdb-slide-to="1"><img
-                                    src="{{profile.user.media.dp.url}}" style="width: 100px;" /></div>
-                        </li>
-                        <li>
-                            <div class="col" data-mdb-target="#carouselExampleInterval" data-mdb-slide-to="2"><img
-                                    src="{{profile.user.media.dp.url}}" style="width: 100px;" /></div>
-                        </li>
-                        <li>
-                            <div class="col" data-mdb-target="#carouselExampleInterval" data-mdb-slide-to="3"><img
-                                    src="{{profile.user.media.dp.url}}" style="width: 100px;" /></div>
-                        </li>
-                        <li>
-                            <div class="col" data-mdb-target="#carouselExampleInterval" data-mdb-slide-to="4"><img
-                                    src="{{profile.user.media.dp.url}}" style="width: 100px;" /></div>
-                        </li>
-
+                    
+                    {% for gallery in gallery %}
+                    <li>
+                        <div class="col" data-mdb-target="#carouselExampleInterval" data-mdb-slide-to="{{ forloop.counter }}"><img
+                                src="{{gallery.img.url}}" style="max-height: 100px;" /></div>
+                    </li>                       
+                    {% endfor %}
+ 
                     </ul>
                     <div class="right-arrow fafa" onclick="myFunction()"><span class="fa fa-chevron-right"></span>
                     </div>
@@ -213,6 +215,13 @@
         transition: opacity .5s;
         display: block;
         width: 100%;
+        
+    }
+    figure{
+      
+            background-image: url('your-image.jpg');
+            /* background-size: 100%; */
+            background-repeat: no-repeat;
     }
 </style>
 
@@ -221,8 +230,8 @@
         var zoomer = e.currentTarget;
         e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
         e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
-        x = offsetX / zoomer.offsetWidth * 100
-        y = offsetY / zoomer.offsetHeight * 100
+        x = offsetX / zoomer.offsetWidth * 200
+        y = offsetY / zoomer.offsetHeight * 200
         zoomer.style.backgroundPosition = x + '% ' + y + '%';
     }
 </script>
@@ -251,8 +260,8 @@
             <div class="modal-body">
 
 
-                <figure class="zoom" onmousemove="zoom(event)" style="background-image: url(images/profile.jpg)">
-                    <img src="images/profile.jpg" />
+                <figure class="zoom" onmousemove="zoom(event)" style="background-image: url({{profile.user.media.dp.url}})">
+                    <img src="{{profile.user.media.dp.url}}" />
                 </figure>
 
             </div>
@@ -260,4 +269,28 @@
         </div>
     </div>
 </div>
+
+
+{% for gallery in gallery  %}
+
+<div class="modal  fade" id="imgzoom-{{ forloop.counter }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+                <figure class="zoom" onmousemove="zoom(event)" style="background-image: url({{gallery.user.media.dp.url}})">
+                    <img src="{{gallery.user.media.dp.url}}" />
+                </figure>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endfor %}
 {% endblock main %}

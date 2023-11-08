@@ -15,7 +15,7 @@
 <div class="container m-5" style="background-color: #fff;background-color: #fff;
     padding: 24px 60px;">
 
-    <div class="container">
+    <div class="container text-center">
         <div class="row">
             <div class="col-md-2">
                 <img class="img-thumbnail rounded-circle" src="{{UserIn.media.dp.url}}"
@@ -31,7 +31,7 @@
                     </div>
 
             </div>
-            <div class="col-md-2 ">
+            <div class="col-md-2 my-0 py-0">
                 <br>
                 <button type="submit" class="btn btn-primary my-2">Save</button>
             </div>
@@ -41,9 +41,10 @@
 
 </div>
 
-<div class="container">
+<hr class="hr">
+<div class="container" style="background-color: #fff; border-radius: 10px; margin: 15px;">
     <div class="top text-center my-3">
-        <h1 class="">Gallery</h1>
+        <h1 class="" >Gallery</h1>
         <button class=" my-5 mx-auto btn-sm btn btn-primary" data-toggle="collapse" href="#collapseExample"
             role="button" aria-expanded="false" aria-controls="collapseExample">Add New Image</button>
         <div class="collapse" id="collapseExample">
@@ -52,10 +53,10 @@
                     <form action="/staff/save_gallery/{{UserIn.username}}" method="post" enctype="multipart/form-data">
                     <label for="formFile" class="form-label">Upload an Image</label>
                         {% csrf_token %}
-                    <center><input style="width: 50%;" required name="img" class="form-control sm" type="file"
+                    <input required name="img" class="form-control sm" type="file"
                             id="formFile">
 
-                    </center><button type="submit" class="btn btn-success btn-sm my-2">Upload</button>
+                    <button type="submit" class="btn btn-success btn-sm my-2">Upload</button>
                 </form>
                 </div>
             </div>

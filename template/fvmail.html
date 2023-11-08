@@ -1,13 +1,13 @@
-<html>
-    <head><title></title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
-    <body>
+{% extends 'theme/base.html' %}
+
+{% block main %}
+    
+    
         <div class="container" style="padding: 50px;">
             <form action="/fvmail" method="POST">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Enter Verification Code</label>
-                  <input name="code" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Code">
+                  <input required name="code" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Code">
                   <small id="emailHelp" class="form-text text-muted">Enter Verification Code that We Send On Your Email.</small>
                 </div>
                 <input type="hidden" value="{{code}}" name="ccode">
@@ -20,5 +20,6 @@
 
               </form>
         </div>
-    </body>
-</html>
+
+
+        {% endblock main %}

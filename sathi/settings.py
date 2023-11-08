@@ -28,11 +28,17 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 
+CSRF_TRUSTED_ORIGINS = ['https://*https://846a-2409-40c2-5-4b8d-e064-1801-9e25-e095.ngrok-free.app/','https://846a-2409-40c2-5-4b8d-e064-1801-9e25-e095.ngrok-free.app/*']
+
+
 # Application definition
 
 INSTALLED_APPS = [
     'app1',
     'staff',
+    'extra',
+    
+    'import_export',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -67,7 +73,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+            'custom_filters': 'app1.templatetags.custom_filters',
             
+            }
           
         },
     },

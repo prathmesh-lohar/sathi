@@ -24,7 +24,7 @@ class profile(models.Model):
     income = models.CharField(max_length=50,default="", null=True, blank=True)
     medical_condition = models.CharField(max_length=50,default="", null=True, blank=True)
     city = models.CharField(max_length=50,default="", null=True, blank=True)
-    about_me = models.TextField(null=True,blank=True)
+    about_me = models.TextField(null=True,blank=True,default="")
     related_officer = models.CharField(max_length=50,default="", null=True, blank=True)
 
     username =   models.CharField(max_length=100,default="", null=True, blank=True)
@@ -56,10 +56,10 @@ class family_details(models.Model):
     mother_name = models.CharField(max_length=50,default="", null=True, blank=True)
     mother_education = models.CharField(max_length=50,default="", null=True, blank=True)
     mother_occupation = models.CharField(max_length=50,default="", null=True, blank=True)
-    sister=models.TextField(null=True,blank=True)
-    brother=models.TextField(null=True,blank=True)
-    native_place=models.TextField(null=True,blank=True)
-    relatives=models.TextField(null=True,blank=True)
+    sister=models.TextField(null=True,blank=True, default="")
+    brother=models.TextField(null=True,blank=True, default="")
+    native_place=models.TextField(null=True,blank=True,default="")
+    relatives=models.TextField(null=True,blank=True,default="")
 
     username =   models.CharField(max_length=100,default="", null=True, blank=True)
     first_name =   models.CharField(max_length=100,default="", null=True, blank=True)
@@ -88,5 +88,13 @@ class gallery(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     img = models.ImageField(upload_to="gallery", height_field=None, width_field=None, max_length=None)
 
+    def __str__(self):
+            return str(self.user)
+        
+        
+class document(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    file = models.ImageField(upload_to="documents", height_field=None, width_field=None, max_length=None)
+    name = name = models.CharField(max_length=50, blank=True, null=True)
     def __str__(self):
             return str(self.user)

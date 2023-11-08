@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Suggest Field</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="col">
+        <label for="exampleInputEmail1">Hobbies:</label>
+        <input id="input-hobbies" type="text" name="Hobbies" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        
+        <datalist id="list-hobbies">
+            <!-- {% for hb in hobbieslist %}
+            <option>{{ hb.nameofhobbie }}</option>
+            {% endfor } -->
+            <option>2</option>
+            <option>2</option>
+            <option>2</option>
+            <option>2</option>
+        </datalist>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function (e) {
+            const inputHobbies = document.getElementById('input-hobbies');
+            const datalist = document.getElementById('list-hobbies');
+            const hobbieslist = [ /* your hobbies list */ ];
+    
+            inputHobbies.addEventListener('input', function (e) {
+                const inputText = e.target.value;
+                // Clear the existing options in the datalist
+                while (datalist.firstChild) {
+                    datalist.removeChild(datalist.firstChild);
+                }
+                
+                // Split the input text into words
+                const words = inputText.split(' ');
+    
+                // Filter and add new options based on the last word
+                const lastWord = words[words.length - 1];
+                for (const hb of hobbieslist) {
+                    if (hb.nameofhobbie.toLowerCase().startsWith(lastWord.toLowerCase())) {
+                        const option = document.createElement('option');
+                        option.value = hb.nameofhobbie;
+                        datalist.appendChild(option);
+                    }
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>

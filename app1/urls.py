@@ -20,7 +20,7 @@ urlpatterns = [
 
 
 
-    path("profile", views.profile , name="profile"),
+    
     path("profile_home", views.profile_home , name="profile_home"),
     path("save_personal_detail", views.save_personal_detail , name="save_personal_detail"),
 

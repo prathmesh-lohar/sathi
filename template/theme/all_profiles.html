@@ -6,6 +6,13 @@
 
 {% load static %}
 {% block main %}
+
+{% load custom_filters %}
+
+
+
+
+
 <script src="{% static 'assets/js/cal.js' %}"></script>
 
 <div class="filter-mob text-center" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><span>Profile Fileter
@@ -81,6 +88,7 @@
             <div class="cardarea">
 
                 {% for m in all_profiles %}
+                <a href="show_profile/{{m.user.id}}">
                 <div class="card mb-3">
                     <div class=" row g-0">
                         <div class="col-md-4">
@@ -103,109 +111,61 @@
 
                                 </div>
                                 <h5 class="card-title">{{m.user.first_name}} {{m.user.last_name}}</h5>
-                                <p class="card-text">
-                                <div class="row">
-                                    <div class="col-4">
+                                <div class="card-text text-row" >
+                                <div class="row" >
+                                    <div class="col">
                                         <span class="fa fa-graduation-cap"></span><span> {{m.Qualification}}</span>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col">
                                         <span class="fa fa-briefcase "></span><span> {{m.work}}</span><br>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-4">
-                                        <span class="fa fa-calendar"></span><span> Male,
-                                            {% if m.age %}
-                                            {{m.age}} Years
-                                            {% else %}
-                                            ---
-                                            {% endif %}
+                                    <div class="col">
+                                        <span class="fa fa-user"></span><span> Male
+                                          
                                         </span>
                                     </div>
-                                    <div class="col-4">
-
-                                        <span class="fa fa-long-arrow-up "></span><span> {{m.height}}</span>
+                                    <div class="col">
+                                        <span class="fa fa-calendar"></span>
+                                        {% if m.age %}
+                                        {{m.age}} Years
+                                        {% else %}
+                                        ---
+                                        {% endif %}
                                     </div>
+                                   
                                 </div>
                                 <div class="row">
-                                    <div class="col-4">
+                                  
+                                    <div class="col">
                                         <span class="fa fa-ring"></span><span> {{m.marrital_status}}</span>
 
                                     </div>
-                                    <div class="col-4">
+
+                                    <div class="col">
                                         
-                                        <script>
-                                            var work = "{{m.work}}";
-                                            var Qualification = "{{m.Qualification}}";
-                                            var color = "{{m.color}}";
-                                            var marrital_status ="{{m.marrital_status}}";
-                                            var height = "{{m.height}}";
-                                            
-                                            var experience = "{{m.experience}}";
-                                            var hobbies = "{{m.hobbies}}";
-                                            var city = "{{m.city}}";
-                                            var medical_condition = "{{m.medical_condition}}";
-                                            var income = "{{m.income}}";
-
-                                            var max = 100;
-
-                                            var score = 0;
-
-                                            if(work=="{{request.user.profile.work}}")
-                                            {
-                                                score = score+10;
-                                            }
-                                            if(Qualification=="{{request.user.profile.Qualification}}")
-                                            {
-                                                score = score+10;
-                                            }if(color=="{{request.user.profile.color}}")
-                                            {
-                                                score = score+10;
-                                            }if(marrital_status=="{{request.user.profile.marrital_status}}")
-                                            {
-                                                score = score+10;
-                                            }if(experience=="{{request.user.profile.experience}}")
-                                            {
-                                                score = score+10;
-                                            }
-                                            if(hobbies=="{{request.user.profile.hobbies}}")
-                                            {
-                                                score = score+10;
-                                            }if(city=="{{request.user.profile.city}}")
-                                            {
-                                                score = score+10;
-                                            }
-                                            if(medical_condition=="{{request.user.profile.medical_condition}}")
-                                            {
-                                                score = score+10;
-                                            }if(income=="{{request.user.profile.income}}")
-                                            {
-                                                score = score+10;
-                                            }
-                                            if(height=="{{request.user.profile.height}}")
-                                            {
-                                                score = score+10;
-                                            }
-
-                                            var per = (score/max) * 100;
-
-                                            console.log(per)
-                                        </script>
-        
-                                        <span class="fa fa-filter "></span><span> Matching <p id="val" onload="cal({{m.id}})"></p> %  <span id="mid">{{m.id}}</span> </span><br>
+                                        <span class="fa fa-filter"></span>Matching  {% with id=m.id cuid=request.user.profile.id %}{{ id|custom_filters:cuid }}{% endwith %}%
                                         
-                                       
+
                                     </div>
+
+                                    
+                                  
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-4">
+                                    <div class="col">
+
+                                        <span class="fa fa-long-arrow-up "></span><span> {{m.height}}</span>
+                                    </div>
+                                    <div class="col">
 
                                         <span class="fa fa-location-arrow"> </span><span> {{m.city}}</span>
                                     </div>
                                 </div>
 
-                                </p>
+                                </div>
                                 <hr class="hr" />
                                 <p class="card-text">
                                     <span class="tags">chat now</span>
@@ -218,7 +178,7 @@
                         </div>
                     </div>
                 </div>
-
+            </a>
                 {% endfor %}
 
 
@@ -280,4 +240,15 @@
         </div>
     </div>
 </div>
+
+<style>
+    a{
+        color: #601e4f;
+    }
+    a:hover{
+        color: #601e4f;
+
+    }
+</style>
+
 {% endblock main %}

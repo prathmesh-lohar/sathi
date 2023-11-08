@@ -24,6 +24,26 @@
 
 <body>
 
+  <!-- alerts -->
+{% if messages %}
+{% for message in messages %}
+
+{% if 'error' not in message.tags %} 
+<div class="alert alert-{{ message.tags }} rounded-0 m-0 text-center"  role="alert" id="autoCloseAlert">
+  {{ message }} &nbsp; &nbsp; &nbsp; &nbsp; <span id="countdown">3</span> 
+</div>
+{% endif %}
+
+
+{% if 'error' in message.tags %} 
+<div class="alert alert-danger rounded-0 m-0 text-center"  role="alert">
+  <span class="fa fa-exclamation-triangle" aria-hidden="true"> </span> {{ message }} &nbsp; &nbsp; &nbsp; &nbsp; 
+</div>
+{% endif %}
+
+{% endfor %}
+{% endif %}
+<!--  -->
 
   <!-- header -->
   <div class="top-head">
@@ -56,6 +76,11 @@
             <li class="nav-item">
               <a class="nav-link" href="/all_profiles">Find Match</a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/profile_home">My Shadi</a>
+            </li>
+
             <li class="nav-item">
               <a class="nav-link" href="#">Search</a>
             </li>
@@ -466,6 +491,46 @@
 
   </div>
 
+
+
+  <!-- alert -->
+<script>
+  // Function to automatically close the alert after 3 seconds
+  function autoCloseAlert() {
+      var alert = document.getElementById('autoCloseAlert');
+      if (alert) {
+          setTimeout(function() {
+              alert.style.transition = "0.5s";
+              alert.style.opacity = 0;
+              setTimeout(function() {
+                  alert.style.display = "none";
+              }, 500);
+          }, 3000); // 3000 milliseconds (3 seconds)
+      }
+  }
+
+  // Call the autoCloseAlert function when the page loads
+  window.onload = autoCloseAlert;
+</script>
+
+
+<script>
+  var seconds = 3; // Set the initial countdown time
+
+  function updateCountdown() {
+      var countdownElement = document.getElementById('countdown');
+      if (seconds >= 0) {
+          countdownElement.innerText = seconds;
+          seconds--;
+      } else {
+          countdownElement.innerText = "Countdown finished!";
+      }
+  }
+
+  // Update the countdown every second (1000 milliseconds)
+  setInterval(updateCountdown, 1000);
+</script>
+<!--  -->
 
 
 </body>

@@ -2,6 +2,12 @@
 
 {% block main %}
 
+
+<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+    
+
+
+
 <div class="container" style="padding: 24px 35px;
 background: #fff;">
 <div class="alert alert-dark" role="alert">
@@ -62,16 +68,31 @@ background: #fff;">
 
             <div class="row">
                 <div class="col ">
-                    <label for="exampleInputEmail1">Date Of Birth:  &nbsp; &nbsp; Existing: {{details.dob}}</label>
-                    <input value="{{details.dob}}" required type="date" name="dob" class=" form-control"  id="exampleInputEmail1"
+                    <label for="exampleInputEmail1">Date Of Birth:  </small></label>
+                    <input value="{{details.dob|date:'Y-m-d'}}" required type="date" name="dob" class=" form-control"  id="exampleInputEmail1"
                         aria-describedby="emailHelp">
                 </div>
 
                 <div class="col ">
                     <label for="exampleInputEmail1">Income:
-                        :</label>
-                    <input value="{{details.income}}" type="text" name="Income" class=" form-control" id="exampleInputEmail1"
+                        </label>
+                    <input list="list-timezone" id="input-datalist" value="{{details.income}}" type="text" name="Income" class=" form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp" >
+
+                        <datalist id="list-timezone">
+                            
+                            {% for income in incomelist %}
+                            <option>{{income.range}}</option>
+                            {% endfor %}
+                                
+                        
+                        </datalist>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', e => {
+                                $('#input-datalist').autocomplete()
+                            }, false);
+                        </script>
                 </div>
             </div>
 
@@ -79,53 +100,215 @@ background: #fff;">
                
                 <div class="col">
                     <label for="exampleInputEmail1">Height:</label>
-                    <input value="{{details.height}}" type="text" name="height" class=" form-control" id="exampleInputEmail1"
+                    <input list="list-height" id="input-height" value="{{details.height}}" type="text" name="height" class=" form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp" >
+
+                        <datalist id="list-height">
+
+                            
+                            {% for h in heightlist %}
+                            <option>{{h.height}} </option>
+                            {% endfor %}
+                                
+                            
+                           
+                            
+                        </datalist>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', e => {
+                                $('#input-height').autocomplete()
+                            }, false);
+                        </script>
                 </div>
                 <div class="col ">
                     <label for="exampleInputEmail1">Color:</label>
-                    <input value="{{details.color}}" type="text" name="color" class=" form-control" id="exampleInputEmail1"
+                    <input list="list-color" id="input-color" value="{{details.color}}" type="text" name="color" class=" form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp" >
+
+                        <datalist id="list-color">
+
+                            
+                            {% for c in colorlist %}
+                            <option>{{c.color}} </option>
+                            {% endfor %}
+                                
+                            
+                           
+                            
+                        </datalist>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', e => {
+                                $('#input-color').autocomplete()
+                            }, false);
+                        </script>
                 </div>
             </div>
+          
 
             <div class="row">
 
-                <div class="col ">
+                <div class="col-md">
+                    <label title="you can select multiple" for="input-Qualification">Qualification:</label>
+                   
+                    <input  type="text" name="tags" value="{{details.Qualification}}"  id="input-Qualification" class="form-control" >
+                    
+                  </div>
+                  
+                  
+                    
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+                  <script src="https://unpkg.com/@yaireo/tagify"></script>
+                  <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
+               
+                <script>
+                    // Define the list of allowed tags
+                    var allowedTags = [{% for qual in Qualificationlist %} "{{qual.nameofQualification}}",{% endfor %}"Other"];
+                
+                    // The DOM element you wish to replace with Tagify
+                    var input = document.querySelector('input[name=tags]');
+                
+                    // Initialize Tagify with the whitelist
+                    new Tagify(input, {
+                    whitelist: allowedTags,
+                    // enforceWhitelist: true,
+                    // editTags: 1,
+                
+                    });
+                </script>
+
+                  
+
+                <!-- <div class="col-md ">
                     <label for="exampleInputEmail1">Qualification:</label>
-                    <input value="{{details.Qualification}}" type="work" name="qualification" class=" form-control" id="exampleInputEmail1"
+                    <input list="list-Qualification" id="input-Qualification" value="{{details.Qualification}}" type="work" name="qualification" class=" form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp" >
-                </div>
+                        <datalist id="list-Qualification">
 
-                <div class="col ">
+                            
+                            {% for q in Qualificationlist %}
+                            <option>{{q.nameofQualification}} </option>
+                            {% endfor %}
+                                
+                            
+                           
+                            
+                        </datalist>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', e => {
+                                $('#input-Qualification').autocomplete()
+                            }, false);
+                        </script>
+                </div> -->
+
+             
+           
+
+
+                <div class="col-md ">
                     <label for="exampleInputEmail1">Work:</label>
-                    <input value="{{details.work}}" type="work" name="work" class=" form-control" id="exampleInputEmail1"
+                    <input list="list-work" id="input-work" value="{{details.work}}" type="work" name="work" class=" form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp" >
+
+                        <datalist id="list-work">
+
+                            
+                            {% for w in worklist %}
+                            <option>{{w.nameofwork}} </option>
+                            {% endfor %}
+                                
+                            
+                           
+                            
+                        </datalist>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', e => {
+                                $('#input-work').autocomplete()
+                            }, false);
+                        </script>
                 </div>
 
+                
+            </div>
+            <div class="row">
                 <div class="col">
                     <label for="exampleInputEmail1">Experience:
-                        :</label>
-                    <input value="{{details.experience}}" type="text" name="experience" class=" form-control" id="exampleInputEmail1"
+                        </label>
+                    <input list="list-exp" id="input-exp" value="{{details.experience}}" type="text" name="experience" class=" form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp" >
+
+                        <datalist id="list-exp">
+
+                            
+                            {% for e in experiencelist %}
+                            <option>{{e.experience}} </option>
+                            {% endfor %}
+                                
+                            
+                           
+                            
+                        </datalist>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', e => {
+                                $('#input-exp').autocomplete()
+                            }, false);
+                        </script>
                 </div>
+
+               
+
+                <div class="col-md">
+                    <label title="you can select multiple" for="input-Qualification">Hobbies:</label>
+                   
+                    <input  type="text" name="hobie" value="{{details.hobbies}}"  id="input-Qualification" class="form-control" >
+                    
+                  </div>
+                  
+                  
+                    
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+                  <script src="https://unpkg.com/@yaireo/tagify"></script>
+                  <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
+               
+                <script>
+                    // Define the list of allowed tags
+                    var allowedTags = [{% for qual in hobbieslist %} "{{qual.nameofhobbie}}",{% endfor %}"Other"];
+                
+                    // The DOM element you wish to replace with Tagify
+                    var input = document.querySelector('input[name=hobie]');
+                
+                    // Initialize Tagify with the whitelist
+                    new Tagify(input, {
+                    whitelist: allowedTags,
+                    // enforceWhitelist: true,
+                    // editTags: 1,
+                
+                    });
+                </script>
+
+                  
+
+
+                
             </div>
             <div class="row">
 
-                <div class="col ">
-                    <label for="exampleInputEmail1">Hobbies:
-                        :</label>
-                    <input value="{{details.hobbies}}" type="text" name="Hobbies" class=" form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" >
-                </div>
 
+            
 
 
                 <div class="col ">
-                    <label for="exampleInputEmail1">Medical condition:
-                        :</label>
-                    <input value="{{details.medical_condition}}" type="text" name="medical_condition" class=" form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" >
+                    <label for="exampleInputEmail1">Medical condition:</label>
+                    <select id="inputState" class="form-control" name="medical_condition" >
+                        <option selected>{{details.medical_condition}}</option>
+                        <option>Good</option>
+                        
+
+                    </select>
                 </div>
 
 
@@ -134,6 +317,8 @@ background: #fff;">
                         :</label>
                     <input  value="{{details.city}}" type="text" name="city"  class=" form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp">
+
+
                 </div>
             </div>
 
@@ -154,7 +339,7 @@ background: #fff;">
 
         <h3 class="my-2">Family Details</h3>
         <div class="row my-2">
-            <div class="col ">
+            <div class="col-md ">
                 <label for="exampleInputEmail1">Father_Name:</label>
                 <input value="{{fdetails.father_name}}" type="text" name="father_name" class=" form-control" id="exampleInputEmail1"
                     aria-describedby="emailHelp" >
@@ -175,7 +360,7 @@ background: #fff;">
         </div>
 
         <div class="row">
-            <div class="col">
+            <div class="col-md">
                 <label for="exampleInputEmail1">Mother_Name:</label>
                 <input value="{{fdetails.mother_name}}"  type="work" name="mother_name" class=" form-control" id="exampleInputEmail1"
                     aria-describedby="emailHelp" >
@@ -197,13 +382,13 @@ background: #fff;">
 
 
         <div class="row">
-            <div class="col">
+            <div class="col-md">
                 <label for="exampleFormControlTextarea1"> sister (if no type No):</label>
                 <textarea class="form-control"  name="sister" id="exampleFormControlTextarea1"
                     rows="3">{{fdetails.sister}}</textarea>
             </div>
 
-            <div class="col">
+            <div class="col-md">
                 <label for="exampleFormControlTextarea1"> Brother (if no type No):</label>
                 <textarea class="form-control"  name="brother" id="exampleFormControlTextarea1"
                     rows="3">{{fdetails.brother}}</textarea>
@@ -211,7 +396,7 @@ background: #fff;">
         </div>
 
         <div class="row">
-            <div class="col">
+            <div class="col-md">
                 <label for="exampleFormControlTextarea1"> Native_Place</label>
                 <textarea class="form-control"  name="native_place" id="exampleFormControlTextarea1"
                     rows="3">{{fdetails.native_place}}</textarea>
@@ -219,7 +404,7 @@ background: #fff;">
 
             
 
-            <div class="col">
+            <div class="col-md">
                 <label for="exampleFormControlTextarea1"> Relatives</label>
                 <textarea class="form-control"  name="relatives" id="exampleFormControlTextarea1"
                     rows="3">{{fdetails.relatives}}</textarea>
@@ -235,7 +420,7 @@ background: #fff;">
       
         </div>
         <div class="row">
-            <div class="col my-5">
+            <div class="col-md my-5">
             <button type="submit" class="btn btn-primary " >Save All</button>
             <button onclick="window.location.href='/staff';" type="button" class="btn btn-danger " >Cancel</button>
 
@@ -250,6 +435,9 @@ background: #fff;">
 
     </form>
     </div>
+
+
+
 </div>
 
 </div>
