@@ -36,6 +36,8 @@ class profile(models.Model):
     is_approved = models.BooleanField(default=False)
 
     is_mail_verified = models.BooleanField(default=False)
+    
+    views = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.user)

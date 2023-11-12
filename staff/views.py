@@ -268,7 +268,7 @@ def save_details(request):
             qualification = request.POST.get('tags')
             work = request.POST.get('work')
             experience = request.POST.get('experience')
-            Hobbies = request.POST.get('Hobbies')
+            Hobbies = request.POST.get('hobie')
             Income = request.POST.get('Income')
             medical_condition = request.POST.get('medical_condition')
             city = request.POST.get('city')

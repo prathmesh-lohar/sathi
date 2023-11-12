@@ -82,206 +82,25 @@
 
             <div class="row">
                 
-                    <div class="container my-2">
+                <ul class="list-group list-group-light">
+                    <li class="list-group-item px-3 border-0 rounded-3 mb-2">Important Links</li>
+                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-primary mb-2">My Profile</li>
+                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-secondary mb-2">Gallery</li>
+                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-success mb-2">News</li>
+                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-danger mb-2">Offers</li>
+                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-warning mb-2">My Plan</li>
+                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-info mb-2">wallet</li>
+                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-light mb-2">Message</li>
+                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-success mb-2">Connect</li>
 
-                        <hr class="hr">
-                        <h5>Personal Details &nbsp;<span class="fa fa-lg fa-caret-down" type="button"
-                                data-mdb-toggle="collapse" data-mdb-target="#pdet" aria-expanded="false"
-                                aria-controls="pdet"> </span>
-
-
-                            </button>
-                        </h5>
-                        <hr class="hr">
-                        <div class="pdet" id="pdet">
-                            <div class="row">
-                                <div class="col">
-                                    <p><b>Name: </b> {{request.user.first_name}} {{request.user.last_name}}</p>
-                                </div>
-                                <div class="col">
-                                    <p><b>Registered For: </b> {{request.user.profile.registerfor}} </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p><b>User Name: </b> {{request.user.profile.user}} </p>
-                                </div>
-                                <div class="col">
-                                    <p><b>Gender: </b> {{request.user.profile.gender}} </p>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                
-                                <div class="col">
-                                    <p><b>Date Of Birth: </b> {{request.user.profile.dob}} </p>
-                                </div>
-                                <div class="col">
-                                    <p><b>Age: </b> {{request.user.profile.age}} </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p><b>Contact: </b> {{request.user.profile.mobile}} </p>
-                                </div>
-                                <div class="col">
-                                    <p><b>Marrital Status: </b> {{request.user.profile.marrital_status}} </p>
-
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col">
-                                    <p><b>You Looking For: </b> {{request.user.profile.lookingfor}} </p>
-                                </div>
-                                <div class="col">
-                                    
-                                    <p><b>Height: </b> {{request.user.profile.height}} </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p><b>Color: </b> {{request.user.profile.color}} </p>
-                                </div>
-                                <div class="col">
-                                    <p><b>Qualification: </b> {{request.user.profile.Qualification}} </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p><b>Work: </b> {{request.user.profile.work}} </p>
-                                </div>
-                                <div class="col">
-                                    <p><b>Experience: </b> {{request.user.profile.experience}} </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p><b>Hobbies: </b> {{request.user.profile.hobbies}} </p>
-
-                                </div>
-                                <div class="col">
-                                    <p><b>Income: </b> {{request.user.profile.income}} </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p><b>Medical Condition: </b> {{request.user.profile.medical_condition}} </p>
-                                </div>
-                                <div class="col">
-                                    <p><b>City: </b> {{request.user.profile.city}} </p>
-                                </div>
-                            </div>
-                            <p><b>about_me: </b> <span
-                                    style="font-size: 14px;">{{request.user.profile.about_me}}</span> </p>
-
-                        </div>
-
-
-                    </div>
+                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-dark mb-2">Report</li>
+                  </ul>
               
 
             </div>
-            <div class="row">
+           
                 
-                <div class="container my-2">
-
-                    <hr class="hr">
-                    <h5>Personal Details &nbsp;<span class="fa fa-lg fa-caret-down" type="button"
-                            data-mdb-toggle="collapse" data-mdb-target="#fdet" aria-expanded="false"
-                            aria-controls="pdet"> </span>
-
-
-                        </button>
-                    </h5>
-                    <hr class="hr">
-                    <div class="pdet" id="fdet">
-                        <div class="row">
-                            <div class="col">
-                                <p><b>Name: </b> {{request.user.first_name}} {{request.user.last_name}}</p>
-                            </div>
-                            <div class="col">
-                                <p><b>Registered For: </b> {{request.user.profile.registerfor}} </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p><b>User Name: </b> {{request.user.profile.user}} </p>
-                            </div>
-                            <div class="col">
-                                <p><b>Gender: </b> {{request.user.profile.gender}} </p>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            
-                            <div class="col">
-                                <p><b>Date Of Birth: </b> {{request.user.profile.dob}} </p>
-                            </div>
-                            <div class="col">
-                                <p><b>Age: </b> {{request.user.profile.age}} </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p><b>Contact: </b> {{request.user.profile.mobile}} </p>
-                            </div>
-                            <div class="col">
-                                <p><b>Marrital Status: </b> {{request.user.profile.marrital_status}} </p>
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <p><b>You Looking For: </b> {{request.user.profile.lookingfor}} </p>
-                            </div>
-                            <div class="col">
-                                
-                                <p><b>Height: </b> {{request.user.profile.height}} </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p><b>Color: </b> {{request.user.profile.color}} </p>
-                            </div>
-                            <div class="col">
-                                <p><b>Qualification: </b> {{request.user.profile.Qualification}} </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p><b>Work: </b> {{request.user.profile.work}} </p>
-                            </div>
-                            <div class="col">
-                                <p><b>Experience: </b> {{request.user.profile.experience}} </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p><b>Hobbies: </b> {{request.user.profile.hobbies}} </p>
-
-                            </div>
-                            <div class="col">
-                                <p><b>Income: </b> {{request.user.profile.income}} </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p><b>Medical Condition: </b> {{request.user.profile.medical_condition}} </p>
-                            </div>
-                            <div class="col">
-                                <p><b>City: </b> {{request.user.profile.city}} </p>
-                            </div>
-                        </div>
-                        <p><b>about_me: </b> <span
-                                style="font-size: 14px;">{{request.user.profile.about_me}}</span> </p>
-
-                    </div>
-
-
-                </div>
-          
+                
 
         </div>
         </div>

@@ -114,7 +114,7 @@
                                 <div class="card-text text-row" >
                                 <div class="row" >
                                     <div class="col">
-                                        <span class="fa fa-graduation-cap"></span><span> {{m.Qualification}}</span>
+                                        <span class="fa fa-graduation-cap"></span><span> {{m.Qualification|sort_filter}}</span>
                                     </div>
                                     <div class="col">
                                         <span class="fa fa-briefcase "></span><span> {{m.work}}</span><br>
@@ -128,11 +128,13 @@
                                     </div>
                                     <div class="col">
                                         <span class="fa fa-calendar"></span>
+                                        <span>
                                         {% if m.age %}
                                         {{m.age}} Years
                                         {% else %}
                                         ---
                                         {% endif %}
+                                    </span>
                                     </div>
                                    
                                 </div>
@@ -145,7 +147,7 @@
 
                                     <div class="col">
                                         
-                                        <span class="fa fa-filter"></span>Matching  {% with id=m.id cuid=request.user.profile.id %}{{ id|custom_filters:cuid }}{% endwith %}%
+                                        <span class="fa fa-filter"></span> <span> Matching  {% with id=m.id cuid=request.user.profile.id %}{{ id|custom_filters:cuid }}{% endwith %}%</span> 
                                         
 
                                     </div>

@@ -1,56 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto-Suggest Field</title>
-    <!-- Add Bootstrap CSS link -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="col">
-        <label for="exampleInputEmail1">Hobbies:</label>
-        <input id="input-hobbies" type="text" name="Hobbies" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        
-        <datalist id="list-hobbies">
-            <!-- {% for hb in hobbieslist %}
-            <option>{{ hb.nameofhobbie }}</option>
-            {% endfor } -->
-            <option>2</option>
-            <option>2</option>
-            <option>2</option>
-            <option>2</option>
-        </datalist>
+<!-- Add jQuery and MDBootstrap scripts -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js"></script>
+
+<!-- Your carousel HTML -->
+<div id="carouselExampleInterval" class="carousel slide" data-mdb-interval="false">
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-mdb-interval="10000">
+            <img src="{{profile.user.media.dp.url}}" data-mdb-toggle="modal" data-mdb-target="#imgzoom" class="d-block w-100" alt="" />
+        </div>
+        {% for gallery in gallery %}
+        <div class="carousel-item" data-mdb-interval="2000">
+            <img src="{{gallery.img.url}}" class="d-block w-100" alt="{{media.user}}" data-mdb-toggle="modal" data-mdb-target="#imgzoom-{{ forloop.counter }}"/>
+        </div>
+        {% endfor %}
     </div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function (e) {
-            const inputHobbies = document.getElementById('input-hobbies');
-            const datalist = document.getElementById('list-hobbies');
-            const hobbieslist = [ /* your hobbies list */ ];
-    
-            inputHobbies.addEventListener('input', function (e) {
-                const inputText = e.target.value;
-                // Clear the existing options in the datalist
-                while (datalist.firstChild) {
-                    datalist.removeChild(datalist.firstChild);
-                }
-                
-                // Split the input text into words
-                const words = inputText.split(' ');
-    
-                // Filter and add new options based on the last word
-                const lastWord = words[words.length - 1];
-                for (const hb of hobbieslist) {
-                    if (hb.nameofhobbie.toLowerCase().startsWith(lastWord.toLowerCase())) {
-                        const option = document.createElement('option');
-                        option.value = hb.nameofhobbie;
-                        datalist.appendChild(option);
-                    }
-                }
-            });
+    <button class="carousel-control-prev" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- JavaScript to get the current active image -->
+<script>
+    $(document).ready(function () {
+        $('#carouselExampleInterval').on('slid.mdb.carousel', function () {
+            var activeImgSrc = $('.carousel-item.active img').attr('src');
+            console.log('Current active image source: ' + activeImgSrc);
         });
-    </script>
-    
-</body>
-</html>
+    });
+</script>

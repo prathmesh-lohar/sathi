@@ -1,5 +1,6 @@
 {% extends 'theme/base.html' %}
 {% load static %}
+{% load custom_filters %}
 {% block title %}Home|{% endblock title %}
 
 
@@ -127,23 +128,28 @@
       {% for f in featured1 %}
 
        <div class="col-md-3 my-1">
+      <a href="/show_profile/{{f.user.id}}">
+
         <div class="card m-0 p-0">
+          
 
           <img src="{{f.user.media.dp.url}}" class="card-img" alt="{{f.user.first_name}}" />
-
+        
           <div class="card-bg">
             <div class="card-block">
 
               <h3 class="card-title">{{f.user.first_name}}<br> {{f.user.last_name}}</h3>
-              <p class="card-text">{{f.Qualification}}</p>
+              <p class="card-text">{{f.Qualification|sort_filter}}</p>
               
 
             </div>
           </div>
         </div>
-      </div>  
+    </a>
 
-      {% endfor %}
+      </div> 
+      {% endfor %} 
+  
         
     </div>
   </div>
@@ -159,9 +165,9 @@
       </div>
       <div class="col-md-7 my-5">
         <div class="body">
-          <h2 class="my-4 mx-5"> Welcome to</h2>
-          <h3 class="mx-5">Wedding Matrimony</h3>
-          <p class="mx-5 my-4">Lorem lipsume siteamet Lorem lipsume siteametLorem lipsume siteamet
+          <h2 class="my-4 mx-auto"> Welcome to</h2>
+          <h3 class="mx-auto">Wedding Matrimony</h3>
+          <p class="mx-auto my-4">Lorem lipsume siteamet Lorem lipsume siteametLorem lipsume siteamet
             Lorem lipsume siteamet
             Lorem lipsume siteamet
             Lorem lipsume siteametLorem lipsume siteametLorem lipsume siteametLorem lipsume siteamet
@@ -179,7 +185,7 @@
           <hr class="hr px-5 mx-5">
 
           <div class="ico">
-            <div class="container mx-5">
+            <div class="container mx-auto">
               <div class="row">
                 <div class="col">
                   <span class="fa fa-phone"></span><span class="num"> +91 0000 000000

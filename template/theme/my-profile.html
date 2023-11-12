@@ -1,0 +1,753 @@
+{% extends 'theme/base.html' %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% load custom_filters %}
+{% block main %}
+<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+    
+
+<section style="background-color: #eee;">
+  <div class="container py-5">
+    
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            
+
+
+              <div class="avatar-upload my-0 my-0 ">
+                  <div class="avatar-edit">
+                    <form id="myForm" action="/my_profile" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <input name="dp" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                      <label for="imageUpload"></label>
+                  </form>
+                  
+                  </div>
+                  <div class="avatar-preview">
+                      <div id="imagePreview" style="background-image: url('{{request.user.media.dp.url}}');">
+                      </div>
+                  </div>
+              </div>
+
+            <!-- <img src="{{request.user.media.dp.url}}" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;"> -->
+            <h5 class="my-3">{{request.user.first_name}} {{request.user.last_name}}</h5>
+            <p class="text-muted mb-1">{{request.user.profile.Qualification|sort_filter}},</p>
+            <p class="text-muted mb-4">{{request.user.profile.work}}, {{request.user.profile.experience}} years of Experience, {{request.user.profile.color}}, {{request.user.profile.height}}</p>
+            
+          </div>
+        </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+          <a href="#gallery"> <button class="btn-success btn w-100">Update Gallery</button></a>
+          <a href="#docs"><button class="btn-primary btn w-100 my-2">Update Documents</button></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row my-4">
+              <form action="/save_details" method="post">
+                  {% csrf_token %}
+              <div class="col-md-12">
+                  <h3>Personal Details</h3>
+      
+                  <div class="row my-2">
+                      <div class="col ">
+                          <label for="gender">Gender</label>
+                          <select id="gender" class="form-control" name="gender" >
+                              <option selected>{{details.gender}}</option>
+                              <option>Male</option>
+                              <option>Female</option>
+                              
+      
+                          </select>
+                      </div>
+      
+                      <div class="col ">
+                          <label for="regfor">Resister For</label>
+                          <select id="regfor" class="form-control" name="regofor" >
+                              <option selected>{{details.registerfor}}</option>
+                              <option>Own</option>
+                              <option>Brother</option>
+                              <option>Sister</option>
+                              <option>Friend</option>
+                              <option>Other</option>
+      
+      
+                          </select>
+                      </div>
+                  </div>
+      
+                  <div class="row">
+                      <div class="col ">
+                          <label for="exampleInputEmail1">Mobile:</label>
+                          <input value="{{details.mobile}}" type="number" name="mobile" class=" form-control" id="exampleInputEmail1"
+                              aria-describedby="emailHelp" >
+                      </div>
+      
+                      <div class="col ">
+                          <label for="exampleInputEmail1">Marrital Status:</label>
+                          <select id="inputState" class="form-control" name="mstatus">
+                              <option selected>{{details.marrital_status}}</option>
+                              <option>Single</option>
+                              <option>In Process</option>
+                              <option>On Hold</option>
+                              <option>Married</option>
+      
+                          </select>
+                      </div>
+                  </div>
+      
+                  <div class="row">
+                      <div class="col ">
+                          <label for="exampleInputEmail1">Date Of Birth:  </small></label>
+                          <input value="{{details.dob|date:'Y-m-d'}}" required type="date" name="dob" class=" form-control"  id="exampleInputEmail1"
+                              aria-describedby="emailHelp">
+                      </div>
+      
+                      <div class="col ">
+                          <label for="exampleInputEmail1">Income:
+                              </label>
+                          <input list="list-timezone" id="input-datalist" value="{{details.income}}" type="text" name="Income" class=" form-control" id="exampleInputEmail1"
+                              aria-describedby="emailHelp" >
+      
+                              <datalist id="list-timezone">
+                                  
+                                  {% for income in incomelist %}
+                                  <option>{{income.range}}</option>
+                                  {% endfor %}
+                                      
+                              
+                              </datalist>
+      
+                              <script>
+                                  document.addEventListener('DOMContentLoaded', e => {
+                                      $('#input-datalist').autocomplete()
+                                  }, false);
+                              </script>
+                      </div>
+                  </div>
+      
+                  <div class="row">
+                     
+                      <div class="col">
+                          <label for="exampleInputEmail1">Height:</label>
+                          <input list="list-height" id="input-height" value="{{details.height}}" type="text" name="height" class=" form-control" id="exampleInputEmail1"
+                              aria-describedby="emailHelp" >
+      
+                              <datalist id="list-height">
+      
+                                  
+                                  {% for h in heightlist %}
+                                  <option>{{h.height}} </option>
+                                  {% endfor %}
+                                      
+                                  
+                                 
+                                  
+                              </datalist>
+      
+                              <script>
+                                  document.addEventListener('DOMContentLoaded', e => {
+                                      $('#input-height').autocomplete()
+                                  }, false);
+                              </script>
+                      </div>
+                      <div class="col ">
+                          <label for="exampleInputEmail1">Color:</label>
+                          <input list="list-color" id="input-color" value="{{details.color}}" type="text" name="color" class=" form-control" id="exampleInputEmail1"
+                              aria-describedby="emailHelp" >
+      
+                              <datalist id="list-color">
+      
+                                  
+                                  {% for c in colorlist %}
+                                  <option>{{c.color}} </option>
+                                  {% endfor %}
+                                      
+                                  
+                                 
+                                  
+                              </datalist>
+      
+                              <script>
+                                  document.addEventListener('DOMContentLoaded', e => {
+                                      $('#input-color').autocomplete()
+                                  }, false);
+                              </script>
+                      </div>
+                  </div>
+                
+      
+                  <div class="row">
+      
+                      <div class="col-md">
+                          <label title="you can select multiple" for="input-Qualification">Qualification:</label>
+                         
+                          <input  type="text" name="tags" value="{{details.Qualification}}"  id="input-Qualification" class="form-control" >
+                          
+                        </div>
+                        
+                        
+                          
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+                        <script src="https://unpkg.com/@yaireo/tagify"></script>
+                        <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
+                     
+                      <script>
+                          // Define the list of allowed tags
+                          var allowedTags = [{% for qual in Qualificationlist %} "{{qual.nameofQualification}}",{% endfor %}"Other"];
+                      
+                          // The DOM element you wish to replace with Tagify
+                          var input = document.querySelector('input[name=tags]');
+                      
+                          // Initialize Tagify with the whitelist
+                          new Tagify(input, {
+                          whitelist: allowedTags,
+                          // enforceWhitelist: true,
+                          // editTags: 1,
+                      
+                          });
+                      </script>
+      
+                        
+      
+                      <!-- <div class="col-md ">
+                          <label for="exampleInputEmail1">Qualification:</label>
+                          <input list="list-Qualification" id="input-Qualification" value="{{details.Qualification}}" type="work" name="qualification" class=" form-control" id="exampleInputEmail1"
+                              aria-describedby="emailHelp" >
+                              <datalist id="list-Qualification">
+      
+                                  
+                                  {% for q in Qualificationlist %}
+                                  <option>{{q.nameofQualification}} </option>
+                                  {% endfor %}
+                                      
+                                  
+                                 
+                                  
+                              </datalist>
+      
+                              <script>
+                                  document.addEventListener('DOMContentLoaded', e => {
+                                      $('#input-Qualification').autocomplete()
+                                  }, false);
+                              </script>
+                      </div> -->
+      
+                   
+                 
+      
+      
+                      <div class="col-md ">
+                          <label for="exampleInputEmail1">Work:</label>
+                          <input list="list-work" id="input-work" value="{{details.work}}" type="work" name="work" class=" form-control" id="exampleInputEmail1"
+                              aria-describedby="emailHelp" >
+      
+                              <datalist id="list-work">
+      
+                                  
+                                  {% for w in worklist %}
+                                  <option>{{w.nameofwork}} </option>
+                                  {% endfor %}
+                                      
+                                  
+                                 
+                                  
+                              </datalist>
+      
+                              <script>
+                                  document.addEventListener('DOMContentLoaded', e => {
+                                      $('#input-work').autocomplete()
+                                  }, false);
+                              </script>
+                      </div>
+      
+                      
+                  </div>
+                  <div class="row">
+                      <div class="col">
+                          <label for="exampleInputEmail1">Experience:
+                              </label>
+                          <input list="list-exp" id="input-exp" value="{{details.experience}}" type="text" name="experience" class=" form-control" id="exampleInputEmail1"
+                              aria-describedby="emailHelp" >
+      
+                              <datalist id="list-exp">
+      
+                                  
+                                  {% for e in experiencelist %}
+                                  <option>{{e.experience}} </option>
+                                  {% endfor %}
+                                      
+                                  
+                                 
+                                  
+                              </datalist>
+      
+                              <script>
+                                  document.addEventListener('DOMContentLoaded', e => {
+                                      $('#input-exp').autocomplete()
+                                  }, false);
+                              </script>
+                      </div>
+      
+                     
+      
+                      <div class="col-md">
+                          <label title="you can select multiple" for="input-Qualification">Hobbies:</label>
+                         
+                          <input  type="text" name="hobie" value="{{details.hobbies}}"  id="input-Qualification" class="form-control" >
+                          
+                        </div>
+                        
+                        
+                          
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+                        <script src="https://unpkg.com/@yaireo/tagify"></script>
+                        <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
+                     
+                      <script>
+                          // Define the list of allowed tags
+                          var allowedTags = [{% for qual in hobbieslist %} "{{qual.nameofhobbie}}",{% endfor %}"Other"];
+                      
+                          // The DOM element you wish to replace with Tagify
+                          var input = document.querySelector('input[name=hobie]');
+                      
+                          // Initialize Tagify with the whitelist
+                          new Tagify(input, {
+                          whitelist: allowedTags,
+                          // enforceWhitelist: true,
+                          // editTags: 1,
+                      
+                          });
+                      </script>
+      
+                        
+      
+      
+                      
+                  </div>
+                  <div class="row">
+      
+      
+                  
+      
+      
+                      <div class="col ">
+                          <label for="exampleInputEmail1">Medical condition:</label>
+                          <select id="inputState" class="form-control" name="medical_condition" >
+                              <option selected>{{details.medical_condition}}</option>
+                              <option>Good</option>
+                              
+      
+                          </select>
+                      </div>
+      
+      
+                      <div class="col">
+                          <label for="exampleInputEmail1">City
+                              :</label>
+                          <input  value="{{details.city}}" type="text" name="city"  class=" form-control" id="exampleInputEmail1"
+                              aria-describedby="emailHelp">
+      
+      
+                      </div>
+                  </div>
+      
+                  <div class="form-group">
+                      <label for="exampleFormControlTextarea1">About Me</label>
+                      <textarea class="form-control"  name="about" id="exampleFormControlTextarea1"
+                          rows="3">{{details.about_me}}</textarea>
+                  </div>
+      
+      
+      
+                  <!-- <input type="hidden" name="userid" value="{{User}}"> -->
+      
+      
+      
+      
+              </div>
+      
+              <h3 class="my-2">Family Details</h3>
+              <div class="row my-2">
+                  <div class="col-md ">
+                      <label for="exampleInputEmail1">Father_Name:</label>
+                      <input value="{{fdetails.father_name}}" type="text" name="father_name" class=" form-control" id="exampleInputEmail1"
+                          aria-describedby="emailHelp" >
+                  </div>
+      
+                  <div class="col ">
+                      <label for="exampleInputEmail1"> Father_Education:</label>
+                      <input value="{{fdetails.father_education}}"  type="text" name="father_education" class=" form-control" id="exampleInputEmail1"
+                          aria-describedby="emailHelp" >
+                  </div>
+      
+      
+                  <div class="col ">
+                      <label for="exampleInputEmail1">Father_Occupation:</label>
+                      <input value="{{fdetails.father_occupation}}"  type="text" name="father_occupation" class=" form-control" id="exampleInputEmail1"
+                          aria-describedby="emailHelp" >
+                  </div>
+              </div>
+      
+              <div class="row">
+                  <div class="col-md">
+                      <label for="exampleInputEmail1">Mother_Name:</label>
+                      <input value="{{fdetails.mother_name}}"  type="work" name="mother_name" class=" form-control" id="exampleInputEmail1"
+                          aria-describedby="emailHelp" >
+                  </div>
+      
+                  <div class="col ">
+                      <label for="exampleInputEmail1">Mother_Education:</label>
+                      <input value="{{fdetails.mother_education}}"  type="work" name="mother_education" class=" form-control" id="exampleInputEmail1"
+                          aria-describedby="emailHelp" >
+                  </div>
+      
+                  <div class="col ">
+                      <label for="exampleInputEmail1">Mother_Occupation:
+                          :</label>
+                      <input value="{{fdetails.mother_occupation}}"  type="text" name="mother_occupation" class=" form-control" id="exampleInputEmail1"
+                          aria-describedby="emailHelp" >
+                  </div>
+              </div>
+      
+      
+              <div class="row">
+                  <div class="col-md">
+                      <label for="exampleFormControlTextarea1"> sister (if no type No):</label>
+                      <textarea class="form-control"  name="sister" id="exampleFormControlTextarea1"
+                          rows="3">{{fdetails.sister}}</textarea>
+                  </div>
+      
+                  <div class="col-md">
+                      <label for="exampleFormControlTextarea1"> Brother (if no type No):</label>
+                      <textarea class="form-control"  name="brother" id="exampleFormControlTextarea1"
+                          rows="3">{{fdetails.brother}}</textarea>
+                  </div>
+              </div>
+      
+              <div class="row">
+                  <div class="col-md">
+                      <label for="exampleFormControlTextarea1"> Native_Place</label>
+                      <textarea class="form-control"  name="native_place" id="exampleFormControlTextarea1"
+                          rows="3">{{fdetails.native_place}}</textarea>
+                  </div>
+      
+                  
+      
+                  <div class="col-md">
+                      <label for="exampleFormControlTextarea1"> Relatives</label>
+                      <textarea class="form-control"  name="relatives" id="exampleFormControlTextarea1"
+                          rows="3">{{fdetails.relatives}}</textarea>
+                  </div>
+      
+              </div>
+      
+              
+              <div class="row">
+                  <div class="col-md my-2">
+                  <button type="submit" class="btn btn-primary " >Save All</button>
+                  <button onclick="window.location.href='/staff';" type="button" class="btn btn-danger " >Cancel</button>
+      
+                   </div>
+              </div>
+      
+              <input type="hidden" name="uid" value="{{uid}}">
+              <input type="hidden" name="username" value="{{user.username}}">
+              <input type="hidden" name="id" value="{{user.id}}">
+              
+              <input type="hidden" name="offcer" value="request.user">
+      
+          </form>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body" id="gallery">
+                <p class="mb-4"> Gallery
+                </p>
+                <form id="gallery-form" action="/save_gallery" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                <div class="file-input">
+                  <input
+                    type="file"
+                    name="file-input"
+                    id="file-input"
+                    class="file-input__input"
+                  />
+                  <label class="file-input__label" for="file-input">
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="upload"
+                      class="svg-inline--fa fa-upload fa-w-16"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M296 384h-80c-13.3 0-24-10.7-24-24V192h-87.7c-17.8 0-26.7-21.5-14.1-34.1L242.3 5.7c7.5-7.5 19.8-7.5 27.3 0l152.2 152.2c12.6 12.6 3.7 34.1-14.1 34.1H320v168c0 13.3-10.7 24-24 24zm216-8v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h136v8c0 30.9 25.1 56 56 56h80c30.9 0 56-25.1 56-56v-8h136c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"
+                      ></path>
+                    </svg>
+                    <span>Upload file</span></label
+                  >
+                </div>
+              </form>
+
+                
+                <div class="container">
+                  <div class="row my-3">
+            
+                    {% for g in gallery %}
+                        
+                    
+                        
+                    <div class="col-md-3">
+                        <div class="card my-2">
+                            <img src="{{g.img.url}}" class="card-img-top " alt="...">
+                            <div class="card-footer">
+                                <a href="/delete_gallery/{{g.id}}">
+                                <button style="width: 100%;" class="btn btn-sm rounded-0 btn-danger"><span
+                                        class="fa fa-trash" style="color: white;"> </span></button>
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    {% endfor %}
+                </div>
+                </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-12 my-2">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body" id="docs">
+                  
+                  
+                  <div class="container my-0 py-0">
+                      <p>
+                          <button class="btn btn-primary my-5 btn-sm" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseExample"
+                              aria-expanded="false" aria-controls="collapseExample">
+                              <span class="bi bi-plus"> </span>
+                              Upload New
+                              Document
+                          </button>
+                      </p>
+                  
+                  </div>
+                  <div class="conatainer">
+                      <div class="collapse" id="collapseExample">
+                          <div class="container" class="collapse" id="collapseExample">
+                              <div class="card card-body">
+                  
+                                  <div class="form">
+                                      <div class="row">
+                  
+                                          <form action="/save_doc" method="post" enctype="multipart/form-data">
+                                              <div class="mb-md-3">
+                                                  <label for="formFile" class="form-label">Name Of Document</label>
+                                                  <input required name="name" class="form-control" type="text" id="formFile">
+                                                  {% csrf_token %}
+                                              </div>
+                  
+                                              <div class="mb-md-3">
+                                                  <label for="formFile" class="form-label">Upload Document File</label>
+                                                  <input required name="file" class="form-control" type="file" id="formFile">
+                  
+                                              </div>
+                  
+                                              <div class="mb-3 form-check mx-1">
+                                                  <input required type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                  <label class="form-check-label" for="exampleCheck1">I'm Sure This Document is Original</label>
+                                              </div>
+                                              <div class="mb-3 my-2">
+                                                  <button class="btn btn-primary" type="submit">Save</button>
+                                              </div>
+                  
+                                          </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  
+                  <div class="dic-main" style="background-color: #ffff; border-radius: 10px; padding-bottom: 10px; margin: 10px;">
+                  
+                  <div class="container ">
+                      <h1>documents</h1>
+                  </div>
+                  
+                  <div class="container">
+                      <ul class="list-group list-group-flush">
+                          
+                          {% for i in alldocs %}
+                          <a target="_blank" href="{{i.file.url}}">
+                          <li class="list-group-item">{{i.name}}</li>
+                      </a>
+                  
+                          {% endfor %}
+                              
+                         
+                        </ul>
+                  </div>
+                  </div>
+                  
+                  
+                 
+                  </div>
+                </div>
+              </div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<style>
+  .avatar-upload {
+  position: relative;
+  max-width: 205px;
+  margin: 50px auto;
+}
+.avatar-upload .avatar-edit {
+  position: absolute;
+  right: 12px;
+  z-index: 1;
+  top: 10px;
+}
+.avatar-upload .avatar-edit input {
+  display: none;
+}
+.avatar-upload .avatar-edit input + label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #FFFFFF;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+.avatar-upload .avatar-edit input + label:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
+.avatar-upload .avatar-edit input + label:after {
+  content: "\f040";
+  font-family: 'FontAwesome';
+  color: #757575;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+}
+.avatar-upload .avatar-preview {
+  width: 192px;
+  height: 192px;
+  position: relative;
+  border-radius: 100%;
+  border: 6px solid #F8F8F8;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+.avatar-upload .avatar-preview > div {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+</style>
+
+
+<style>
+  
+.file-input__input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.file-input__label {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 12px;
+  background-color: #4245a8;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+}
+
+.file-input__label svg {
+  height: 16px;
+  margin-right: 4px;
+}
+
+</style>
+
+<script>
+  document.getElementById("imageUpload").onchange = function () {
+      document.getElementById("myForm").submit();
+  };
+</script>
+
+<script>
+  document.getElementById("file-input").onchange = function () {
+      document.getElementById("gallery-form").submit();
+  };
+</script>
+
+<script>
+  function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+              $('#imagePreview').hide();
+              $('#imagePreview').fadeIn(650);
+          }
+          reader.readAsDataURL(input.files[0]);
+      }
+  }
+  $("#imageUpload").change(function () {
+      readURL(this);
+  });
+</script>
+{% endblock main %}

@@ -67,5 +67,20 @@ def custom_filters(id,cuid):
         res = math.ceil(tres)
             
         return res  # Replace with the actual field you want to retrieve
-    except YourModel.DoesNotExist:
+    except profile.DoesNotExist:
         return "Not found"  # You can customize the return value for non-existent IDs
+
+
+@register.filter(name='sort_filter')
+def sort_filter(value):
+    
+    value=str(value)
+    chars_to_remove = "[{}]"
+
+    for t in chars_to_remove:
+        value=value.replace(t, " ")
+        value=value.replace('"', " ")
+        value = value.replace('value : ', '')
+
+        
+    return value

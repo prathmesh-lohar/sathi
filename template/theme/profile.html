@@ -4,16 +4,12 @@
 
 {% endblock title %}
 
+{% load custom_filters %}
+{% load static %}
 
 {% block main %}
-    
-<script>
-var activeImage = document.querySelector("#carouselExampleInterval .carousel-inner .carousel-item.active img");
-var src = activeImage.getAttribute("src");
 
-console.log(src); // This will log the src of the active image to the console
 
-</script>
 
 
 <div class="container p-0 ">
@@ -26,15 +22,16 @@ console.log(src); // This will log the src of the active image to the console
                             <img src="{{profile.user.media.dp.url}}" data-mdb-toggle="modal" data-mdb-target="#imgzoom"
                                 class="d-block w-100" alt="" />
                         </div>
-                        
-                        {% for gallery in gallery  %}
+
+                        {% for gallery in gallery %}
                         <div class="carousel-item" data-mdb-interval="2000">
-                            <img src="{{gallery.img.url}}" class="d-block w-100" alt="{{media.user}}" data-mdb-toggle="modal" data-mdb-target="#imgzoom-{{ forloop.counter }}"/>
+                            <img src="{{gallery.img.url}}" class="d-block w-100" alt="{{media.user}}"
+                                data-mdb-toggle="modal" data-mdb-target="#imgzoom-{{ forloop.counter }}" />
                         </div>
                         {% endfor %}
-                            
-                      
-                       
+
+
+
                     </div>
                     <button class="carousel-control-prev" data-mdb-target="#carouselExampleInterval" type="button"
                         data-mdb-slide="prev">
@@ -47,6 +44,8 @@ console.log(src); // This will log the src of the active image to the console
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
+
+
 
                 <div class="scrol_tab">
                     <div class="left-arrow fafa" onclick="leftFunction()"><span class="fa fa-chevron-left"></span>
@@ -61,14 +60,15 @@ console.log(src); // This will log the src of the active image to the console
                             <div class="col" data-mdb-target="#carouselExampleInterval" data-mdb-slide-to="0"><img
                                     src="{{profile.user.media.dp.url}}" style=" max-height: 100px;" /></div>
                         </li>
-                    
-                    {% for gallery in gallery %}
-                    <li>
-                        <div class="col" data-mdb-target="#carouselExampleInterval" data-mdb-slide-to="{{ forloop.counter }}"><img
-                                src="{{gallery.img.url}}" style="max-height: 100px;" /></div>
-                    </li>                       
-                    {% endfor %}
- 
+
+                        {% for gallery in gallery %}
+                        <li>
+                            <div class="col" data-mdb-target="#carouselExampleInterval"
+                                data-mdb-slide-to="{{ forloop.counter }}"><img src="{{gallery.img.url}}"
+                                    style="max-height: 100px;" /></div>
+                        </li>
+                        {% endfor %}
+
                     </ul>
                     <div class="right-arrow fafa" onclick="myFunction()"><span class="fa fa-chevron-right"></span>
                     </div>
@@ -87,9 +87,9 @@ console.log(src); // This will log the src of the active image to the console
 
         <div class="col-md-7 m-0 p-0">
             <div class="container  my-5 bio">
-                <h1 class="h1">Angelina Jolie</h1>
+                <h1 class="h1">{{profile.user.first_name}} {{profile.user.last_name}}</h1>
                 <div class="online">
-                    <span class="viewers bg-warning text-white">100 viewers</span>
+                    <span class="viewers bg-warning text-white">{{profile.views}} viewers</span>
                     <span class="onlinenow bg-success text-white">Online Now</span>
 
                 </div>
@@ -108,43 +108,108 @@ console.log(src); // This will log the src of the active image to the console
                 </div>
                 <div class="infodata">
                     <div class="points" id="info1">
+                        <div class="row">
+                            <div class="col-md">
 
-                        <span class="fa fa-graduation-cap"></span><span> BMA Finance</span>
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        <span class="fa fa-briefcase "></span><span> Finance Analyst [ Wipro pvt.
-                            lmt.]</span><br>
-                        <span class="fa fa-calendar"></span><span> Male, 26 Years</span>
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
+                                <span class="fa fa-graduation-cap"></span><span
+                                    id="qual">{{profile.Qualification|sort_filter}} </span>
+                            </div>
+                            <div class="col-md">
+                                <span class="fa fa-briefcase "></span><span>{{profile.work}}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md">
+                                <span class="fa fa-calendar"></span><span>{{profile.age}} Years</span>
+                            </div>
+                            <div class="col-md">
 
-                        <span class="fa fa-long-arrow-up "></span><span> 5.6"</span>
-                        <br>
-                        <span class="fa fa-ring"></span><span> Unmarried</span>
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        <span class="fa fa-filter "></span><span> Matching 75%</span><br>
-                        <span class="fa fa-location-arrow"> </span><span> Parali</span>
+                                <span class="fa fa-long-arrow-up "></span><span> {{profile.height}}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md">
+                                <span class="fa fa-ring"></span><span>{{profile.marrital_status}}</span>
+                            </div>
+                            <div class="col-md">
 
+                                <span class="fa fa-filter "></span><span>Matching {% with id=profile.id cuid=request.user.profile.id %}{{ id|custom_filters:cuid }}{% endwith %}%</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md">
+                                <span class="fa fa-location-arrow"> </span><span>{{profile.city}}</span>
+                            </div>
+                        </div>
 
                         </p>
                         <hr class="hr" />
                         <b>About</b>
                         <p>
-                            It is a long established fact that a reader will be distracted by the readable content of a
-                            page when looking at its layout. The point of using Lorem Ipsum is that it has a
-                            more-or-less normal distribution of letters, as opposed to using 'Content here, content
-                            here', making it look like readable English.
+                            {{profile.about_me}}</p>
+                        <hr class="hr" />
 
-                            Many desktop publishing packages and web page editors now use Lorem Ipsum as their default
-                            model text.</p>
+                    </div>
+
+                    <div class="container p-0 m-2">
+                        <div class="row">
+                            <div class="col-md">
+                                <strong>Name: </strong>{{profile.user.first_name}} {{profile.user.last_name}}
+                            </div>
+                            <div class="col-md">
+                                <strong>Gender: </strong>{{profile.gender}} 
+                            </div>
+                            <div class="col-md">
+                                <strong>Marrital Status: </strong>{{profile.marrital_status}} 
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md">
+                                <strong>Height: </strong>{{profile.height}} 
+                            </div>  
+                            <div class="col-md">
+                                <strong>Color: </strong>{{profile.color}} 
+                            </div>
+                            <div class="col-md">
+
+                                <strong>Qualification : </strong><span class="qual"> {{profile.Qualification|sort_filter}} </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md">
+                                <strong>Work: </strong>{{profile.work}} 
+                                
+                            </div>
+                            <div class="col-md">
+                                <strong>Experience: </strong>{{profile.experience}} 
+                            </div>
+                            <div class="col-md">
+                                <strong>Hobbies: </strong>{{profile.hobbies}} 
+
+                                <!-- <strong>Qualification : </strong><span id="qual"> {{profile.Qualification}} </span> -->
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md">
+                                <strong>Income: </strong>{{profile.income}} 
+                                
+                            </div>
+                            <div class="col-md">
+                                <strong>Medical Condition: </strong>{{profile.medical_condition}} 
+                            </div>
+                            <div class="col-md">
+                                <strong>City: </strong>{{profile.city}} 
+
+                                <!-- <strong>Qualification : </strong><span id="qual"> {{profile.Qualification}} </span> -->
+                            </div>
+                        </div>
+                        
+                        
+                        <hr class="hr" />
+                        
                     </div>
 
                 </div>
@@ -157,24 +222,78 @@ console.log(src); // This will log the src of the active image to the console
                 <div class="infodata" id="info2">
                     <div class="points">
 
+                        <div class="container p-0 m-2">
+                            <div class="row">
+                                <div class="col-md">
+                                    <strong>Father_name: </strong>{{profile.user.family_details.father_name}} 
+                                </div>
+                                <div class="col-md">
+                                    <strong>Father Education: </strong>{{profile.user.family_details.father_education}} 
+                                </div>
+                                <div class="col-md">
+                                    <strong>Father Occupation : </strong>{{profile.user.family_details.father_occupation}} 
+                                </div>
+                            </div>
+    
+                            
+                            <div class="row">
+                                <div class="col-md">
+                                    <strong>Father_name: </strong>{{profile.user.family_details.mother_name}} 
+                                </div>
+                                <div class="col-md">
+                                    <strong>Father Education: </strong>{{profile.user.family_details.mother_education}} 
+                                </div>
+                                <div class="col-md">
+                                    <strong>Father Occupation : </strong>{{profile.user.family_details.mother_occupation}} 
+                                </div>
+                            </div>
 
-                        <p>
-                            It is a long established fact that a reader will be distracted by the readable content of a
-                            page when looking at its layout. The point of using Lorem Ipsum is that it has a
-                            more-or-less normal distribution of letters, as opposed to using 'Content here, content
-                            here', making it look like readable English.
+                            <div class="row">
+                                <div class="col-md">
+                                    <strong>Sister: </strong>{{profile.user.family_details.sister}} 
+                                </div>
+                                
+                              
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md">
+                                    <strong>Brother: </strong>{{profile.user.family_details.brother}} 
+                                </div>
+                                
+                              
+                            </div>
 
-                            Many desktop publishing packages and web page editors now use Lorem Ipsum as their default
-                            model text.</p>
+                            <div class="row">
+                                <div class="col-md">
+                                    <strong>Native Place: </strong>{{profile.user.family_details.native_place}} 
+                                </div>
+                                
+                              
+                            </div><div class="row">
+                                <div class="col-md">
+                                    <strong>Relatives: </strong>{{profile.user.family_details.relatives}} 
+                                </div>
+                                
+                              
+                            </div>
+                        <hr class="hr" />
+
+                            
+                        </div>
+                        
                     </div>
 
                 </div>
+                
 
             </div>
+           
         </div>
 
     </div>
 </div>
+
 
 
 <!-- hideinfo -->
@@ -215,13 +334,14 @@ console.log(src); // This will log the src of the active image to the console
         transition: opacity .5s;
         display: block;
         width: 100%;
-        
+
     }
-    figure{
-      
-            background-image: url('your-image.jpg');
-            /* background-size: 100%; */
-            background-repeat: no-repeat;
+
+    figure {
+
+        background-image: url('your-image.jpg');
+        /* background-size: 100%; */
+        background-repeat: no-repeat;
     }
 </style>
 
@@ -260,7 +380,8 @@ console.log(src); // This will log the src of the active image to the console
             <div class="modal-body">
 
 
-                <figure class="zoom" onmousemove="zoom(event)" style="background-image: url({{profile.user.media.dp.url}})">
+                <figure class="zoom" onmousemove="zoom(event)"
+                    style="background-image: url({{profile.user.media.dp.url}})">
                     <img src="{{profile.user.media.dp.url}}" />
                 </figure>
 
@@ -271,9 +392,11 @@ console.log(src); // This will log the src of the active image to the console
 </div>
 
 
-{% for gallery in gallery  %}
 
-<div class="modal  fade" id="imgzoom-{{ forloop.counter }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{% for gallery in gallery %}
+
+<div class="modal  fade" id="imgzoom-{{ forloop.counter }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -283,8 +406,9 @@ console.log(src); // This will log the src of the active image to the console
             <div class="modal-body">
 
 
-                <figure class="zoom" onmousemove="zoom(event)" style="background-image: url({{gallery.user.media.dp.url}})">
-                    <img src="{{gallery.user.media.dp.url}}" />
+
+                <figure class="zoom" onmousemove="zoom(event)" style="background-image: url({{gallery.img.url}})">
+                    <img src="{{gallery.img.url}}" />
                 </figure>
 
             </div>
@@ -292,5 +416,9 @@ console.log(src); // This will log the src of the active image to the console
         </div>
     </div>
 </div>
+
+
+ 
 {% endfor %}
+
 {% endblock main %}
