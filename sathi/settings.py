@@ -23,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-i34$qrbksqytx_b-@r_j2o0mt%th%4zof_5vwku2ut++#o0^$6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
 
-CSRF_TRUSTED_ORIGINS = ['https://*https://846a-2409-40c2-5-4b8d-e064-1801-9e25-e095.ngrok-free.app/','https://846a-2409-40c2-5-4b8d-e064-1801-9e25-e095.ngrok-free.app/*']
+# CSRF_TRUSTED_ORIGINS = ['https://*https://localhost/','https://local/*']
 
 
 # Application definition
@@ -132,20 +132,20 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_URL = 'static/'
-# STATIC_ROOT = '/static/'
+MEDIA_URL = '/media/'
 
-# Added manually
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static") 
-]
+if DEBUG:
 
+  STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+else:
+
+  STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
-MEDIA_URL = '/media/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

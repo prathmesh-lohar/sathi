@@ -7,6 +7,7 @@ sudo chown :www-data sathi/db.sqlite3
 sudo chown :www-data sathi/static/
 
 sudo chown :www-data sathi/static/admin/
+sudo chown :www-data sathi/static/import_export/
 sudo chown :www-data sathi/media/
 sudo chown :www-data sathi/media/documents
 sudo chown :www-data sathi/media/dp
@@ -20,6 +21,9 @@ sudo chmod -R 775 vdf/
 sudo chmod -R 775 sathi/db.sqlite3
 sudo chmod -R 775 sathi/static/
 sudo chmod -R 775 sathi/static/admin/
+sudo chmod -R 775 sathi/static/import_export/
+
+
 sudo chmod -R 775 sathi/media/
 sudo chmod -R 775 sathi/media/documents
 sudo chmod -R 775 sathi/media/dp
