@@ -36,8 +36,9 @@ urlpatterns = [
     path("cdp", views.cdp , name="cdp"),
     path("all_profiles", views.all_profiles , name="all_profiles"),
     path("show_profile/<int:id>", views.show_profile , name="show_profile"),
-
-
+    
+    
+  
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

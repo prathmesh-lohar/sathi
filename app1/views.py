@@ -5,6 +5,8 @@ from app1.models import profile, family_details, media
 from django.contrib import messages
 from extra.models import *
 
+
+
 import random
 import string
 
@@ -256,22 +258,26 @@ def all_profiles(request):
 
 
 def show_profile(request, id):
-    from app1.models import profile, family_details, media,gallery
+    if request.user.is_authenticated:
+        from app1.models import profile, family_details, media,gallery
 
-    profile = profile.objects.filter(user=id)[0]
-    viw = profile.views
-    addview = viw+1
-    saveview = profile.views=addview
-    profile.save()
-    gallery = gallery.objects.filter(user=id)
-    
+        profile = profile.objects.filter(user=id)[0]
+        viw = profile.views
+        addview = viw+1
+        saveview = profile.views=addview
+        profile.save()
+        gallery = gallery.objects.filter(user=id)
+        
 
-    data = {
-        'profile': profile,
-        'gallery':gallery,
+        data = {
+            'profile': profile,
+            'gallery':gallery,
 
-    }
-    return render(request, "theme/profile.html", data)
+        }
+        return render(request, "theme/profile.html", data)
+    else:
+        messages.error(request,"Login Required ")
+        return redirect('/')
 
 
 def gencode():
@@ -523,5 +529,3 @@ def delete_gallery(request,id):
     
     
 
-    
-    

@@ -28,7 +28,7 @@ DEBUG = False
 ALLOWED_HOSTS = ["*"]
 
 
-# CSRF_TRUSTED_ORIGINS = ['https://*https://localhost/','https://local/*']
+CSRF_TRUSTED_ORIGINS = ['https://*https://13.49.78.112/','https://13.49.78.112/*']
 
 
 # Application definition

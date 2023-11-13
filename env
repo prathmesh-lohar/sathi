@@ -14,3 +14,9 @@ Alias /static/ /var/www/html/sathi/static/
     AllowOverride None
     Require all granted
 </Directory>
+
+
+Alias /media/ /var/www/html/sathi/media/
+<Directory /var/www/html/sathi/media/>
+    Require all granted
+</Directory>

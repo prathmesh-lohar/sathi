@@ -16,7 +16,7 @@ sudo chown :www-data sathi/media/gallery
 
 
 
-sudo chmod -R 775 vdf/
+sudo chmod -R 775 sathi/
 
 sudo chmod -R 775 sathi/db.sqlite3
 sudo chmod -R 775 sathi/static/
