@@ -12,6 +12,8 @@ import string
 
 
 def home(request):
+    if request.user.is_staff:
+        return redirect('/logout')
     from app1.models import profile, family_details, media
     featured1 = profile.objects.filter(is_featured=1)[:8]
     # featured2 = profile.objects.filter(is_featured=1)[8:]
