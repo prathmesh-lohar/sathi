@@ -23,20 +23,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-i34$qrbksqytx_b-@r_j2o0mt%th%4zof_5vwku2ut++#o0^$6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS = ['https://*https://e703-2409-40c2-101f-b767-755a-a83b-d416-989a.ngrok-free.app/','https://e703-2409-40c2-101f-b767-755a-a83b-d416-989a.ngrok-free.app/*']
 
-CSRF_TRUSTED_ORIGINS = ['https://*https://13.49.78.112/','https://13.49.78.112/*']
+# CSRF_TRUSTED_ORIGINS = ['https://*https://13.49.78.112/','https://13.49.78.112/*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'app1',
     'staff',
     'extra',
+    'chat',
     
     'import_export',
     'django.contrib.admin',
@@ -82,7 +85,11 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'sathi.wsgi.application'
+ASGI_APPLICATION = "sathi.asgi.application"
+
 
 
 # Database
@@ -99,10 +106,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sathi',
-        'USER': 'prathmesh@admin',
+        'USER': 'prathm',
         'PASSWORD': '$$Lohar@9975$$',
-        'HOST': 'localhost',
+        'HOST': '13.49.78.112',
         'PORT': '3306',
+        
     }
 }
 
@@ -164,3 +172,22 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+#channels
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer"
+#     }
+# }
