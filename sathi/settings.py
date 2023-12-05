@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 
-CSRF_TRUSTED_ORIGINS = ['https://*https://13.49.78.112/','https://13.49.78.112/*']
+CSRF_TRUSTED_ORIGINS = ['https://*https://13.53.37.154/','https://13.53.37.154/*']
 
 
 # Application definition
@@ -94,24 +94,24 @@ ASGI_APPLICATION = "sathi.asgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sathi',
-        'USER': 'prathm',
-        'PASSWORD': '$$Lohar@9975$$',
-        'HOST': '13.49.78.112',
-        'PORT': '3306',
-        
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'sathi',
+#         'USER': 'prathm',
+#         'PASSWORD': '$$Lohar@9975$$',
+#         'HOST': '13.49.78.112',
+#         'PORT': '3306',
+        
+#     }
+# }
 
 
 
