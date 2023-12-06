@@ -11,50 +11,6 @@
     </span>
     <span class="fa fa-bars float-end" style="padding: 10px;"></span>
 </div>
-
-
-<div class="container-fluid main-chat p-0 m-0">
-    <div class="row">
-      <div class="col">
-        <!-- Scrollable Container -->
-        <div class="scrollable-container">
-          <!-- Content goes here -->
-          <div class="scrollable-content">
-            <!-- Your content -->
-            <ul style="list-style: none;" id="message-list">
-                {% for message in messages %}
-                <!-- <li>[{{message.sender.username}}]: {{message.text}} -->
-                {% if message.sender.username == request.user.username %}
-                <br>
-                <li><span class="thred" >{{message.text}}</span></li>
-                <br>
-                
-                {% else %}
-                <br>
-                
-                <li class="user">{{message.text}}</li>
-                <br>
-                
-                {% endif %}
-    
-            
-                
-                
-            {% endfor %}
-            <!-- <li><span class="bg-light thred float-start" style="">thred</span></li> -->
-            
-        </ul>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-{% comment %}
-
-    
 <div class="main-chat p-0 m-0">
     <br>
     <ul style="list-style: none;" id="message-list">
@@ -82,9 +38,6 @@
     </ul>
 </div>
 
-    
-{% endcomment %}
-
 <br>
 <form id="message-form" class="sticky-bottom bg-light" >
     {% csrf_token %}
@@ -97,8 +50,6 @@
 </form>
 
 <br>
-
-
 
 
 <!-- chat script -->
@@ -150,11 +101,11 @@
 
     ws.onclose = function(event) {
         console.log("Connection is closed");
-        setTimeout(() => {
-            const newws = new WebSocket(url);
-        console.log("re connected");
+        // setTimeout(() => {
+        //     const newws = new WebSocket(url);
+        // console.log("re connected");
 
-        },1000);
+        // },1000);
     }
 
     ws.onerror = function(event) {
@@ -173,25 +124,6 @@
 </script>
 <!-- chat script -->
 
-
-
-<!-- scrollbar -->
-
-<style>
-    /* Custom styles */
-    .scrollable-container {
-      max-height: 400px; /* Set your desired max height */
-      overflow-y: auto;
-      transform: scaleY(-1); /* Flip the container */
-    }
-
-    /* Optional: Styles for the content inside the scrollable container */
-    .scrollable-content {
-      padding: 10px;
-      transform: scaleY(-1); /* Flip the content to display correctly */
-    }
-  </style>
-<!--  -->
 <style>
     
     ul{

@@ -1,0 +1,50 @@
+{% extends 'theme/base.html' %}
+
+
+{% block title %}
+    message
+{% endblock title %}
+    
+
+{% block main %}
+
+<div class="container my-3">
+    <center><h2>All Messages</h2></center>
+
+    <div class="container bg-white">
+        <ul class="list-group list-group-light">
+
+            
+            {% for m in msg %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <div class="fw-bold">{{m.thread}}</div>
+                  <div class="text-muted">{{m.text|slice:10}} ..</div>
+                </div>
+                <span class="badge rounded-pill badge-success">1</span>
+              </li>
+            {% endfor %}
+                
+           
+
+
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <div class="fw-bold">Alex Ray</div>
+                <div class="text-muted">alex.ray@gmail.com</div>
+              </div>
+              <span class="badge rounded-pill badge-primary">Onboarding</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <div class="fw-bold">Kate Hunington</div>
+                <div class="text-muted">kate.hunington@gmail.com</div>
+              </div>
+              <span class="badge rounded-pill badge-warning">Awaiting</span>
+            </li>
+          </ul>
+    </div>
+</div>
+    
+{% endblock main %}
+    

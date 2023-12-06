@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import View
 from django.contrib.auth import get_user_model
 from django.shortcuts import Http404
@@ -6,7 +6,7 @@ from chat.models import Thread, Message
 
 
 class ThreadView(View):
-    template_name = 'chat/temp-chat.html'
+    template_name = 'chat/chat-home.html'
 
     def get_queryset(self):
         return Thread.objects.by_user(self.request.user)
@@ -40,6 +40,10 @@ class ThreadView(View):
         Message.objects.create(sender=user, thread=thread, text=text)
         context = self.get_context_data(**kwargs)
         return render(request, self.template_name, context=context)
+    
+    
+
+
 
 # def chat2(request,receiver):
 #     receiver=receiver

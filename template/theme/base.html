@@ -85,9 +85,19 @@
               <a class="nav-link" href="#">Search</a>
             </li>
 
+
             <li class="nav-item">
               <a class="nav-link " href="#">Plans</a>
             </li>
+
+            <button type="button" class="btn btn-primary position-relative" style="width: 100px; height: 30px;
+            padding: 6px 20px;
+            margin: 5px 0px;">
+              Message
+              <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+              </span>
+            </button>
 
 
           </ul>
@@ -135,7 +145,7 @@
               {% else %}
               {% static 'assets/images/def.jpg' %}
               {% endif %}
-                " class="rounded-circle" height="38" width="38"
+                " class="rounded-circle border" height="38" width="38"
                 alt="dp_{{request.user}}" loading="lazy" />
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">

@@ -3,8 +3,6 @@
 {% block content %}
 
 
-
-
     <h3>You: {{me.username}}</h3>
     <h3>Thread: {{user.username}}</h3>
     <ul id="message-list">
@@ -13,6 +11,7 @@
         {% endfor %}
     </ul>
     <form id="message-form">
+        
         {% csrf_token %}
         <input type="text" name="message" id="message" required>
         <input type="submit" value="Send" class="btn">
@@ -42,10 +41,16 @@
     
         ws.onclose = function(event) {
             console.log("Connection is closed");
+            setTimeout(() => {
+                const newws = new WebSocket(url);
+            console.log("re connected");
+
+            },1000);
         }
     
         ws.onerror = function(event) {
             console.log("Something went wrong");
+            
         }
     
         const messageForm = document.getElementById('message-form')

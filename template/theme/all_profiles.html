@@ -88,10 +88,10 @@
             <div class="cardarea">
 
                 {% for m in all_profiles %}
-                <a href="show_profile/{{m.user.id}}">
                 <div class="card mb-3">
                     <div class=" row g-0">
                         <div class="col-md-4">
+                        <a href="show_profile/{{m.user.id}}">
                             <img src="
                                 
                                 {% if m.user.media.dp.url %}
@@ -101,7 +101,7 @@
                                 {% endif %}
                                     
                                 " alt="dp-{{m.user.first_name}}" class="img-fluid rounded-start profile-img" />
-
+                            </a>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -110,6 +110,8 @@
                                     <span class="fa fa-thumbs-o-up"></span>
 
                                 </div>
+                                <a href="show_profile/{{m.user.id}}">
+
                                 <h5 class="card-title">{{m.user.first_name}} {{m.user.last_name}}</h5>
                                 <div class="card-text text-row" >
                                 <div class="row" >
@@ -136,6 +138,7 @@
                                         {% endif %}
                                     </span>
                                     </div>
+
                                    
                                 </div>
                                 <div class="row">
@@ -168,9 +171,12 @@
                                 </div>
 
                                 </div>
+
+                                </a>
+                                
                                 <hr class="hr" />
                                 <p class="card-text">
-                                    <span class="tags">chat now</span>
+                                    <a href="/chat/{{m.user.username}}"> <span class="tags">Chat Now</span></a>
                                     <span class="tags">watsapp</span>
                                     <span class="tags">send Interest</span>
                                     <span class="tags">more..</span>
@@ -180,7 +186,6 @@
                         </div>
                     </div>
                 </div>
-            </a>
                 {% endfor %}
 
 

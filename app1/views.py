@@ -529,5 +529,20 @@ def delete_gallery(request,id):
     messages.warning(request, "image Deleted successfully")
     return redirect(request.META.get('HTTP_REFERER'))  
     
-    
 
+
+
+@login_required(login_url='/login')    
+def message(request):
+    
+    from chat.models import Message
+    
+    # msg = Message.objects.filter(thread=request.user.id)
+    msg = Message.objects.filter(thread__users=request.user)
+    
+    
+    data = {
+        'msg':msg,
+    }
+    
+    return render(request, "theme/all-message.html",data)

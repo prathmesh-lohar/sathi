@@ -3,7 +3,7 @@ from channels.db import database_sync_to_async
 from asgiref.sync import async_to_sync, sync_to_async
 from django.contrib.auth.models import User
 from chat.models import Thread, Message
-
+from channels.exceptions import StopConsumer
 import json
 
 
@@ -49,6 +49,8 @@ class ChatConsumer(AsyncConsumer):
     async def websocket_disconnect(self, event):
         print(f'[{self.channel_name}] - Disonnected')
         await self.channel_layer.group_discard(self.room_name, self.channel_name)
+        
+        raise StopConsumer()
 
     @database_sync_to_async
     def store_message(self, text):
