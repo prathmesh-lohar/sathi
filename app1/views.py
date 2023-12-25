@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from app1.models import profile, family_details, media
 from django.contrib import messages
 from extra.models import *
-
+from django.db.models import Q
 
 
 import random
@@ -15,7 +15,10 @@ def home(request):
     if request.user.is_staff:
         return redirect('/logout')
     from app1.models import profile, family_details, media
+    from extra.models import city
+
     featured1 = profile.objects.filter(is_featured=1)[:8]
+    city = city.objects.all()
     # featured2 = profile.objects.filter(is_featured=1)[8:]
 
     if request.user.is_authenticated:
@@ -26,13 +29,19 @@ def home(request):
 
             data = {
                 'featured1': featured1,
+                'city':city,
+                
                 # 'featured2':featured2,
             }
 
             return render(request, "theme/index.html", data)
+    
+    
 
+        
     data = {
         'featured1': featured1,
+        'city':city,
         #   'featured2':featured2,
     }
 
@@ -130,10 +139,16 @@ def register(request):
             User.objects.create_user(password=pwd, username=uname, email=email, first_name=fname, last_name=lname)
             user = auth.authenticate(username=uname, password=pwd)
             auth.login(request, user)
-            from app1.models import profile
-            obj = profile(user=request.user, is_mail_verified=False, registerfor=regfor, gender=gender, lookingfor=lfor,
+            from app1.models import profile,family_details
+            obj = profile(user_id=request.user.id, is_mail_verified=False, registerfor=regfor, gender=gender, lookingfor=lfor,
                           dob=dob, mobile=contact)
             obj.save()
+            oj2 = family_details(user_id=request.user.id)
+      
+            oj2.save()
+  
+            
+            
             return redirect('/profile_home')
     else:
         HttpResponse("faield")
@@ -223,6 +238,10 @@ def all_profiles(request):
     from app1.models import profile, family_details, media
 
     from match.matchfun import matchfun
+    
+    from extra.models import city
+    
+    city = city.objects.all()
 
     p = profile.objects.all().values('id', 'work', 'Qualification', 'color', 'marrital_status', 'height', 'experience',
                                      'hobbies', 'income', 'medical_condition', 'city')
@@ -252,10 +271,24 @@ def all_profiles(request):
     for id in all_profiles:
         print(id.id)
 
+    if request.method == 'POST':
+        lfor = request.POST.get('lfor')
+        age = request.POST.get('age')
+        religion = request.POST.get('religion')
+        city = request.POST.get('city')
+        
+        from app1.models import profile
+        
+        all_profiles = profile.objects.filter(Q(gender__icontains=lfor) | Q(city__icontains=city)).order_by('id')[:5]
+        
+        
     data = {
 
-        'all_profiles': all_profiles
+        'all_profiles': all_profiles,
+        'city':city,
     }
+    
+    
     return render(request, "theme/all_profiles.html", data)
 
 
@@ -367,8 +400,8 @@ def my_profile(request):
         from extra.models import Qualification,work,experience,hobbies,income,height,color
 
         username=request.user.username
-        details  = profile.objects.filter(username=username).first()
-        fdetails  = family_details.objects.filter(username=username).first()
+        details  = profile.objects.filter(user=request.user).first()
+        fdetails  = family_details.objects.filter(user=request.user).first()
         user = User.objects.filter(username=username).first()
         
         
@@ -468,16 +501,16 @@ def save_details(request):
             if verify == "on":
                 vstatus=True
         
-            if profile.objects.filter(username=username).exists():
-                obj=profile.objects.filter(username=uid).update(user=id,mobile=mobile,marrital_status=mstatus,dob=dob,height=height,color=color,Qualification=qualification,work=work,experience=experience,hobbies=Hobbies,income=Income,medical_condition=medical_condition,city=city,about_me=about,gender=gender,registerfor=regofor,is_approved=vstatus)
-                obj2=family_details.objects.filter(username=uid).update(user=id,father_name=father_name,father_education=father_education,father_occupation=father_occupation,mother_name=mother_name,mother_education=mother_education,mother_occupation=mother_occupation,brother=brother,sister=sister,relatives=relatives,native_place=native_place)
+            if profile.objects.filter(user=request.user).exists():
+                obj=profile.objects.filter(user=request.user).update(user=request.user,mobile=mobile,marrital_status=mstatus,dob=dob,height=height,color=color,Qualification=qualification,work=work,experience=experience,hobbies=Hobbies,income=Income,medical_condition=medical_condition,city=city,about_me=about,gender=gender,registerfor=regofor,is_approved=vstatus)
+                obj2=family_details.objects.filter(user=request.user).update(user=request.user,father_name=father_name,father_education=father_education,father_occupation=father_occupation,mother_name=mother_name,mother_education=mother_education,mother_occupation=mother_occupation,brother=brother,sister=sister,relatives=relatives,native_place=native_place)
                 messages.success(request, "details uploaded successfully")
                 
             
             else:
                 # user = User.objects.filter(id=uid).first()
                 obj=profile(username=uid,mobile=mobile,marrital_status=mstatus,dob=dob,height=height,color=color,Qualification=qualification,work=work,experience=experience,hobbies=Hobbies,income=Income,medical_condition=medical_condition,city=city,about_me=about,gender=gender,registerfor=regofor,is_approved=vstatus)
-                obj2=family_details(username=uid,user=id,father_name=father_name,father_education=father_education,father_occupation=father_occupation,mother_name=mother_name,mother_education=mother_education,mother_occupation=mother_occupation,brother=brother,sister=sister,relatives=relatives,native_place=native_place)
+                obj2=family_details(username=uid,user=request.user,father_name=father_name,father_education=father_education,father_occupation=father_occupation,mother_name=mother_name,mother_education=mother_education,mother_occupation=mother_occupation,brother=brother,sister=sister,relatives=relatives,native_place=native_place)
                 obj.save()
                 messages.success(request, "details uploaded successfully")
                 
@@ -532,17 +565,37 @@ def delete_gallery(request,id):
 
 
 
-@login_required(login_url='/login')    
+  
+from django.db.models import Subquery, OuterRef
+from django.shortcuts import render
+from chat.models import Message
+
+
+@login_required(login_url='/login')
+
 def message(request):
-    
-    from chat.models import Message
-    
-    # msg = Message.objects.filter(thread=request.user.id)
-    msg = Message.objects.filter(thread__users=request.user)
-    
-    
+    # Subquery to get the latest timestamp for each thread
+    latest_timestamps = Message.objects.filter(thread=OuterRef('thread')).order_by('-timestamp').values('timestamp')[:1]
+
+    # Query to get the latest message for each thread
+    msg = Message.objects.filter(
+        thread__users=request.user,
+        timestamp=Subquery(latest_timestamps)
+    )
+
     data = {
-        'msg':msg,
+        'msg': msg,
     }
-    
-    return render(request, "theme/all-message.html",data)
+
+    return render(request, "theme/all-message.html", data)
+
+
+
+
+
+@login_required(login_url='/login')
+
+def plans(request):
+   return render(request, "theme/plans.html")
+   
+

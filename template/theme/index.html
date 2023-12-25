@@ -14,11 +14,12 @@
     <small class="p ">Most trusted Matrimony Brand in the World.</small>
 
     <div class="container search-form">
-
+      <form action="/all_profiles" method="POST">
+        {% csrf_token %}
       <div class="row g-3">
         <div class="col-sm">
           <div class="form-outline">
-            <select>
+            <select name="lfor">
               <option>I am looking for</option>
               <option>Male</option>
               <option>Feale</option>
@@ -28,7 +29,7 @@
         </div>
         <div class="col-sm">
           <div class="form-outline">
-            <select>
+            <select name="age">
               <option>Age</option>
               <option>22-25</option>
               <option>25-30</option>
@@ -42,9 +43,25 @@
 
         <div class="col-sm">
           <div class="form-outline">
-            <select>
-              <option>Religion</option>
+            <select name="religion">
+              <option >Religion</option>
 
+              <option disabled>....</option>
+
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="form-outline">
+            <select name="city">
+              <option>City</option>
+              
+              {% for c in city %}
+              <option >{{c.nameofcity}}</option>
+                
+              {% endfor %}
+                
               <option>....</option>
 
             </select>
@@ -53,24 +70,12 @@
 
         <div class="col-sm">
           <div class="form-outline">
-            <select>
-              <option>Location</option>
-              <option>pune</option>
-              <option>latur</option>
-              <option>parali</option>
-              <option>....</option>
-
-            </select>
-          </div>
-        </div>
-
-        <div class="col-sm">
-          <div class="form-outline">
-            <button class="btn btn-black">Search</button>
+            <button type="submit" class="btn btn-black">Search</button>
           </div>
         </div>
 
       </div>
+    </form>
 
     </div>
 

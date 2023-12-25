@@ -84,3 +84,16 @@ def sort_filter(value):
 
         
     return value
+
+@register.filter(name='message_filter')
+def message_filter(value,user):
+    user=str(user)
+    value=str(value)
+    
+    if user in value:
+        value = value.replace(user, "")
+        value = value.replace("and", "")
+        value = value.replace(" ", "")
+        
+    
+    return value

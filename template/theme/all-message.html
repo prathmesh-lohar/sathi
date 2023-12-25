@@ -8,6 +8,9 @@
 
 {% block main %}
 
+{% load custom_filters %}
+
+
 <div class="container my-3">
     <center><h2>All Messages</h2></center>
 
@@ -15,33 +18,25 @@
         <ul class="list-group list-group-light">
 
             
-            {% for m in msg %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+         {% for m in msg %}
+         <a href="/chat/{{ m.thread|message_filter:request.user.username }}" >
+            <li class="list-group-item d-flex justify-content-between align-items-center" style="padding: 20px 40px">
                 <div>
-                  <div class="fw-bold">{{m.thread}}</div>
+                  <div class="fw-bold">{{ m.thread|message_filter:request.user.username }}</div>
+                  
+
                   <div class="text-muted">{{m.text|slice:10}} ..</div>
                 </div>
-                <span class="badge rounded-pill badge-success">1</span>
+                <span class="badge rounded-pill badge-success"></span>
               </li>
+            </a>
             {% endfor %}
-                
-           
+    
+
+        
 
 
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <div>
-                <div class="fw-bold">Alex Ray</div>
-                <div class="text-muted">alex.ray@gmail.com</div>
-              </div>
-              <span class="badge rounded-pill badge-primary">Onboarding</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <div>
-                <div class="fw-bold">Kate Hunington</div>
-                <div class="text-muted">kate.hunington@gmail.com</div>
-              </div>
-              <span class="badge rounded-pill badge-warning">Awaiting</span>
-            </li>
+
           </ul>
     </div>
 </div>

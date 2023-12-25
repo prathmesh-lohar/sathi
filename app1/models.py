@@ -10,7 +10,7 @@ class profile(models.Model):
     registerfor = models.CharField(max_length=50,default="", null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     gender = models.CharField(max_length=50,default="", null=True, blank=True)
-    lookingfor = models.CharField(max_length=50,default="", null=True, blank=True)
+    lookingfor = models.TextField(default="", null=True, blank=True)
     
     mobile = models.CharField(max_length=50,default="", null=True, blank=True)
     marrital_status = models.CharField(max_length=50,default="", null=True, blank=True)
@@ -41,6 +41,23 @@ class profile(models.Model):
 
     def __str__(self):
         return str(self.user)
+    
+    def calculate_profile_completion(self):
+        total_fields = 18  # Assuming 18 fields in your model (update accordingly)
+        completed_fields = sum(field is not None and field != "" for field in [
+            self.registerfor, self.gender, self.lookingfor, self.mobile,
+            self.marrital_status, self.dob, self.height, self.color,
+            self.Qualification, self.work, self.experience, self.hobbies,
+            self.income, self.medical_condition, self.city, self.about_me,
+            self.related_officer
+        ])
+
+        # Calculate the completion percentage
+        if total_fields > 0:
+            completion_percentage = (completed_fields / total_fields) * 100
+            return round(completion_percentage, 2)
+        else:
+            return 0.0
     
     @property
     def age(self):  

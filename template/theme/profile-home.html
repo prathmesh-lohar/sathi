@@ -15,12 +15,14 @@
             <div class="cardarea ">
                 <div class="row">
                     <div class="col-md">
-                        <div class="card rounded-0 p-0 m-0 my-2">
+                        <a href="/all_profiles" style="text-decoration: none; border-color: #4f4f4f;">
+                            <div class="card rounded-0 p-0 m-0 my-2">
                             <img src="{% static 'assets/images/match.png' %}" class="card-img-top">
-                            <div class="foooter">
+                             <div class="foooter">
                                 Find Your Match
                             </div>
                         </div>
+                    </a>
                     </div>
 
                     <div class="col-md">
@@ -34,12 +36,14 @@
 
 
                     <div class="col-md">
+                        <a href="/message">
                         <div class="card rounded-0 p-0 m-0 my-2">
                             <img src="{% static 'assets/images/interact.png' %}" class="card-img-top">
                             <div class="foooter">
                                 Interact Call & Message
                             </div>
                         </div>
+                    </a>
                     </div>
                 </div>
 
@@ -76,22 +80,25 @@
         </div>
         <div class="col-md-4 profile-wid">
             <div class="progress" style="height: 20px;">
-                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
-                    aria-valuemax="100">25%</div>
+                <div class="progress-bar" role="progressbar" style="width: {{ request.user.profile.calculate_profile_completion }}%;" aria-valuenow="{{ request.user.profile.calculate_profile_completion }}" aria-valuemin="0"
+                    aria-valuemax="100">{{ request.user.profile.calculate_profile_completion }}%</div>
             </div>
 
             <div class="row">
                 
                 <ul class="list-group list-group-light">
                     <li class="list-group-item px-3 border-0 rounded-3 mb-2">Important Links</li>
-                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-primary mb-2">My Profile</li>
-                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-secondary mb-2">Gallery</li>
-                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-success mb-2">News</li>
-                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-danger mb-2">Offers</li>
-                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-warning mb-2">My Plan</li>
-                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-info mb-2">wallet</li>
-                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-light mb-2">Message</li>
-                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-success mb-2">Connect</li>
+
+                    <a href="/my_profile"><li class="list-group-item px-3 border-0 rounded-3 list-group-item-primary mb-2">My Profile</li></a>
+
+                    <a href=""><li class="list-group-item px-3 border-0 rounded-3 list-group-item-secondary mb-2">Gallery</li></a>
+                    
+                    <a href=""><li class="list-group-item px-3 border-0 rounded-3 list-group-item-success mb-2">News</li></a>
+                    <a href=""><li class="list-group-item px-3 border-0 rounded-3 list-group-item-danger mb-2">Offers</li></a>
+                    <a href="/plans"><li class="list-group-item px-3 border-0 rounded-3 list-group-item-warning mb-2">My Plan</li></a>
+                    <a href=""><li class="list-group-item px-3 border-0 rounded-3 list-group-item-info mb-2">wallet</li></a>
+                    <a href="/message"><li class="list-group-item px-3 border-0 rounded-3 list-group-item-light mb-2">Message</li></a>
+                    <a href=""><li class="list-group-item px-3 border-0 rounded-3 list-group-item-success mb-2">Connect</li></a>
 
                     <li class="list-group-item px-3 border-0 rounded-3 list-group-item-dark mb-2">Report</li>
                   </ul>

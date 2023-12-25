@@ -24,16 +24,17 @@
 
             <div class="filter my-5 mx-0">
 
-                <form>
+                <form action="/all_profiles" method="post">
+                    {% csrf_token %}
                     <label class="form-label"><span class="fa fa-search"></span> I'm looking for</label>
-                    <select class="form-select my-2" aria-label="Default select example">
+                    <select name="lfor" class="form-select my-2" aria-label="Default select example">
                         <option selected>I'm looking for</option>
-                        <option value="1">Men</option>
-                        <option value="2">Women</option>
+                        <option value="male">Men</option>
+                        <option value="female">Women</option>
 
                     </select>
                     <label class="form-label"><span class="fa  fa-clock-o"></span> Age</label>
-                    <select class="form-select my-2" aria-label="Default select example">
+                    <select name="age" class="form-select my-2" aria-label="Default select example">
                         <option selected>Select Age</option>
                         <option value="1">22-30</option>
                         <option value="1">30-35</option>
@@ -43,19 +44,22 @@
 
 
                     </select><label class="form-label"><span class="fa fa-bell-o"></span> Select Religion</label>
-                    <select class="form-select my-2" aria-label="Default select example">
+                    <select name="religion" disabled class="form-select my-2" aria-label="Default select example">
                         <option selected>Religion</option>
-                        <option value="1">Any</option>
+                        <option value="1">..</option>
 
                     </select>
                     <label class="form-label"><span class="fa fa-globe"></span> Location</label>
-                    <select class="form-select my-2" aria-label="Default select example">
-                        <option selected>Pune</option>
-                        <option value="1">nanded</option>
-                        <option value="2">beed</option>
-                        <option value="2">parali</option>
-                        <option value="2">nagpur..</option>
+                    <select name="city" class="form-select my-2" aria-label="Default select example">
+                        <option selected>City</option>
+                        
+                        {% for c in city %}
+                        <option >{{c.nameofcity}}</option>
+                            
+                        {% endfor %}
+                            
                     </select>
+                    <button class="btn btn-outline-dark w-100 my-2" type="submit">Apply Filter</button>
                 </form>
 
             </div>
@@ -124,7 +128,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <span class="fa fa-user"></span><span> Male
+                                        <span class="fa fa-user"></span><span> {{m.gender}}
                                           
                                         </span>
                                     </div>
@@ -205,16 +209,16 @@
             </div>
             <div class="modal-body">
 
-                <form>
+                <form action="/all_profiles" method="post">
                     <label class="form-label"><span class="fa fa-search"></span> I'm looking for</label>
-                    <select class="form-select my-2" aria-label="Default select example">
+                    <select name="lfor" class="form-select my-2" aria-label="Default select example">
                         <option selected>I'm looking for</option>
                         <option value="1">Men</option>
                         <option value="2">Women</option>
 
                     </select>
-                    <label class="form-label"><span class="fa  fa-clock-o"></span> Age</label>
-                    <select class="form-select my-2" aria-label="Default select example">
+                    <label  class="form-label"><span class="fa  fa-clock-o"></span> Age</label>
+                    <select name="age" class="form-select my-2" aria-label="Default select example">
                         <option selected>Select Age</option>
                         <option value="1">22-30</option>
                         <option value="1">30-35</option>
@@ -222,28 +226,34 @@
                         <option value="1">40-50</option>
 
 
-
+                        {% csrf_token %}
                     </select><label class="form-label"><span class="fa fa-bell-o"></span> Select Religion</label>
-                    <select class="form-select my-2" aria-label="Default select example">
+                    <select name="religion" class="form-select my-2" aria-label="Default select example">
                         <option selected>Religion</option>
                         <option value="1">Any</option>
 
                     </select>
                     <label class="form-label"><span class="fa fa-globe"></span> Location</label>
-                    <select class="form-select my-2" aria-label="Default select example">
-                        <option selected>Pune</option>
-                        <option value="1">nanded</option>
-                        <option value="2">beed</option>
-                        <option value="2">parali</option>
-                        <option value="2">nagpur..</option>
+                    <select name="city" class="form-select my-2" aria-label="Default select example">
+                        <option selected>city</option>
+                        
+                        {% for c in city %}
+                        <option >{{c.nameofcity}}</option>
+                            
+                        {% endfor %}
+                            
+                        
                     </select>
-                </form>
+
+                    <button class="btn btn-outline-dark w-100 my-2" type="submit">APPLY FILTER</button>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            
             </div>
+        </form>
+
         </div>
     </div>
 </div>

@@ -29,6 +29,10 @@ class Message(TrackingModel):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
     sender = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     text = models.TextField(blank=False, null=False)
+    timestamp = models.DateTimeField(auto_now_add=True, blank=True,null=True)
+    
+    is_read = models.BooleanField(default=False)
+   
 
     def __str__(self) -> str:
         return f'From <Thread - {self.thread}>'
