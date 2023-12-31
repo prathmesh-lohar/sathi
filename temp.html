@@ -1,58 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    /* Custom styles */
-    .scrollable-container {
-      max-height: 200px; /* Set your desired max height */
-      overflow-y: auto;
-      transform: scaleY(-1); /* Flip the container */
-    }
-
-    /* Optional: Styles for the content inside the scrollable container */
-    .scrollable-content {
-      padding: 10px;
-      transform: scaleY(-1); /* Flip the content to display correctly */
-    }
-  </style>
-  <title>Scrollable Container</title>
-</head>
-<body>
-  <div class="container-fluid p-0 m-0">
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Search Form</h2>
+  <form>
     <div class="row">
-      <div class="col">
-        <!-- Scrollable Container -->
-        <div class="scrollable-container">
-          <!-- Content goes here -->
-          <div class="scrollable-content">
-            <!-- Your content -->
-            <p>Message 1</p>
-            <p>Message 2</p>
-            <p>Message 3</p>
-            <p>Message 3</p>
-            <p>Message 3</p>
-            <p>Message 3</p>
-            <p>Message 3</p>
-            <p>Message 3</p>
-            <p>Message 3</p>
-            <p>Message 3</p>
-            <p>Message 3</p>
-            <p>Message 3</p>
-            <p>Message 3</p>
-            <p>Message 3</p>
-            <!-- Add more messages as needed -->
-          </div>
-        </div>
+      <div class="col-md-4">
+        <label for="gender">Gender:</label>
+
+        <select class="form-select" id="gender">
+          <option value="">Select Gender</option>
+
+          <option value="male">Male</option>
+
+          <option value="female">Female</option>
+
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label for="age">Age:</label>
+        <input
+          type="number"
+          class="form-control"
+          id="age"
+          placeholder="Enter age"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="city">City:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          placeholder="Enter city"
+        />
       </div>
     </div>
-  </div>
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <label for="work">Work:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="work"
+          placeholder="Enter work"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="marital_status">Marital Status:</label>
+        <select class="form-select" id="marital_status">
+          <option value="">Select Marital Status</option>
 
-  <!-- Bootstrap JS and Popper.js (if needed) -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</body>
-</html>
+          <option value="single">Single</option>
+
+          <option value="married">Married</option>
+
+          <option value="divorced">Divorced</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-12 text-center">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+  </form>
+</div>

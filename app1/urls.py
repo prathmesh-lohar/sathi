@@ -29,11 +29,9 @@ urlpatterns = [
       
     
     
-    path("save_personal_detail", views.save_personal_detail , name="save_personal_detail"),
 
-    path("family_details", views.family_details , name="family_details"),
 
-    path("cdp", views.cdp , name="cdp"),
+
     path("all_profiles", views.all_profiles , name="all_profiles"),
     path("show_profile/<int:id>", views.show_profile , name="show_profile"),
     
@@ -41,6 +39,8 @@ urlpatterns = [
     
     
     path("plans", views.plans , name="plans"),
+    
+    path("search",views.search, name="search"),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

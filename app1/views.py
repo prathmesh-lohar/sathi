@@ -165,72 +165,8 @@ def profile_home(request):
     return render(request, "theme/profile-home.html")
 
 
-@login_required(login_url='/login')
-def save_personal_detail(request):
-    if request.method == "POST":
-        mobile = request.POST.get('mobile')
-        mstatus = request.POST.get('mstatus')
-        dob = request.POST.get('dob')
-        height = request.POST.get('height')
-        color = request.POST.get('color')
-        qualification = request.POST.get('qualification')
-        work = request.POST.get('work')
-        experience = request.POST.get('experience')
-        Hobbies = request.POST.get('Hobbies')
-        Income = request.POST.get('Income')
-        medical_condition = request.POST.get('medical_condition')
-        city = request.POST.get('city')
-        about = request.POST.get('about')
-        userid = request.POST.get('userid')
-        gender = request.POST.get('gender')
-
-        from app1.models import profile
-        obj = profile.objects.filter(user=request.user).update(mobile=mobile, marrital_status=mstatus, dob=dob,
-                                                               height=height, color=color, Qualification=qualification,
-                                                               work=work, experience=experience, hobbies=Hobbies,
-                                                               income=Income, medical_condition=medical_condition,
-                                                               city=city, about_me=about, gender=gender)
-
-    return redirect('/family_details')
 
 
-@login_required(login_url='/login')
-def family_details(request):
-    if request.method == "POST":
-        father_name = request.POST.get('father_name')
-        father_education = request.POST.get('father_education')
-        father_occupation = request.POST.get('father_occupation')
-        mother_name = request.POST.get('mother_name')
-        mother_education = request.POST.get('mother_education')
-        mother_occupation = request.POST.get('mother_occupation')
-        sister = request.POST.get('sister')
-        brother = request.POST.get('brother')
-        native_place = request.POST.get('native_place')
-        relatives = request.POST.get('relatives')
-
-        from app1.models import family_details
-        obj = family_details(user=User.objects.get(pk=request.user.id), father_name=father_name,
-                             father_education=father_education, father_occupation=father_occupation,
-                             mother_name=mother_name, mother_education=mother_education,
-                             mother_occupation=mother_occupation, brother=brother, sister=sister, relatives=relatives,
-                             native_place=native_place)
-        obj.save()
-
-        return redirect('/cdp')
-
-    return render(request, "family_details.html")
-
-
-def cdp(request):
-    if request.method == "POST":
-        picture__input = request.FILES['picture__input']
-        from app1.models import media
-        obj = media(user=User.objects.get(pk=request.user.id), dp=picture__input)
-        obj.save()
-
-        return redirect('/')
-
-    return render(request, "cdp.html")
 
 
 @login_required(login_url='/login')
@@ -264,7 +200,7 @@ def all_profiles(request):
 
     print(mlist)
 
-    all_profiles = profile.objects.filter(id__in=mlist, gender=opogen,is_approved=True)
+    all_profiles = profile.objects.filter(id__in=mlist, gender=opogen,is_approved=True)[:20]
 
     all_profiles = sorted(all_profiles, key=lambda x: mlist.index(x.id))
 
@@ -279,9 +215,9 @@ def all_profiles(request):
         
         from app1.models import profile
         
-        all_profiles = profile.objects.filter(Q(gender__icontains=lfor) | Q(city__icontains=city)).order_by('id')[:5]
-        
-        
+        all_profiles = profile.objects.filter(Q(gender__icontains=lfor) | Q(city__icontains=city), is_approved=True).exclude(user=request.user).order_by('id')[:20]
+       
+   
     data = {
 
         'all_profiles': all_profiles,
@@ -581,7 +517,7 @@ def message(request):
     msg = Message.objects.filter(
         thread__users=request.user,
         timestamp=Subquery(latest_timestamps)
-    )
+    ).order_by('-timestamp')  
 
     data = {
         'msg': msg,
@@ -599,3 +535,25 @@ def plans(request):
    return render(request, "theme/plans.html")
    
 
+@login_required(login_url='/login')
+def search(request):
+    from app1.models import profile
+    from extra.models import city
+    if request.method=="POST":
+        gender = request.POST.get('gender')
+        work = request.POST.get('work')
+        marital_status = request.POST.get('marital_status')
+        age = request.POST.get('age')
+        Qualification = request.POST.get('Qualification')
+        city = request.POST.get('city')
+        
+        all_profiles = profile.objects.filter(Q(gender__icontains=gender) | Q(work__icontains=work) | Q(marrital_status=marital_status) | Q(Qualification__icontains=Qualification) | Q(city=city) | Q(is_approved=True)).exclude(user=request.user)[:20]
+        
+        data = {
+            "city":city,
+            "all_profiles":all_profiles
+        }
+        return render(request, "theme/all_profiles.html",data)
+        
+        
+    return render(request, "theme/search.html")

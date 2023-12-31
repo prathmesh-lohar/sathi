@@ -1,0 +1,70 @@
+{% extends "theme/base.html" %}
+
+{% block main %}
+
+
+  <div class="container my-3">
+ 
+    <form action="/search" method="POST">
+        {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6">
+          <div class="md-form mb-4">
+            <label for="gender">Gender</label>
+            <select class="form-control" id="gender" name="gender">
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form mb-4">
+            <label for="work">Work</label>
+            <input type="text" class="form-control" id="work" placeholder="Enter Work" name="work">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="md-form mb-4">
+            <label for="marital_status">Marital Status</label>
+            <select class="form-control" id="marital_status" name="marital_status">
+              <option value="">Select Status</option>
+              <option value="single">Single</option>
+              <option value="married">Married</option>
+              <option value="divorced">Divorced</option>
+              <option value="widowed">Widowed</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form mb-4">
+            <label for="age">Age</label>
+            <input type="number" class="form-control" id="age" placeholder="Enter Age" name="age">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="md-form mb-4">
+            <label for="qualification">Qualification</label>
+            <input type="text" class="form-control" id="qualification" placeholder="Enter Qualification" name="Qualification">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form mb-4">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" placeholder="Enter City" name="city">
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Search</button>
+    </form>
+  </div>
+
+
+  <br>
+
+{% endblock main %}    

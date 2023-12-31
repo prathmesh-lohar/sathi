@@ -117,3 +117,16 @@ class document(models.Model):
     name = name = models.CharField(max_length=50, blank=True, null=True)
     def __str__(self):
             return str(self.user)
+        
+        
+        
+class follow(models.Model):
+    ufrom = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "ufrom" , blank=True,null=True)
+    uto = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "uto", blank=True,null=True)
+    
+    status_option = [
+        ('Requested','Requested'),
+        ('Followed','Followed'),
+        ('Unfollowed','Unfollowed'),
+    ]    
+    status = models.CharField(max_length=50,choices=status_option, blank=True,null=True)
