@@ -12,7 +12,7 @@ admin.site.register(family_details)
 admin.site.register(media)
 admin.site.register(gallery)
 admin.site.register(document)
-admin.site.register(follow)
+
 
 
 
@@ -22,3 +22,9 @@ class profileAdmin(admin.ModelAdmin):
     list_editable = ('is_featured','is_approved','is_mail_verified',)
     list_filter=['related_officer','is_approved']
 admin.site.register(profile, profileAdmin)
+
+
+class followAdmin(admin.ModelAdmin):
+    list_display = ('ufrom','uto','status')
+    
+admin.site.register(follow, followAdmin)

@@ -618,6 +618,29 @@
 
 
           </div>
+          {% load static %}
+
+          <div class="container bg-white rounded">
+            <h2>My Followers</h2>
+            <div class="container">
+                <ul class="list-group list-group-light">
+                    {% for fi in follow_instance %}
+                    <li class="list-group-item px-3 border-0 active my-1" aria-current="true">
+                        {% if fi.ufrom.media.dp.url %}
+                        <img src="{{fi.ufrom.media.dp.url}}" class="rounded-circle" height="25" width="25"> 
+                        {% else  %}
+                        <img src="{% static '/assets/images/def.jpg' %}" class="rounded-circle" height="25" width="25"> 
+                        
+                        {% endif %}
+                        
+                        {{fi.ufrom.first_name}}  {{fi.ufrom.last_name}}
+                      </li>
+                    {% endfor %}
+                    
+                    
+                  </ul>
+            </div>
+          </div>
           
         </div>
       </div>

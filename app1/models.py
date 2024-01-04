@@ -127,6 +127,8 @@ class follow(models.Model):
     status_option = [
         ('Requested','Requested'),
         ('Followed','Followed'),
+        ('Rejected','Rejected'),
         ('Unfollowed','Unfollowed'),
+        
     ]    
     status = models.CharField(max_length=50,choices=status_option, blank=True,null=True)

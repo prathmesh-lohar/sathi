@@ -41,6 +41,19 @@ urlpatterns = [
     path("plans", views.plans , name="plans"),
     
     path("search",views.search, name="search"),
+    
+    path("follow/<int:uto>",views.follow, name="follow"),
+    path("unfollow/<int:uto>",views.unfollow, name="unfollow"),
+    
+    
+    path("follow_accept/<int:id>",views.follow_accept, name="follow_accept"),
+    path("follow_reject/<int:id>",views.follow_reject, name="follow_reject"),
+    
+    
+    
+    path("notifications",views.notifications, name="notifications"),
+    
+    
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

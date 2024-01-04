@@ -5,6 +5,7 @@ from app1.models import profile, family_details, media
 from django.contrib import messages
 from extra.models import *
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
 
 
 import random
@@ -230,7 +231,7 @@ def all_profiles(request):
 
 def show_profile(request, id):
     if request.user.is_authenticated:
-        from app1.models import profile, family_details, media,gallery
+        from app1.models import profile, family_details, media,gallery,follow
 
         profile = profile.objects.filter(user=id)[0]
         viw = profile.views
@@ -239,10 +240,13 @@ def show_profile(request, id):
         profile.save()
         gallery = gallery.objects.filter(user=id)
         
+        follow_instance = follow.objects.filter(ufrom=request.user,uto=id).first()
+              
 
         data = {
             'profile': profile,
             'gallery':gallery,
+            'follow_instance':follow_instance,
 
         }
         return render(request, "theme/profile.html", data)
@@ -332,7 +336,7 @@ def fvmail(request):
 
 @login_required(login_url='/login')
 def my_profile(request):
-        from app1.models import profile,family_details,media,gallery,document
+        from app1.models import profile,family_details,media,gallery,document,follow
         from extra.models import Qualification,work,experience,hobbies,income,height,color
 
         username=request.user.username
@@ -353,6 +357,9 @@ def my_profile(request):
         hobbieslist = hobbies.objects.all()
         gallery = gallery.objects.filter(user_id=request.user.id)
         alldocs = document.objects.filter(user_id=request.user.id)
+        
+        follow_instance = follow.objects.filter(uto=request.user,status="Followed").order_by("-id")
+        
         
         
         if request.method == "POST":
@@ -382,7 +389,8 @@ def my_profile(request):
             'experiencelist':experiencelist,
             'hobbieslist':hobbieslist,
             'gallery':gallery,
-            'alldocs':alldocs
+            'alldocs':alldocs,
+            'follow_instance':follow_instance,
             
         }
         return render(request, "theme/my-profile.html",data)
@@ -557,3 +565,75 @@ def search(request):
         
         
     return render(request, "theme/search.html")
+
+
+
+@login_required(login_url='/login')
+def follow(request,uto):
+    from app1.models import follow
+    
+    ufrom = request.user
+    uto_user = get_object_or_404(User, id=uto)
+    if follow.objects.filter(ufrom=ufrom,uto=uto_user,status="Requested").exists():
+        messages.warning(request, "alredy followed")
+    else:
+        
+        req=follow(ufrom=ufrom,uto=uto_user,status="Requested")
+        req.save()
+    return redirect(request.META.get('HTTP_REFERER'))  
+
+
+@login_required(login_url='/login')
+def unfollow(request,uto):
+    from app1.models import follow
+    
+    ufrom = request.user
+    uto_user = get_object_or_404(User, id=uto)
+    if follow.objects.filter(ufrom=ufrom,uto=uto_user,status="Unfollowed").exists():
+        messages.warning(request, "alredy Unfollowed")
+    else:
+        
+        req=follow(ufrom=ufrom,uto=uto_user,status="Unfollowed")
+        req.save()
+    return redirect(request.META.get('HTTP_REFERER'))  
+
+
+@login_required(login_url='/login')
+def notifications(request):
+    from app1.models import follow
+    follow_instance = follow.objects.filter(uto=request.user,status="Requested").order_by('-id')
+    data = {
+        'follow_instance':follow_instance,
+    }
+    return render(request,  "theme/notifications.html",data)
+
+
+@login_required(login_url='/login')
+
+def follow_accept(request, id):
+    from app1.models import follow
+    id=int(id)
+    lu=int(request.user.id)
+    
+    fri = follow.objects.filter(uto=lu,ufrom=id).first()
+    fri.status = "Followed"
+    fri.save()
+    messages.success(request, "Accepted")
+
+    
+    return redirect(request.META.get('HTTP_REFERER')) 
+
+
+@login_required(login_url='/login')
+def follow_reject(request, id):
+    from app1.models import follow
+    id=int(id)
+    lu=int(request.user.id)
+    
+    fri = follow.objects.filter(uto=lu,ufrom=id).first()
+    fri.status = "Rejected"
+    fri.save()
+    messages.error(request, "Rejected")
+
+    
+    return redirect(request.META.get('HTTP_REFERER')) 

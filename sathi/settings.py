@@ -74,9 +74,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+                #custem
+                
+                'app1.notification_processors.follow_requestfrom',
             ],
             'libraries':{
             'custom_filters': 'app1.templatetags.custom_filters',
+        
             
             }
           
