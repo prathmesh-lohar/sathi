@@ -24,6 +24,11 @@ class ThreadView(View):
         context['me'] = self.request.user
         context['thread'] = self.get_object()
         context['user'] = self.other_user
+        
+        # Mark messages as read when the chat is opened
+        messages = self.get_object().message_set.filter(is_read=False)
+        messages.update(is_read=True)
+        
         context['messages'] = self.get_object().message_set.all()
         return context
 

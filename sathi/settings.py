@@ -78,6 +78,8 @@ TEMPLATES = [
                 #custem
                 
                 'app1.notification_processors.follow_requestfrom',
+                'app1.notification_processors.unread_messages_count',
+                
             ],
             'libraries':{
             'custom_filters': 'app1.templatetags.custom_filters',

@@ -49,7 +49,27 @@
 
   <!-- header -->
   <div class="top-head">
+    <div class="right">
+      <ul>
+        <li><span class="fa fa-search"></span></li>
+        <li>ABOUT</li>
+        <li>CONTACT</li>
+        <li>FEEDBACK</li>
+        <li>REPORT</li>
+     
+      </ul>
+    </div>
 
+    <div class="left">
+      <ul>
+        <li><span class="fa fa-phone text-sm"> +91 0000000000 </span></li>
+        <li><span class="fa fa-envelope"></span>domain@gmail.com</li>
+        <li><span class="fa fa-facebook"></span></li>
+        <li><span class="fa fa-youtube"></span></li>
+        <li><span class="fa fa-instagram"></span></li>
+     
+      </ul>
+    </div>
 
   </div>
   <header>
@@ -84,7 +104,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="">Search</a>
+              <a class="nav-link" href="/search">Search</a>
             </li>
 
 
@@ -97,9 +117,13 @@
             padding: 6px 20px;
             margin: 5px 0px;">
               Message
-              <!-- <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-                <span class="visually-hidden">New alerts</span>
-              </span> -->
+              {% if unread_messages_count > 0 %}
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger">
+                {{ unread_messages_count }}
+                <span class="visually-hidden">unread messages</span>
+              </span>
+              {% endif %}
+              
             </button>
           </a>
 
@@ -123,7 +147,10 @@
             <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button"
               data-mdb-toggle="dropdown" aria-expanded="false">
               <i class="fas fa-bell fa-lg"></i>
+              {% if follow_requests|length > 0 %}
               <span class="badge rounded-pill badge-notification bg-danger">{{ follow_requests|length }}</span>
+                
+              {% endif %}
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
 
@@ -132,7 +159,7 @@
 <ul  style="margin: 0px 0px 0px -35px">
     {% for follow_instance in follow_requests %}
        
-            <li class="dropdown-item">You Have Follow request from: {{ follow_instance.ufrom.username }} 
+            <li class="dropdown-item" onclick="window.location.href='/notifications'">You Have Follow request from: {{ follow_instance.ufrom.username }} 
                 <!-- <button class="btn btn-sm btn-danger" style="font-size: 10px;">Accept</button>
                 <button class="btn btn-sm btn-success" style="font-size: 10px;">Reject</button> -->
             </li>
@@ -165,6 +192,14 @@
               </li>
               <li>
                 <a class="dropdown-item" href="/profile_home">My Shadi</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/notifications">Notifications {% if follow_requests|length %} <span class="badge badge-success my-2">{{ follow_requests|length }}</span>  {% endif %}</a>
+
+              </li>
+              <li>
+                <a class="dropdown-item" href="/message">Message   {% if unread_messages_count > 0 %} <span class="badge badge-success my-2">{{ unread_messages_count }}</span> {% endif %}</a>
+
               </li>
               <li>
                 <a class="dropdown-item" href="/logout">Logout</a>

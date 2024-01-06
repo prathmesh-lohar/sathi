@@ -79,21 +79,20 @@
 
                     {% if follow_instance %}
                         {% if follow_instance.status|lower == "requested" %}
-                            <span class="btn mx-0 btn-lg btn-danger"> <span class="fa fa-clock"></span> Requested</span>
+                        <span class="btn mx-0 btn-lg btn-danger"> <span class="fa fa-clock"></span> Requested</span>
+                        {% elif follow_instance.status|lower == "unfollowed" %}
+                        <span class="btn mx-0 btn-lg btn-danger" onclick="window.location.href='/follow/{{ profile.user.id }}'"> <span class="fa fa-heart"></span> Follow</span>
+                        
                         {% elif follow_instance.status|lower == "followed" %}
-                            <span class="btn mx-0 btn-lg btn-danger" onclick="window.location.href='/unfollow/{{ profile.user.id }}'"> <span class="fa fa-heart-broken"></span> Unfollow</span>
+                        <span class="btn mx-0 btn-lg btn-danger" onclick="window.location.href='/unfollow/{{ profile.user.id }}'"> <span class="fa fa-heart-broken"></span> Unfollow</span>
                         {% elif follow_instance.status|lower == "rejected" %}
                             <span class="btn mx-0 btn-lg btn-dark"> <span class="fa fa-heart-broken"></span> Rejected</span>
                         
-                        {% elif follow_instance.status|lower == "Unfollowed" %}
-                        <span class="btn mx-0 btn-lg btn-danger" onclick="window.location.href='/follow/{{ profile.user.id }}'"> <span class="fa fa-heart"></span> Follow</span>
-                        
-                        
                         {% endif %}
-
-                        {% else %}
+                    {% else %}
                         <span class="btn mx-0 btn-lg btn-danger" onclick="window.location.href='/follow/{{ profile.user.id }}'"> <span class="fa fa-heart"></span> Follow</span>
                     {% endif %}
+
 
 
                 </div>

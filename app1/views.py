@@ -526,9 +526,16 @@ def message(request):
         thread__users=request.user,
         timestamp=Subquery(latest_timestamps)
     ).order_by('-timestamp')  
+    
+    # unread_msg_count = Message.objects.filter(
+    #     thread__users=request.user,
+    #     is_read=False,
+    # ).count()
+
 
     data = {
         'msg': msg,
+        # 'unread_msg_count': unread_msg_count,
     }
 
     return render(request, "theme/all-message.html", data)
