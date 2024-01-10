@@ -106,7 +106,7 @@
     
     const host = window.location.hostname;
 
-    const url = 'ws://'+host+':8000/ws' + window.location.pathname;
+    const url = 'ws://'+host+':8001/ws' + window.location.pathname;
     console.log("path: ", url);
     const ws = new WebSocket(url)
     ws.onopen = function(event) {

@@ -93,7 +93,7 @@ TEMPLATES = [
 
 
 
-WSGI_APPLICATION = 'sathi.wsgi.application'
+#WSGI_APPLICATION = 'sathi.wsgi.application'
 ASGI_APPLICATION = "sathi.asgi.application"
 
 
