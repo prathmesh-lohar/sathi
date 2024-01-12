@@ -137,8 +137,13 @@
 
         <div class="card m-0 p-0">
           
-
+          {% if f.user.media.dp.url %}
           <img src="{{f.user.media.dp.url}}" class="card-img" alt="{{f.user.first_name}}" />
+          {% else %}
+          <img src="{% static '/assets/images/def.jpg' %}" class="card-img" alt="{{f.user.first_name}}" />
+
+          {% endif %}
+         
         
           <div class="card-bg">
             <div class="card-block">
