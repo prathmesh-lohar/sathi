@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'chat',
     
     'import_export',
+    'jazzmin',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -197,3 +199,11 @@ CHANNEL_LAYERS = {
 #         "BACKEND": "channels.layers.InMemoryChannelLayer"
 #     }
 # }
+
+
+# admin theme 
+
+from .jazzmin import JAZZMIN_SETTINGS
+
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
+
