@@ -209,14 +209,14 @@ def all_profiles(request):
         print(id.id)
 
     if request.method == 'POST':
-        lfor = request.POST.get('lfor')
+       
         age = request.POST.get('age')
         religion = request.POST.get('religion')
         city = request.POST.get('city')
         
         from app1.models import profile
         
-        all_profiles = profile.objects.filter(Q(gender__icontains=lfor) | Q(city__icontains=city), is_approved=True).exclude(user=request.user).order_by('id')[:20]
+        all_profiles = profile.objects.filter(Q(gender="opogen") | Q(city__icontains=city), is_approved=True).exclude(user=request.user).order_by('id')[:20]
        
    
     data = {

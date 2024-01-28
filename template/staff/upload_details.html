@@ -385,13 +385,20 @@ background: #fff;">
             <div class="col-md">
                 <label for="exampleFormControlTextarea1"> sister (if no type No):</label>
                 <textarea class="form-control"  name="sister" id="exampleFormControlTextarea1"
-                    rows="3">{{fdetails.sister}}</textarea>
+                rows="3">{% if fdetails.sister %}{{fdetails.sister}}{% else %}Name : 
+Education : 
+Occupation:
+Marital Status:{% endif %}</textarea>
             </div>
 
             <div class="col-md">
                 <label for="exampleFormControlTextarea1"> Brother (if no type No):</label>
                 <textarea class="form-control"  name="brother" id="exampleFormControlTextarea1"
-                    rows="3">{{fdetails.brother}}</textarea>
+                    rows="3">{% if fdetails.brother %}{{fdetails.brother}}{% else %}Name : 
+Education : 
+Occupation: 
+Marital Status:{% endif %}
+                    </textarea>
             </div>
         </div>
 
@@ -399,7 +406,7 @@ background: #fff;">
             <div class="col-md">
                 <label for="exampleFormControlTextarea1"> Native_Place</label>
                 <textarea class="form-control"  name="native_place" id="exampleFormControlTextarea1"
-                    rows="3">{{fdetails.native_place}}</textarea>
+                    rows="5">{{fdetails.native_place}}</textarea>
             </div>
 
             
@@ -407,7 +414,7 @@ background: #fff;">
             <div class="col-md">
                 <label for="exampleFormControlTextarea1"> Relatives</label>
                 <textarea class="form-control"  name="relatives" id="exampleFormControlTextarea1"
-                    rows="3">{{fdetails.relatives}}</textarea>
+                    rows="5">{{fdetails.relatives}}</textarea>
             </div>
 
         </div>

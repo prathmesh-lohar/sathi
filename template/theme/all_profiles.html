@@ -26,13 +26,7 @@
 
                 <form action="/all_profiles" method="post">
                     {% csrf_token %}
-                    <label class="form-label"><span class="fa fa-search"></span> I'm looking for</label>
-                    <select name="lfor" class="form-select my-2" aria-label="Default select example">
-                        <option selected>I'm looking for</option>
-                        <option value="male">Men</option>
-                        <option value="female">Women</option>
-
-                    </select>
+                   
                     <label class="form-label"><span class="fa  fa-clock-o"></span> Age</label>
                     <select name="age" class="form-select my-2" aria-label="Default select example">
                         <option selected>Select Age</option>
@@ -104,7 +98,7 @@
                                 /static/assets/images/def.jpg
                                 {% endif %}
                                     
-                                " alt="dp-{{m.user.first_name}}" class="img-fluid rounded-start profile-img" />
+                                " alt="dp-{{m.user.first_name}}" class="img-fluid rounded-start profile-img "  style="height: 230px;" />
                             </a>
                         </div>
                         <div class="col-md-8">
@@ -179,7 +173,7 @@
                                 </a>
                                 
                                 <hr class="hr" />
-                                <p class="card-text">
+                                <p class="card-text ">
                                     <a href="/chat/{{m.user.username}}"> <span class="tags">Chat Now</span></a>
                                     <span class="tags">watsapp</span>
                                     <span class="tags">send Interest</span>
@@ -265,7 +259,11 @@
     a:hover{
         color: #601e4f;
 
+    } 
+    .profileare .card .card-body img{
+        height: 200px;
     }
+
 </style>
 
 {% endblock main %}

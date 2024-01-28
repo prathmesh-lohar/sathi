@@ -17,16 +17,16 @@
       <form action="/all_profiles" method="POST">
         {% csrf_token %}
       <div class="row g-3">
-        <div class="col-sm">
+        <!-- <div class="col-sm">
           <div class="form-outline">
-            <select name="lfor">
+            <select name="lfor" disabled>
               <option>I am looking for</option>
               <option>Male</option>
               <option>Female</option>
 
             </select>
           </div>
-        </div>
+        </div> -->
         <div class="col-sm">
           <div class="form-outline">
             <select name="age">
@@ -43,7 +43,7 @@
 
         <div class="col-sm">
           <div class="form-outline">
-            <select name="religion">
+            <select name="religion" disabled>
               <option >Religion</option>
 
               <option disabled>....</option>

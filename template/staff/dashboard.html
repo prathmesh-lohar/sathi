@@ -41,6 +41,7 @@
                         <tr>
                             <th scope="col">Name</th>
 
+                            <th scope="col">Id</th>
 
                             <th scope="col">Username</th>
 
@@ -68,6 +69,10 @@
                                 <a class="text-heading font-semibold" href="/staff/alter_user/{{u.username}}">
                                     {{u.first_name}} {{u.last_name}}
                                 </a>
+                            </td>
+
+                            <td>
+                                {{u.user.id}}
                             </td>
 
                             <td>

@@ -425,13 +425,20 @@
                   <div class="col-md">
                       <label for="exampleFormControlTextarea1"> sister (if no type No):</label>
                       <textarea class="form-control"  name="sister" id="exampleFormControlTextarea1"
-                          rows="3">{{fdetails.sister}}</textarea>
+                      rows="4">{% if fdetails.sister %}{{fdetails.sister}}{% else %}Name : 
+Education : 
+Occupation:
+Marital Status:{% endif %}</textarea>
                   </div>
       
                   <div class="col-md">
                       <label for="exampleFormControlTextarea1"> Brother (if no type No):</label>
                       <textarea class="form-control"  name="brother" id="exampleFormControlTextarea1"
-                          rows="3">{{fdetails.brother}}</textarea>
+                          rows="4">{% if fdetails.brother %}{{fdetails.brother}}{% else %}Name : 
+Education : 
+Occupation:
+Marital Status: {% endif %}
+                          </textarea>
                   </div>
               </div>
       

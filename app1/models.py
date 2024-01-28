@@ -75,8 +75,12 @@ class family_details(models.Model):
     mother_name = models.CharField(max_length=50,default="", null=True, blank=True)
     mother_education = models.CharField(max_length=50,default="", null=True, blank=True)
     mother_occupation = models.CharField(max_length=50,default="", null=True, blank=True)
+    
     sister=models.TextField(null=True,blank=True, default="")
+    
+    
     brother=models.TextField(null=True,blank=True, default="")
+    
     native_place=models.TextField(null=True,blank=True,default="")
     relatives=models.TextField(null=True,blank=True,default="")
 

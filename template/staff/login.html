@@ -10,9 +10,91 @@
 </head>
 
 <body>
+    
+   
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <div class="container">
+    
+        <script>
+            function show_spinner(){
+    
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+    
+                var element = document.getElementById("spinner");
+                var element2 = document.getElementById("login");
+                
+    
+                
+    
+    
+                // Toggle the display property
+                if (username !== "" && password !== "" && element.style.display === "none") {
+                    element.style.display = "block";
+                    element2.style.display = "none";
+                } else {
+                    element.style.display = "none";
+                }
+                }
+        </script>
+        <style>
+            ::selection {
+                color: #ffffff;
+                background-color: #31285C;
+            }
+    
+            body {
+                background-color: #F0F0F0;
+            }
+    
+            .wrapper {
+                background-color: #FFFFFF;
+                border-radius: 5px;
+                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+                padding: 30px;
+            }
+    
+            .heading {
+                color: #3B3663;
+                margin-bottom: 20px;
+            }
+    
+            .heading p {
+                color: #AAA8BB;
+            }
+    
+            button {
+                width: 100%;
+                height: 45px;
+                border: none;
+                color: #FFFFFF;
+                background-color: #31285C;
+                border-radius: 5px;
+                font-size: 17px;
+                font-weight: 500;
+                transition: 0.3s;
+            }
+    
+            button:hover {
+                background-color: #31283B;
+            }
+            .btn-primary{
+                background-color:#3B3663;
+                border-color:#3B3663;
+                border-radius:0px;
+            }
+            form-control{
+                border-color:#3B3663;
+                color:3B3663;
+                border-radius:0px;
+            }
+            #spinner{
+                display: none;
+            }
+        </style>
+        
+        <div class="container">
         <div class="row justify-content-center align-items-center min-vh-100">
             <div class="col-12 col-sm-8 col-md-6 col-lg-4">
                 {% if messages %}
@@ -61,84 +143,8 @@
 
     
 
-    <style>
-        ::selection {
-            color: #ffffff;
-            background-color: #31285C;
-        }
-
-        body {
-            background-color: #F0F0F0;
-        }
-
-        .wrapper {
-            background-color: #FFFFFF;
-            border-radius: 5px;
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
-            padding: 30px;
-        }
-
-        .heading {
-            color: #3B3663;
-            margin-bottom: 20px;
-        }
-
-        .heading p {
-            color: #AAA8BB;
-        }
-
-        button {
-            width: 100%;
-            height: 45px;
-            border: none;
-            color: #FFFFFF;
-            background-color: #31285C;
-            border-radius: 5px;
-            font-size: 17px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background-color: #31283B;
-        }
-        .btn-primary{
-            background-color:#3B3663;
-            border-color:#3B3663;
-            border-radius:0px;
-        }
-        form-control{
-            border-color:#3B3663;
-            color:3B3663;
-            border-radius:0px;
-        }
-        #spinner{
-            display: none;
-        }
-    </style>
-
-    <script>
-        function show_spinner(){
-
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            var element = document.getElementById("spinner");
-            var element2 = document.getElementById("login");
-            
-
-            
 
 
-            // Toggle the display property
-            if (username !== "" && password !== "" && element.style.display === "none") {
-                element.style.display = "block";
-                element2.style.display = "none";
-            } else {
-                element.style.display = "none";
-            }
-            }
-    </script>
 </body>
 
 </html>

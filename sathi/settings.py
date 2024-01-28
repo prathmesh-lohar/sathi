@@ -39,9 +39,13 @@ INSTALLED_APPS = [
     'staff',
     'extra',
     'chat',
+ 
     
     'import_export',
-    'jazzmin',
+    # 'jazzmin',
+    'admin_interface',
+    'colorfield',
+    
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -78,6 +82,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 
                 #custem
+                
+               
                 
                 'app1.notification_processors.follow_requestfrom',
                 'app1.notification_processors.unread_messages_count',
@@ -203,7 +209,10 @@ CHANNEL_LAYERS = {
 
 # admin theme 
 
-from .jazzmin import JAZZMIN_SETTINGS
+# from .jazzmin import JAZZMIN_SETTINGS,JAZZMIN_UI_TWEAKS
 
-JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
+# JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
+
+# JAZZMIN_UI_TWEAKS = JAZZMIN_UI_TWEAKS
+
 

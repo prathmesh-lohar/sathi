@@ -18,7 +18,7 @@ admin.site.register(document)
 
 
 class profileAdmin(admin.ModelAdmin):
-    list_display = ('user','id','mobile','marrital_status','is_featured','is_approved','is_mail_verified')
+    list_display = ('user','user_id','mobile','marrital_status','is_featured','is_approved','is_mail_verified')
     list_editable = ('is_featured','is_approved','is_mail_verified',)
     list_filter=['related_officer','is_approved']
 admin.site.register(profile, profileAdmin)

@@ -117,4 +117,43 @@
 </div>
 
 
+{% if request.user.profile.calculate_profile_completion < 70 %}
+<script>
+    // jQuery is required for Bootstrap and MDB's JavaScript plugins
+    $(document).ready(function () {
+        // Auto launch the MDB modal when the page is loaded
+        $('#exampleModal').modal('show');
+    });
+</script>
+{% endif %}
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <div class="progress " style="height: 20px;">
+                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ request.user.profile.calculate_profile_completion }}%;" aria-valuenow="{{ request.user.profile.calculate_profile_completion }}" aria-valuemin="0"
+                    aria-valuemax="100">{{ request.user.profile.calculate_profile_completion }}%</div>
+            </div>
+
+            <h5 class="my-2">Your profile is only {{ request.user.profile.calculate_profile_completion }}% completed</h4>
+
+
+            <h1>Please Complete Your Profile</h1>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock main %}
