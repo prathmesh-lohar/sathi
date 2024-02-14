@@ -22,6 +22,7 @@ urlpatterns = [
     path("save_details", views.save_details , name="save_details"),
     path("save_gallery/<str:username>", views.save_gallery , name="save_gallery"),
     path("delete_gallery/<int:id>", views.delete_gallery , name="delete_gallery"),
+    
 
 
     path("new_profile", views.new_profile , name="new_profile")

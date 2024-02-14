@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'staff',
     'extra',
     'chat',
+    'dashboard',
  
     
     'import_export',

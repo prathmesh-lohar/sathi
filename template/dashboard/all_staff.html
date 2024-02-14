@@ -1,0 +1,94 @@
+{% extends "dashboard/base.html" %}
+
+{% block main %}
+{% load static %}
+
+<div class="container">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
+
+            <!-- Basic Bootstrap Table -->
+            <div class="card">
+              <h5 class="card-header">All Officers</h5>
+              <div class="table-responsive text-nowrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      
+                      <th>username</th>
+
+                      <th>Email</th>
+
+                      <th>status</th>
+
+                      <!-- <th>Actions</th> -->
+                    </tr>
+                  </thead>
+                  <tbody class="table-border-bottom-0">
+                    {% for user in users %}
+
+                    
+                    <tr onclick="window.location.href='/dashboard/staff/{{user.username}}/profiles'" style="cursor: pointer;">
+                      <td>
+                        <img class="rounded-circle mx-2" alt="avatar1" src="
+                        {% if profile.user.media.dp.url %}
+                          {{profile.user.media.url}}
+                          {% else %}
+                          {% static '/assets/images/def.jpg' %}
+                        {% endif %}" height="30" />
+
+                      </td>
+                      <td>{{user.first_name}} {{user.last_name}}</td>
+                      <td>
+                      {{user.username}} 
+                        
+                      </td>
+                      <td>
+                        {{user.email}} 
+                          
+                        </td>
+                      <td>
+                        {% if user.is_active %}
+                        <span class="badge bg-label-primary me-1">Active</span>
+                        {% else %}
+                        <span class="badge bg-label-danger me-1">Inactive</span>
+
+                        {% endif %}
+
+                      </td>
+                      <!-- <td>
+                        <div class="dropdown">
+                          <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                          </button>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" href="javascript:void(0);"
+                              ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                            >
+                            <a class="dropdown-item" href="javascript:void(0);"
+                              ><i class="bx bx-trash me-1"></i> Delete</a
+                            >
+                          </div>
+                        </div>
+                      </td> -->
+                    </tr>
+                    
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!--/ Basic Bootstrap Table -->
+
+            <hr class="my-5" />
+
+</div>
+
+{% endblock main %}
+
+

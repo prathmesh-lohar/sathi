@@ -484,16 +484,25 @@ def save_gallery(request):
 def save_doc(request):
     from app1.models import document
     if request.method == "POST":
-                file = request.FILES['file']
-                name = request.POST.get('name')
-                
-                from app1.models import document
-                g = document(user_id=request.user.id,file=file,name=name)
-                g.save()
-                messages.success(request, "document uploaded successfully")
-                
-                
-                return redirect(request.META.get('HTTP_REFERER')) 
+            file = request.FILES.get('file')
+            name = request.POST.get('name')
+            
+            # Check if a document with the same name already exists for the user
+            existing_document = document.objects.filter(user_id=request.user.id, name=name).first()
+            
+            if existing_document:
+                # If the document already exists, update it with the new file
+                existing_document.file = file
+                existing_document.save()
+                messages.success(request, "Document updated successfully")
+            else:
+                # If the document doesn't exist, create a new one
+                new_document = document(user_id=request.user.id, file=file, name=name)
+                new_document.save()
+                messages.success(request, "Document uploaded successfully")
+            
+                return redirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 
@@ -644,3 +653,16 @@ def follow_reject(request, id):
 
     
     return redirect(request.META.get('HTTP_REFERER')) 
+
+
+def delete_doc(request,id):
+    id =id
+    
+    from app1.models import document
+    ob = document.objects.get(id=id)
+    ob.delete()
+    messages.error(request, "document deleted ")
+    # return redirect('/my_profile#docs')
+    # my_profile#docs
+    return redirect('/my_profile#docs')
+    # return redirect(request.META.get('HTTP_REFERER'))

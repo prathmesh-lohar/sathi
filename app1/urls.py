@@ -53,7 +53,7 @@ urlpatterns = [
     
     path("notifications",views.notifications, name="notifications"),
     
+    path("delete_doc/<int:id>", views.delete_doc , name="delete_doc"),
     
-
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

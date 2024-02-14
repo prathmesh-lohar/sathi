@@ -1,0 +1,417 @@
+{% extends "dashboard/base.html" %}
+{% block title %}{% endblock title %}
+{% load custom_filters %}
+{% load static %}
+{% block main %}
+
+<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+    
+
+
+
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+          <!-- Menu -->
+  
+    
+  
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+              <!-- Content -->
+  
+              <div class="container-xxl flex-grow-1 container-p-y">
+                <h4 class="py-3 mb-4"><span class="text-muted fw-light">Account Settings /</span> Account</h4>
+  
+                <div class="row">
+                  <div class="col-md-12">
+                    <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                      <li class="nav-item">
+                        <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> Personal</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="pages-account-settings-notifications.html"
+                          ><i class="bx bx-bell me-1"></i> Family</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="pages-account-settings-connections.html"
+                          ><i class="bx bx-link-alt me-1"></i> Documents</a
+                        >
+                      </li>
+                    </ul>
+                    <div class="card mb-4">
+                      <h5 class="card-header">Personal   Details</h5>
+                      <!-- Account -->
+                      <div class="card-body">
+                        <div class="d-flex align-items-start align-items-sm-center gap-4">
+                          <img
+                            src="{% if profiler.user.media.dp.url %}{{profiler.user.media.dp.url}}{% else %}{% static '/assets/images/def.jpg' %}{% endif %}"
+                            alt="user-avatar"
+                            class="d-block rounded"
+                            height="100"
+                            width="100"
+                            id="uploadedAvatar" />
+                          <div class="button-wrapper">
+                            <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                              <span class="d-none d-sm-block">Upload new photo</span>
+                              <i class="bx bx-upload d-block d-sm-none"></i>
+                              <input
+                                type="file"
+                                id="upload"
+                                class="account-file-input"
+                                hidden
+                                accept="image/png, image/jpeg" />
+                            </label>
+                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                              <i class="bx bx-reset d-block d-sm-none"></i>
+                              <span class="d-none d-sm-block">Reset</span>
+                            </button>
+  
+                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                          </div>
+                        </div>
+                      </div>
+                      <hr class="my-0" />
+                      <div class="card-body">
+                        <form action="/dashboard/alter_user/{{profiler.user.username}}" id="formAccountSettings" method="POST" >
+                          {% csrf_token %}
+                          <div class="row">
+                            <div class="mb-3 col-md-6">
+                              <label for="firstName" class="form-label">First Name</label>
+                              <input
+                                class="form-control"
+                                type="text"
+                                id="firstName"
+                                name="firstName"
+                                value="{{profiler.first_name}}"
+                                autofocus />
+                            </div>
+                            <div class="mb-3 col-md-6">
+                              <label for="lastName" class="form-label">Last Name</label>
+                              <input class="form-control" type="text" name="lastName" id="lastName" value="{{profiler.last_name}}" />
+                            </div>
+
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label" for="country">Registered For </label>
+                                <select id="country" class="select2 form-select"
+                                name="regofor">
+                                  <!-- <option value="">Select</option> -->
+                                  <option value="{{profiler.registerfor}}" selected>{{profiler.registerfor}}</option>
+
+                                  <option value="Own">Own</option>
+                                  <option value="Brother">Brother</option>
+                                  <option value="Son"> Son</option>
+                                  <option value="Dougher">daughter</option>
+
+                               
+                                  <option value="Canada">Sister</option>
+                                  <option value="Canada">Friend</option>
+
+                                  <option value="Canada">Other</option>
+
+
+                                
+                                </select>
+                              </div>
+
+                              <div class="mb-3 col-md-6">
+                                <label class="form-label" for="phoneNumber">Mobile Number</label>
+                                <div class="input-group input-group-merge">
+                                  <span class="input-group-text">IN (+91)</span>
+                                  <input
+                                    type="text"
+                                    id="phoneNumber"
+                                    name="mobile"
+                                    class="form-control"
+                                    value="{{profiler.mobile}}"
+                                    placeholder="202 555 0111" />
+                                </div>
+                              </div>
+
+                            <div class="mb-3 col-md-6">
+                              <label for="Mstate" class="form-label">Marrital Status:</label>
+                              <select id="Mstate" class="select2 form-select" name="mstatus">
+                                <option selected>{{profiler.marrital_status}}</option>
+                                <option>Single</option>
+                                <option>In Process</option>
+                                <option>On Hold</option>
+                                <option>Married</option>
+
+
+                              
+                              </select>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                              <label for="organization" class="form-label">Date Of Birth</label>
+                              <input
+                                type="date"
+                                class="form-control"
+                                id="organization"
+                                name="dob"
+                                value="{{profiler.dob|date:'Y-m-d'}}" />
+                            </div>
+
+                            <div class="mb-3 col-md-6">
+                                <label for="income" class="form-label">Income</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="income"
+                                  name="Income"
+                                  list="incomes"
+                                  value="{{profiler.income}}" />
+
+                                  <datalist id="incomes">
+                                    {% for income in incomelist %}
+
+                                    <option value="{{income.range}}">{{income.range}}</option>
+                                      
+                                    {% endfor %}
+                                  </datalist>
+                            </div>
+
+
+                            <div class="mb-3 col-md-6">
+                                <label for="Height" class="form-label">Height</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="Height"
+                                  name="height"
+                                  list="height"
+                                  value="{{profiler.height}}" />
+
+                                  <datalist id="height">
+                                    {% for h in heightlist %}
+
+                                    <option value="{{h.height}}">{{h.height}}</option>
+                                      
+                                    {% endfor %}
+                                  </datalist>
+                            </div>
+
+                           
+
+
+                            <div class="col-md-12">
+                              <label class="form-label" title="you can select multiple" for="input-Qualification">Qualification:</label>
+                             
+                              <input  type="text" name="tags" value="{{profiler.Qualification}}"  id="input-Qualification" class="form-control" >
+                              
+                            </div>
+                            
+                            
+                              
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+                            <script src="https://unpkg.com/@yaireo/tagify"></script>
+                            <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
+                         
+                          <script>
+                              // Define the list of allowed tags
+                              var allowedTags = [{% for qual in Qualificationlist %} "{{qual.nameofQualification}}",{% endfor %}"Other"];
+                          
+                              // The DOM element you wish to replace with Tagify
+                              var input = document.querySelector('input[name=tags]');
+                          
+                              // Initialize Tagify with the whitelist
+                              new Tagify(input, {
+                              whitelist: allowedTags,
+                              // enforceWhitelist: true,
+                              // editTags: 1,
+                          
+                              });
+                          </script>
+          
+                            
+
+
+                              <div class="mb-3 col-md-6 my-2">
+                                <label for="zipCode" class="form-label">Work</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="work"
+                                  name="work"
+                                  list="work"
+                                  placeholder="{{profiler.work}}"
+                                  value="{{profiler.work}}"
+                                  maxlength="6" />
+                              </div>
+
+                              <datalist id="work">
+                                {% for i in worklist %}
+                                <option value="{{i.nameofwork}}">{{i.nameofwork}}</option>
+                                  
+                                {% endfor %}
+                              </datalist>
+
+
+
+                              <div class="mb-3 col-md-6 my-2">
+                                <label for="exampleInputEmail1" class="form-label">Experience:
+                                    </label>
+                                <input list="list-exp" id="input-exp" value="{{profiler.experience}}" type="text" name="experience" class=" form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" name="experience">
+            
+                                    <datalist id="list-exp">
+            
+                                        
+                                        {% for e in experiencelist %}
+                                        <option>{{e.experience}} </option>
+                                        {% endfor %}
+                                            
+                                        
+                                       
+                                        
+                                    </datalist>
+            
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', e => {
+                                            $('#input-exp').autocomplete()
+                                        }, false);
+                                    </script>
+                            </div>
+                              
+
+
+                            <div class="mb-3 col-md-6">
+                              <label title="you can select multiple" class="form-label" for="input-Qualification">Hobbies:</label>
+                             
+                              <input  type="text" name="hobie" value="{{profiler.hobbies}}"  id="input-Qualification" class="form-control" >
+                              
+                            </div>
+                            
+                            
+                              
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+                            <script src="https://unpkg.com/@yaireo/tagify"></script>
+                            <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
+                         
+                          <script>
+                              // Define the list of allowed tags
+                              var allowedTags = [{% for qual in hobbieslist %} "{{qual.nameofhobbie}}",{% endfor %}"Other"];
+                          
+                              // The DOM element you wish to replace with Tagify
+                              var input = document.querySelector('input[name=hobie]');
+                          
+                              // Initialize Tagify with the whitelist
+                              new Tagify(input, {
+                              whitelist: allowedTags,
+                              // enforceWhitelist: true,
+                              // editTags: 1,
+                          
+                              });
+                          </script>
+          
+
+
+                          <div class="mb-3 col-md-6">
+                            <label for="exampleInputEmail1" class="form-label">Medical condition:</label>
+                            <select id="inputState" class="form-control" name="medical_condition" >
+                                <option selected>{{profiler.medical_condition}}</option>
+                                <option>Good</option>
+                                
+        
+                            </select>
+                        </div>
+        
+        
+                        <div class="mb-3 col-md-6">
+                            <label for="exampleInputEmail1" class="form-label">City
+                                :</label>
+                            <input  value="{{profiler.city}}" type="text" name="city"  class=" form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" list="citylist">
+
+                        
+                            <datalist id="citylist">
+                              
+                              {% for c in citylist %}
+                                <option value="{{c.nameofcity}}"></option>
+                              {% endfor %}
+
+                            </datalist>
+                    
+              
+        
+        
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                          <label for="Height" class="form-label">Color</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="color"
+                            name="color"
+                            list="color"
+                            value="{{profiler.color}}" />
+
+                            <datalist id="color">
+                              {% for h in colorlist %}
+
+                              <option value="{{h.color}}">{{h.color}}</option>
+                                
+                              {% endfor %}
+                            </datalist>
+                      </div>
+
+
+                        <div class="mb-3 col-md-12">
+                          <label for="exampleFormControlTextarea1">About Me</label>
+                          <textarea class="form-control"  name="about" id="exampleFormControlTextarea1"
+                              rows="3">{{profiler.about_me}}</textarea>
+                      </div>
+                            
+                              
+                          
+                          </div>
+                          <div class="mt-2">
+                            <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                            <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                      <!-- /Account -->
+                    </div>
+                    <div class="card">
+                      <h5 class="card-header">Delete Account</h5>
+                      <div class="card-body">
+                        <div class="mb-3 col-12 mb-0">
+                          <div class="alert alert-warning">
+                            <h6 class="alert-heading mb-1">Are you sure you want to delete your account?</h6>
+                            <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
+                          </div>
+                        </div>
+                        <form id="formAccountDeactivation" onsubmit="return false">
+                          <div class="form-check mb-3">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              name="accountActivation"
+                              id="accountActivation" />
+                            <label class="form-check-label" for="accountActivation"
+                              >I confirm my account deactivation</label
+                            >
+                          </div>
+                          <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- / Content -->
+  
+        
+  
+              <div class="content-backdrop fade"></div>
+            </div>
+            <!-- Content wrapper -->
+          </div>
+          <!-- / Layout page -->
+        </div>
+  
+     
+
+{% endblock main %}
