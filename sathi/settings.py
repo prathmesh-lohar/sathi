@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     # 'jazzmin',
     'admin_interface',
     'colorfield',
-    
+ 
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,6 +55,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig', 
+    'rest_framework',
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -129,6 +132,19 @@ DATABASES = {
 #     }
 # }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sathi',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        
+    }
+}
+
+    
 
 
 

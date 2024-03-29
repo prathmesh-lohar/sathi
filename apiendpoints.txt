@@ -1,0 +1,10 @@
+api/ profile
+api/ profile/<int:id>
+api/ family_details/<int:id>
+api/ dp/<int:id>
+api/ gallery/<int:id>
+api/ document/<int:id>
+api/ follow/<int:id>
+
+
+id means = userid
