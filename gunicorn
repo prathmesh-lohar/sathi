@@ -1,0 +1,47 @@
+/src/sathi/sathienv/bin/gunicorn
+
+
+[Unit]
+Description=gunicorn socket
+
+[Socket]
+ListenStream=/run/gunicorn.sock
+
+[Install]
+WantedBy=sockets.target
+
+
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/src/sathi
+ExecStart=/src/sathi/sathienv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          sathi.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+server {
+    listen 80;
+    server_name 50.19.198.237;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /src/sathi;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
