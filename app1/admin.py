@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app1.models import profile,family_details,media,gallery,document,follow
+from app1.models import profile,family_details,media,gallery,document,follow,user_level
 
 admin.site.site_header = "Admin Panel"
 admin.site.site_title = "Admin Panel Portal"
@@ -14,6 +14,14 @@ admin.site.register(gallery)
 admin.site.register(document)
 
 
+
+
+
+class user_levelAdmin(admin.ModelAdmin):
+    list_display = ('user','access_type','reginal_manager')
+    list_editable = ('access_type','reginal_manager',)
+    list_filter=['access_type',]
+admin.site.register(user_level, user_levelAdmin)
 
 
 

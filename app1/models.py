@@ -6,6 +6,25 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 
+
+
+class user_level(models.Model):
+    CHOICES = (
+        ('admin', 'admin'),
+        ('reginal_manager', 'reginal_manager'),
+        ('officer', 'officer'),
+        ('user', 'user'),
+    )
+  
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    access_type = models.CharField(max_length=50,default="user", choices=CHOICES)
+    reginal_manager = models.ForeignKey(User, related_name="reginal_manager", on_delete=models.CASCADE, null=True, blank=True)
+    
+    
+    def __str__(self):
+        return str(self.user)
+
+
 class profile(models.Model):
     registerfor = models.CharField(max_length=50,default="", null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -26,6 +45,7 @@ class profile(models.Model):
     city = models.CharField(max_length=50,default="", null=True, blank=True)
     about_me = models.TextField(null=True,blank=True,default="")
     related_officer = models.CharField(max_length=50,default="", null=True, blank=True)
+    reginal_manager = models.CharField(max_length=50,default="", null=True, blank=True)
 
     username =   models.CharField(max_length=100,default="", null=True, blank=True)
     first_name =   models.CharField(max_length=100,default="", null=True, blank=True)

@@ -3,6 +3,8 @@ from urllib import response
 from urllib.request import Request
 from django.shortcuts import render
 
+from django.http import JsonResponse
+
 
 from api.serializers import profileSerializer
 from api.serializers import family_detailsSerializer
@@ -23,7 +25,7 @@ import json
 from rest_framework import viewsets
 
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -37,7 +39,9 @@ from app1.models import gallery
 from app1.models import document
 from app1.models import follow
 from django.contrib.auth.models import User
-
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # Create your views here.
 
@@ -51,14 +55,35 @@ from django.contrib.auth.models import User
 #     # permission_class = [IsAuthenticated]
 
 
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        
+        user = authenticate(username=username,password=password)
+        refresh = RefreshToken.for_user(user)
+        
+        return JsonResponse({
+            'refresh':str(refresh),
+            'access':str(refresh.access_token)
+        })
+
+
 
 class usersClassBassedView(APIView):
+    
+    # permission_classes = (IsAuthenticated,)
+    # permission_classes = [AllowAny]
+    
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    
 
     def get(self, request, id=None ,format=None):
         if id is not None:
             
             try:
-                tt = User.objects.get(user_id=id)
+                tt = User.objects.get(id=id)
             except:
                 return Response('no data found', status=status.HTTP_404_NOT_FOUND)
 
@@ -80,7 +105,7 @@ class usersClassBassedView(APIView):
     
     def put(self, request, id=None ,format=None):
         try:
-            tt=User.objects.get(user_id=id)
+            tt=User.objects.get(id=id)
         except:
             return Response("no data found ", status=status.HTTP_404_NOT_FOUND)
         s = usersSerializer(instance=tt, data=request.data)
@@ -92,7 +117,7 @@ class usersClassBassedView(APIView):
     
     def delete(self, request, id=None ,format=None):
         try:
-            tt= User.objects.get(user_id=id)
+            tt= User.objects.get(id=id)
         except:
             return Response("no data found ", status=status.HTTP_404_NOT_FOUND)
         tt.delete()
@@ -101,6 +126,8 @@ class usersClassBassedView(APIView):
 
 
 class family_detailsClassBassedView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, id=None ,format=None):
         if id is not None:
@@ -149,6 +176,9 @@ class family_detailsClassBassedView(APIView):
 
 
 class profileClassBassedView(APIView):
+    
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, id=None ,format=None):
         if id is not None:
@@ -197,6 +227,8 @@ class profileClassBassedView(APIView):
 
 
 class dpClassBassedView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, id=None ,format=None):
         if id is not None:
@@ -246,6 +278,8 @@ class dpClassBassedView(APIView):
 
 
 class galleryClassBassedView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, id=None ,format=None):
         if id is not None:
@@ -298,6 +332,9 @@ class galleryClassBassedView(APIView):
     
 class documentClassBassedView(APIView):
 
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    
     def get(self, request, id=None ,format=None):
         if id is not None:
             
@@ -345,6 +382,8 @@ class documentClassBassedView(APIView):
 
 
 class followClassBassedView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, id=None ,format=None):
         if id is not None:

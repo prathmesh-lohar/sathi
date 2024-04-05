@@ -5,8 +5,13 @@ from staff import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+
+
 urlpatterns = [
     path("", views.dashboard , name="dashboard"),
+    
+   
     path("login", views.login , name="login"),
     path("logout", views.logout , name="logout"),
     path("add_user", views.add_user , name="add_user"),

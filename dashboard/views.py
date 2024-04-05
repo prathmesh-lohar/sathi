@@ -2,14 +2,15 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from app1.models import profile,media
+from app1.models import profile,media,user_level
 from extra.models import income,experience,Qualification,color,work,hobbies,height
 from dashboard.forms import profileForm
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
 def dashboard(request):
-    if request.user.is_superuser:
+    if request.user.is_superuser or request.user.user_level.access_type=="admin" or request.user.user_level.access_type=="reginal_manager" or request.user.user_level.access_type=="officer" :
         return render(request, "dashboard/index.html")
         
     else:
@@ -25,11 +26,16 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
             
         if user is not None:
-            auth.login(request, user)
-            if request.user.is_superuser:
-                return redirect('/dashboard')
-            else:
-                messages.error(request, "You are not a staff member")
+            try:
+                auth.login(request, user)
+                if request.user.is_superuser or request.user.user_level.access_type=="admin" or request.user.user_level.access_type=="reginal_manager" or request.user.user_level.access_type=="officer" :
+                    return redirect('/dashboard')
+                else:
+                    messages.error(request, "You are not a staff member")
+            except ObjectDoesNotExist:
+                # Handle RelatedObjectDoesNotExist error
+                messages.error(request, "User level does not exist for this user.")
+                return redirect('/dashboard/login')  # Redirect to login page
 
         else:
             messages.error(request, "Invalid Username And Password")
@@ -56,6 +62,40 @@ def all_staff(request):
  
 
 
+
+@login_required(login_url='/dashboard/login')
+
+def reginal_manager(request):
+    # users = User.objects.filter(user__user_level__access_type='reginal_manager')
+    users = user_level.objects.filter(access_type='reginal_manager')
+    
+    
+    
+    data = {
+        'users':users,
+    }
+    
+    return  render(request,"dashboard/reginal_manager.html",data)
+
+@login_required(login_url='/dashboard/login')
+
+def staff_unser_reginal_manager(request,username):
+    
+    
+    # users = User.objects.filter(user__user_level__access_type='reginal_manager')
+    users = user_level.objects.filter(access_type='officer',reginal_manager__username=username)
+    
+    
+    data = {
+        'users':users,
+    }
+    
+    return  render(request,"dashboard/staff_under_reginal_manager.html",data)
+ 
+
+
+
+
 @login_required(login_url='/dashboard/login')
 def staff(request,username):
     
@@ -79,6 +119,7 @@ def alter_user(request,username):
     
     user = User.objects.filter(username=username).first()
     id = user.id
+    
     
     profiler = profile.objects.filter(user=id).first()
 
@@ -148,7 +189,7 @@ def alter_user(request,username):
                 messages.success(request, "details uploaded successfully")
                 
                 # obj2.save()
-            return redirect('/dashboard/all_staff')
+            return redirect(request.META.get('HTTP_REFERER'))
         
     data = {
         'profiler':profiler,
@@ -162,3 +203,18 @@ def alter_user(request,username):
         
     }
     return render(request, "dashboard/alter_user.html",data)
+
+
+
+
+@login_required(login_url='/dashboard/login')
+def all_profiles(request):
+    
+    profiles = profile.objects.all()
+    
+  
+    data = {
+        'profiles':profiles
+    }
+     
+    return render(request, "dashboard/profiles.html",data)

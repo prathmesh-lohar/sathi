@@ -374,7 +374,33 @@
                       </div>
                       <!-- /Account -->
                     </div>
+
                     <div class="card">
+                      <h5 class="card-header">Approve Profile</h5>
+                      <div class="card-body">
+                        <div class="mb-3 col-12 mb-0">
+                          <div class="alert alert-info">
+                            <h6 class="info-heading mb-1">Are you sure you want to approve this profile ?</h6>
+                            <p class="mb-0">Once you make approve , it means all details verified by you.</p>
+                          </div>
+                        </div>
+                        <form id="formAccountDeactivation" onsubmit="return false">
+                          <div class="form-check mb-3">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              name="accountActivation"
+                              id="accountActivation" />
+                            <label class="form-check-label" for="accountActivation"
+                              >I confirm to approve this profile</label
+                            >
+                          </div>
+                          <button type="submit" class="btn btn-info deactivate-account">Approve Profile</button>
+                        </form>
+                      </div>
+                    </div>
+
+                    <div class="card my-3">
                       <h5 class="card-header">Delete Account</h5>
                       <div class="card-body">
                         <div class="mb-3 col-12 mb-0">

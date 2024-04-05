@@ -264,15 +264,47 @@
         </li>
         <!-- Apps -->
 
+        {% if request.user.user_level.access_type == 'admin' %}
+
+        <li class="menu-item">
+          <a
+            href="/dashboard/reginal_manager"
+            target="_blank"
+            class="menu-link">
+            <i class="menu-icon tf-icons bx bx-support"></i>
+            <div data-i18n="Support">Reginal Managers</div>
+          </a>
+        </li>
+
+        {% endif %}
+
+
+        {% if request.user.user_level.access_type == 'admin' or request.user.user_level.access_type == 'reginal_manager' %}
+
         <li class="menu-item">
           <a
             href="/dashboard/all_staff"
             target="_blank"
             class="menu-link">
             <i class="menu-icon tf-icons bx bx-support"></i>
-            <div data-i18n="Support">All Staff</div>
+            <div data-i18n="Support">All Officers</div>
           </a>
         </li>
+        {% endif %}
+
+
+        {% if request.user.user_level.access_type == 'admin' or request.user.user_level.access_type == 'reginal_manager' or request.user.user_level.access_type == 'officer' %}
+
+        <li class="menu-item">
+          <a
+            href="/dashboard/all_profiles"
+            target="_blank"
+            class="menu-link">
+            <i class="menu-icon tf-icons bx bx-support"></i>
+            <div data-i18n="Support">All Profiles</div>
+          </a>
+        </li>
+        {% endif %}
 
 
         <li class="menu-item">
@@ -642,7 +674,7 @@
 
           <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Place this tag where you want the button to render. -->
-            <li class="nav-item lh-1 me-3">
+            {% comment %} <li class="nav-item lh-1 me-3">
               <a
                 class="github-button"
                 href="https://github.com/themeselection/sneat-html-admin-template-free"
@@ -652,7 +684,7 @@
                 aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
                 >Star</a
               >
-            </li>
+            </li> {% endcomment %}
 
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -672,7 +704,7 @@
                       </div>
                       <div class="flex-grow-1">
                         <span class="fw-medium d-block">{{request.user}}</span>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">{{request.user.user_level.access_type}}</small>
                       </div>
                     </div>
                   </a>
@@ -718,6 +750,23 @@
       </nav>
 
       <!-- / Navbar -->
+
+      {% if messages %}
+
+{% for message in messages %}
+
+<div id="message" style="margin: 12px 24px 0px;" class="alert alert-{{message.tags}} d-flex align-items-center" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    <div>
+      {{message}}
+    </div>
+    
+  </div>
+
+  
+{% endfor %}
+
+{% endif %}
 
 
     {% block main %}
