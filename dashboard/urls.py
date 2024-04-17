@@ -21,6 +21,11 @@ urlpatterns = [
     
     
     path("alter_user/<str:username>", views.alter_user , name="alter_user"),
+    path("alter_user_save/<str:username>", views.alter_user_save , name="alter_user_save"),
+    path("upload_dp/<str:username>", views.upload_dp , name="upload_dp"),
+    path("approve_profile/<str:username>", views.approve_profile , name="approve_profile"),
+    path("delete_profile/<str:username>", views.delete_profile , name="delete_profile"),
+    path("alter_user_family/<str:username>", views.alter_user_family , name="alter_user_family"),
     
     
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -52,7 +52,11 @@ def logout(request):
 @login_required(login_url='/dashboard/login')
 
 def all_staff(request):
+    
+
     users = User.objects.filter(is_staff=True)
+    
+
     
     data = {
         'users':users,
@@ -111,10 +115,216 @@ def staff(request,username):
 
 
 
+
+
+
+
+@login_required(login_url='/dashboard/login')
+
+def upload_dp(request,username):
+    from app1.models import media
+    from django.contrib.auth.models import User,auth
+    
+    
+    redirect_link = '/dashboard/alter_user/'+ username
+    
+    if request.method == "POST":
+        picture__input = request.FILES['dp']
+        
+        user = User.objects.get(username=username)
+        
+        id  =  user.id
+        
+        if media.objects.filter(user_id=id).exists():
+            obj = media.objects.get(user_id=id)
+            obj.dp=picture__input
+            obj.save()
+            messages.success(request, "profile picture updated successfully")
+                
+        else:
+            obj = media(user_id=id, dp=picture__input)
+            obj.save()
+            messages.success(request, "profile picture uploaded successfully")
+            
+    
+        return redirect(redirect_link)
+
+
+
+
+
+
+
+@login_required(login_url='/dashboard/login')
+
+def alter_user_save(request,username):
+    from extra.models import income,experience,Qualification,color,work,hobbies,height
+    
+    
+    
+    redirect_link = '/dashboard/alter_user/' + username
+   
+    user = User.objects.filter(username=username).first()
+    id = user.id
+    
+    
+    profiler = profile.objects.filter(user=id).first()
+
+    incomelist = income.objects.all()
+    
+    
+    colorlist = color.objects.all()
+    
+    Qualificationlist= Qualification.objects.all()
+    worklist= work.objects.all()
+    experiencelist = experience.objects.all()
+    hobbieslist = hobbies.objects.all()
+    heightlist = height.objects.all()
+    
+   
+    
+    
+    if request.method == "POST":
+        
+            fname = request.POST.get('firstName')
+            lname = request.POST.get('lastName')
+
+            mobile = request.POST.get('mobile')
+            mstatus = request.POST.get('mstatus')
+            dob = request.POST.get('dob')
+            height = request.POST.get('height')
+            color = request.POST.get('color')
+            qualification = request.POST.get('tags')
+            work = request.POST.get('work')
+            experience = request.POST.get('experience')
+            Hobbies = request.POST.get('hobie')
+            Income = request.POST.get('Income')
+            medical_condition = request.POST.get('medical_condition')
+            city = request.POST.get('city')
+            about = request.POST.get('about')
+            userid = request.POST.get('userid')
+            gender = request.POST.get('gender')
+            uid = request.POST.get('uid')
+            
+            regofor = request.POST.get('regofor')
+
+
+            father_name = request.POST.get('father_name')
+            father_education = request.POST.get('father_education')
+            father_occupation = request.POST.get('father_occupation')
+            mother_name = request.POST.get('mother_name')
+            mother_education = request.POST.get('mother_education')
+            mother_occupation = request.POST.get('mother_occupation')
+            sister = request.POST.get('sister')
+            brother = request.POST.get('brother')
+            native_place = request.POST.get('native_place')
+            relatives = request.POST.get('relatives')
+            
+            
+            
+        
+            if profile.objects.filter(username=username).exists():
+                # obj=profile.objects.filter(username="priyanka").update(mobile=99)
+             
+                try:
+                    obj = User.objects.get(username=username)  # Fetch the user (raise DoesNotExist if not found)
+                    obj.first_name = fname
+                    obj.last_name = lname
+                    obj.save()
+                    
+                    
+                    objprofile=profile.objects.filter(username=username).update(mobile=mobile,marrital_status=mstatus,dob=dob,height=height,color=color,Qualification=qualification,work=work,experience=experience,hobbies=Hobbies,income=Income,medical_condition=medical_condition,city=city,about_me=about,gender=gender,registerfor=regofor)
+               
+                    messages.success(request, "details uploaded successfully")
+                    return redirect(redirect_link)
+                    
+                
+                    
+                except User.DoesNotExist:
+                    messages.error(request, "User with username", username, "not found.")
+               
+                
+            
+            else:
+               
+                # user = User.objects.filter(id=uid).first()
+                obj=profile(username=username,mobile=mobile,marrital_status=mstatus,dob=dob,height=height,color=color,Qualification=qualification,work=work,experience=experience,hobbies=Hobbies,income=Income,medical_condition=medical_condition,city=city,about_me=about,gender=gender,registerfor=regofor)
+                obj.save()
+                messages.success(request, "details uploaded successfully")
+                return redirect(redirect_link)
+                
+                # obj2.save()
+                
+                
+    return redirect(redirect_link)
+
+
+
+@login_required(login_url='/dashboard/login')
+def approve_profile(request,username):
+    from app1.models import profile
+    from django.contrib.auth.models import User,auth
+    
+    
+    redirect_link = '/dashboard/alter_user/' + username
+    
+    user = User.objects.filter(username=username).first()
+    id = user.id
+    
+    if request.method == "POST":
+        
+        check = request.POST.get('check')
+        
+        if check == "on":
+            check = True
+        else:
+            check = False
+            
+        
+        try:
+        
+            obj = profile.objects.filter(user_id=id).first()
+            if check == True:
+                obj.is_approved = True
+                obj.save()
+                messages.success(request, "Profile approved")
+                return redirect(redirect_link)
+            else:
+                obj.is_approved = False
+                obj.save()
+                messages.warning(request, "Profile Disapproved")
+                return redirect(redirect_link)
+        except User.DoesNotExist:
+            messages.error(request, "not exist")
+            return redirect(redirect_link)
+    
+    
+    return redirect(redirect_link)
+    
+
+
+@login_required(login_url='/dashboard/login')
+def delete_profile(request,username):
+    from app1.models import profile
+    from django.contrib.auth.models import User,auth
+    
+    
+    redirect_link = '/dashboard/all_profiles'
+    
+    if User.objects.filter(username=username).first():
+        rm = User.objects.filter(username=username).first()
+        rm.delete()
+        messages.warning(request, "Profile Deleted")
+    else:
+        messages.error(request, "Something went wrong")
+    return redirect(redirect_link)
+
+
 @login_required(login_url='/dashboard/login')
 
 def alter_user(request,username):
     from extra.models import income,experience,Qualification,color,work,hobbies,height
+    
     
     
     user = User.objects.filter(username=username).first()
@@ -134,63 +344,10 @@ def alter_user(request,username):
     hobbieslist = hobbies.objects.all()
     heightlist = height.objects.all()
     
+   
     
-    if request.method == "POST":
-            mobile = request.POST.get('mobile')
-            mstatus = request.POST.get('mstatus')
-            dob = request.POST.get('dob')
-            height = request.POST.get('height')
-            color = request.POST.get('color')
-            qualification = request.POST.get('tags')
-            work = request.POST.get('work')
-            experience = request.POST.get('experience')
-            Hobbies = request.POST.get('hobie')
-            Income = request.POST.get('Income')
-            medical_condition = request.POST.get('medical_condition')
-            city = request.POST.get('city')
-            about = request.POST.get('about')
-            userid = request.POST.get('userid')
-            gender = request.POST.get('gender')
-            uid = request.POST.get('uid')
-            regofor = request.POST.get('regofor')
-
-
-            father_name = request.POST.get('father_name')
-            father_education = request.POST.get('father_education')
-            father_occupation = request.POST.get('father_occupation')
-            mother_name = request.POST.get('mother_name')
-            mother_education = request.POST.get('mother_education')
-            mother_occupation = request.POST.get('mother_occupation')
-            sister = request.POST.get('sister')
-            brother = request.POST.get('brother')
-            native_place = request.POST.get('native_place')
-            relatives = request.POST.get('relatives')
-
-            username = request.POST.get('username')
-            id = request.POST.get('id')
-
-            verify = request.POST.get('verify')
-            
-            vstatus = False
-            
-            if verify == "on":
-                vstatus=True
-        
-            if profile.objects.filter(username=username).exists():
-                obj=profile.objects.filter(username=uid).update(user=id,mobile=mobile,marrital_status=mstatus,dob=dob,height=height,color=color,Qualification=qualification,work=work,experience=experience,hobbies=Hobbies,income=Income,medical_condition=medical_condition,city=city,about_me=about,gender=gender,registerfor=regofor,is_approved=vstatus)
-               
-                messages.success(request, "details uploaded successfully")
-                
-            
-            else:
-                # user = User.objects.filter(id=uid).first()
-                obj=profile(username=uid,mobile=mobile,marrital_status=mstatus,dob=dob,height=height,color=color,Qualification=qualification,work=work,experience=experience,hobbies=Hobbies,income=Income,medical_condition=medical_condition,city=city,about_me=about,gender=gender,registerfor=regofor,is_approved=vstatus)
-                obj.save()
-                messages.success(request, "details uploaded successfully")
-                
-                # obj2.save()
-            return redirect(request.META.get('HTTP_REFERER'))
-        
+    
+    
     data = {
         'profiler':profiler,
         'incomelist':incomelist,
@@ -206,15 +363,27 @@ def alter_user(request,username):
 
 
 
+def alter_user_family(request,username):
+   
+    
+
+    return render(request, "dashboard/alter_user_family.html")
+
+
+
+
 
 @login_required(login_url='/dashboard/login')
 def all_profiles(request):
-    
+
     profiles = profile.objects.all()
-    
-  
     data = {
-        'profiles':profiles
+        'profiles':profiles,
     }
      
     return render(request, "dashboard/profiles.html",data)
+
+
+
+
+

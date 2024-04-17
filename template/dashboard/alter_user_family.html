@@ -27,11 +27,11 @@
                   <div class="col-md-12">
                     <ul class="nav nav-pills flex-column flex-md-row mb-3">
                       <li class="nav-item">
-                        <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> Personal</a>
+                        <a class="nav-link " href="javascript:void(0);"><i class="bx bx-user me-1"></i> Personal</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="/dashboard/alter_user_family/{{profiler.user.username}}"
-                          ><i class="bx bx-bell me-1"></i> Family</a
+                        <a class="nav-link active" href="pages-account-settings-notifications.html"
+                          ><i class="bx bx-bell me-1 "></i> Family</a
                         >
                       </li>
                       <li class="nav-item">
@@ -41,62 +41,11 @@
                       </li>
                     </ul>
                     <div class="card mb-4">
-                      <h5 class="card-header">Personal   Details</h5>
+                      <h5 class="card-header">Family   Details</h5>
                       <!-- Account -->
-                      <div class="card-body">
-                        <form method="POST" id="dp_form" action="/dashboard/upload_dp/{{profiler.username}}"  enctype="multipart/form-data">
-                          {% csrf_token %}
-                        <div class="d-flex align-items-start align-items-sm-center gap-4">
-                          <img
-                            src="{% if profiler.user.media.dp.url %}{{profiler.user.media.dp.url}}{% else %}{% static '/assets/images/def.jpg' %}{% endif %}"
-                            alt="user-avatar"
-                            class="d-block rounded"
-                            height="100"
-                            width="100"
-                           
-                            id="uploadedAvatar" />
-                          <div class="button-wrapper">
-                            <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                              <span class="d-none d-sm-block">Upload new photo</span>
-                              <i class="bx bx-upload d-block d-sm-none"></i>
-                              <input
-                                type="file"
-                                id="upload"
-                                class="account-file-input"
-                                name="dp"
-                                hidden
-                                accept="image/png, image/jpeg" />
-                            </label>
-                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                              <i class="bx bx-reset d-block d-sm-none"></i>
-                              <span class="d-none d-sm-block">Reset</span>
-                            </button>
-  
-                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
-                          </div>
-                        </div>
-                        </form>
-                      </div>
+                
 
-
-                      <script>
-                        const uploadInput = document.getElementById('upload');
-                        const uploadedAvatar = document.getElementById('uploadedAvatar'); // Image element
-                        
-                        uploadInput.addEventListener('change', function(event) {
-                          const reader = new FileReader();
-                          
-                          reader.onload = function(e) {
-                            uploadedAvatar.src = e.target.result; // Set image source to uploaded file
-                          };
-                          
-                          reader.readAsDataURL(event.target.files[0]); // Read the selected file
-
-                          document.getElementById("dp_form").submit(); //submit form 
-                        });
-                        
-                      </script>
-
+              
                       
                       <hr class="my-0" />
                       <div class="card-body">

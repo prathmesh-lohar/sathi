@@ -59,7 +59,8 @@
       <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
           <span class="app-brand-logo demo">
-            <svg
+            <img width="35" src="{% static '/images/logo.png' %}">
+            {% comment %} <svg
               width="25"
               viewBox="0 0 25 42"
               version="1.1"
@@ -105,9 +106,9 @@
                   </g>
                 </g>
               </g>
-            </svg>
+            </svg> {% endcomment %}
           </span>
-          <span class="app-brand-text demo menu-text fw-bold ms-2">Sneat</span>
+          <span class="app-brand-text demo menu-text fw-bold ms-2">Bandhan</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -172,7 +173,7 @@
           </ul>
         </li>
 
-        <!-- Layouts -->
+        <!-- Layouts
         <li class="menu-item">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -208,7 +209,7 @@
           </ul>
         </li>
 
-        <!-- Front Pages -->
+       
         <li class="menu-item">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-store"></i>
@@ -262,7 +263,7 @@
         <li class="menu-header small text-uppercase">
           <span class="menu-header-text">Staff &amp; Profiles</span>
         </li>
-        <!-- Apps -->
+        Apps -->
 
         {% if request.user.user_level.access_type == 'admin' %}
 
@@ -306,7 +307,7 @@
         </li>
         {% endif %}
 
-
+{% comment %} 
         <li class="menu-item">
           <a
             href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-email.html"
@@ -621,7 +622,7 @@
             <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">Pro</div>
           </a>
         </li>
-        <!-- Misc -->
+        <!-- Misc --> {% endcomment %}
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
         <li class="menu-item">
           <a

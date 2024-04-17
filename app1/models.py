@@ -3,26 +3,12 @@ from django.contrib.auth.models import User
 from datetime import date
 
 from django.contrib.auth.models import AbstractUser
+from prefix_id import PrefixIDField
 # Create your models here.
+from django.conf import settings
 
 
 
-
-class user_level(models.Model):
-    CHOICES = (
-        ('admin', 'admin'),
-        ('reginal_manager', 'reginal_manager'),
-        ('officer', 'officer'),
-        ('user', 'user'),
-    )
-  
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    access_type = models.CharField(max_length=50,default="user", choices=CHOICES)
-    reginal_manager = models.ForeignKey(User, related_name="reginal_manager", on_delete=models.CASCADE, null=True, blank=True)
-    
-    
-    def __str__(self):
-        return str(self.user)
 
 
 class profile(models.Model):
@@ -156,3 +142,45 @@ class follow(models.Model):
         
     ]    
     status = models.CharField(max_length=50,choices=status_option, blank=True,null=True)
+    
+    
+ 
+ 
+   
+#for dashboard    
+class user_level(models.Model):
+    CHOICES = (
+        ('admin', 'admin'),
+        ('reginal_manager', 'reginal_manager'),
+        ('officer', 'officer'),
+        ('user', 'user'),
+    )
+  
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    access_type = models.CharField(max_length=50,default="user", choices=CHOICES)
+    reginal_manager = models.ForeignKey(User, related_name="reginal_manager", on_delete=models.CASCADE, null=True, blank=True)
+    
+    
+    def __str__(self):
+        return str(self.user)
+    
+    
+
+
+class reginal_manager_profile(models.Model):
+    reginal_manager_id = UUIDField(prefix="RGM",  primary_key=True)  # Adjust max_length as needed
+    # Other fields in your model
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    region  = models.CharField(max_length=50,default="",blank=True)
+    
+    def __str__(self):
+        return str(self.user)
+    
+class officer_profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    regional_manager  = models.CharField(max_length=50,default="")
+    
+    def __str__(self):
+        return str(self.user)
+
+

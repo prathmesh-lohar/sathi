@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app1.models import profile,family_details,media,gallery,document,follow,user_level
+from app1.models import profile,family_details,media,gallery,document,follow,user_level,reginal_manager_profile
 
 admin.site.site_header = "Admin Panel"
 admin.site.site_title = "Admin Panel Portal"
@@ -12,7 +12,7 @@ admin.site.register(family_details)
 admin.site.register(media)
 admin.site.register(gallery)
 admin.site.register(document)
-
+admin.site.register(reginal_manager_profile)
 
 
 
@@ -36,3 +36,7 @@ class followAdmin(admin.ModelAdmin):
     list_display = ('ufrom','uto','status')
     
 admin.site.register(follow, followAdmin)
+
+
+
+
