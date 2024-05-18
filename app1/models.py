@@ -13,7 +13,7 @@ from django.conf import settings
 
 class profile(models.Model):
     registerfor = models.CharField(max_length=50,default="", null=True, blank=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     gender = models.CharField(max_length=50,default="", null=True, blank=True)
     lookingfor = models.TextField(default="", null=True, blank=True)
     
@@ -73,7 +73,7 @@ class profile(models.Model):
     
 
 class family_details(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     father_name = models.CharField(max_length=50,default="", null=True, blank=True)
     
     father_education = models.CharField(max_length=50,default="", null=True, blank=True)
@@ -101,7 +101,7 @@ class family_details(models.Model):
     
 
 class media(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     dp = models.ImageField(upload_to="dp", height_field=None, width_field=None, max_length=None)
 
     username =   models.CharField(max_length=100,default="", null=True, blank=True)
@@ -168,16 +168,16 @@ class user_level(models.Model):
 
 
 class reginal_manager_profile(models.Model):
-    reginal_manager_id = UUIDField(prefix="RGM",  primary_key=True)  # Adjust max_length as needed
+    reginal_manager_id = models.CharField(max_length=50,blank=True, default="")  # Adjust max_length as needed
     # Other fields in your model
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     region  = models.CharField(max_length=50,default="",blank=True)
     
     def __str__(self):
         return str(self.user)
     
 class officer_profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     regional_manager  = models.CharField(max_length=50,default="")
     
     def __str__(self):
